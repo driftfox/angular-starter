@@ -56,8 +56,8 @@
         "https:\\/\\/jsonplaceholder\\.typicode\\.com\\/users"
       ],
       "strategy": "freshness",
-      "maxSize": 100,
-      "maxAge": 3600000,
+      "maxSize": 100000000,
+      "maxAge": 14400000,
       "timeoutMs": 5000,
       "version": 1
     }
