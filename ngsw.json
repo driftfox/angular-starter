@@ -9,8 +9,8 @@
       "urls": [
         "/mello-labs-angular-starter/favicon.ico",
         "/mello-labs-angular-starter/index.html",
-        "/mello-labs-angular-starter/inline.ee00965a198011d12cb0.bundle.js",
-        "/mello-labs-angular-starter/main.86b6e55aa63a6ecc5e6d.bundle.js",
+        "/mello-labs-angular-starter/inline.a1dc53370fdd19a24992.bundle.js",
+        "/mello-labs-angular-starter/main.513f47e302f9cb901c03.bundle.js",
         "/mello-labs-angular-starter/polyfills.9afba58cc5c5e906563e.bundle.js",
         "/mello-labs-angular-starter/styles.9ace2dee58c0b42157c4.bundle.css"
       ],
@@ -62,10 +62,10 @@
     }
   ],
   "hashTable": {
-    "/mello-labs-angular-starter/inline.ee00965a198011d12cb0.bundle.js": "1176fe4c6f228e91edbcdde5fca43d339e538348",
+    "/mello-labs-angular-starter/inline.a1dc53370fdd19a24992.bundle.js": "8cd2b2995d004b9ac78135e195b7ef2fa75bf919",
     "/mello-labs-angular-starter/fontawesome-webfont.674f50d287a8c48dc19b.eot": "d980c2ce873dc43af460d4d572d441304499f400",
     "/mello-labs-angular-starter/assets/icons/favicon-144x144.png": "cd740acbe91388f85669cc4f0fa5e5b290a856d2",
-    "/mello-labs-angular-starter/main.86b6e55aa63a6ecc5e6d.bundle.js": "ac158c63cfd149def54854d85d41c089da0230c2",
+    "/mello-labs-angular-starter/main.513f47e302f9cb901c03.bundle.js": "788750cf198129ca0aee2164559b490eb9fc5016",
     "/mello-labs-angular-starter/fontawesome-webfont.912ec66d7572ff821749.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "/mello-labs-angular-starter/assets/icons/favicon-192x192.png": "7a0f10dcaff95684e0296cade925335825a14eed",
     "/mello-labs-angular-starter/polyfills.9afba58cc5c5e906563e.bundle.js": "ab0d2811797b2af594b591116f226ad278ffced6",
@@ -77,7 +77,7 @@
     "/mello-labs-angular-starter/favicon.ico": "1dff7b49e72900e40abf57468befc2872e037534",
     "/mello-labs-angular-starter/fontawesome-webfont.fee66e712a8a08eef580.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "/mello-labs-angular-starter/assets/icons/favicon-72x72.png": "b689da63c26bfcbdc1aedc5a149eb05f08625881",
-    "/mello-labs-angular-starter/index.html": "94ab5efee29e23f0991cec0399488b78ce74ccd7",
+    "/mello-labs-angular-starter/index.html": "4595459942ca5d828a411060d00bb6512d95dc3d",
     "/mello-labs-angular-starter/safari-pinned-tab.svg": "36ba0802c2ad6a8d07b4a2f991a4478b91307fee",
     "/mello-labs-angular-starter/assets/icons/favicon-96x96.png": "f4d69d4c58c2a4b6ffc8588e9bb5a800af96ef1a",
     "/mello-labs-angular-starter/assets/mock-data/env-settings.json": "31bb9cb6c8bb16a4e728e95f9fcb6e4b84a6e67b",
