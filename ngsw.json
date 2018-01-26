@@ -14,7 +14,7 @@
         "/mello-labs-angular-starter/inline.47dffd169d9d9d8e61b2.bundle.js",
         "/mello-labs-angular-starter/main.e80be539f5e95094b3db.bundle.js",
         "/mello-labs-angular-starter/polyfills.9afba58cc5c5e906563e.bundle.js",
-        "/mello-labs-angular-starter/styles.9ace2dee58c0b42157c4.bundle.css"
+        "/mello-labs-angular-starter/styles.92dc84777d2e789158ca.bundle.css"
       ],
       "patterns": []
     },
@@ -72,7 +72,7 @@
     "/mello-labs-angular-starter/polyfills.9afba58cc5c5e906563e.bundle.js": "ab0d2811797b2af594b591116f226ad278ffced6",
     "/mello-labs-angular-starter/fontawesome-webfont.af7ae505a9eed503f8b8.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
     "/mello-labs-angular-starter/assets/icons/favicon-36x36.png": "c07c90a0195afffb63ec8eb62abe0632767590d0",
-    "/mello-labs-angular-starter/styles.9ace2dee58c0b42157c4.bundle.css": "d4a3f0862af7a6190b30fcf7d608d5143b364907",
+    "/mello-labs-angular-starter/styles.92dc84777d2e789158ca.bundle.css": "8a20c92997c3f39ad8c9e50350fd3261f441a2da",
     "/mello-labs-angular-starter/fontawesome-webfont.b06871f281fee6b241d6.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
     "/mello-labs-angular-starter/assets/icons/favicon-48x48.png": "c07c90a0195afffb63ec8eb62abe0632767590d0",
     "/mello-labs-angular-starter/apple-touch-icon.png": "15abe2d99cd932cf81f00244cb9db469458911f8",
@@ -80,7 +80,7 @@
     "/mello-labs-angular-starter/assets/icons/favicon-72x72.png": "b689da63c26bfcbdc1aedc5a149eb05f08625881",
     "/mello-labs-angular-starter/favicon.ico": "1dff7b49e72900e40abf57468befc2872e037534",
     "/mello-labs-angular-starter/assets/icons/favicon-96x96.png": "f4d69d4c58c2a4b6ffc8588e9bb5a800af96ef1a",
-    "/mello-labs-angular-starter/index.html": "a6bea667b2d91d4f01391727b34c5eadc68f802a",
+    "/mello-labs-angular-starter/index.html": "5d58202f6156fd8e64025fd09ae602779813bd0c",
     "/mello-labs-angular-starter/assets/mock-data/env-settings.json": "31bb9cb6c8bb16a4e728e95f9fcb6e4b84a6e67b",
     "/mello-labs-angular-starter/safari-pinned-tab.svg": "36ba0802c2ad6a8d07b4a2f991a4478b91307fee",
     "/mello-labs-angular-starter/assets/mock-data/login.json": "4e4b0d718b64155c94706003eb8703fdc830c658",
