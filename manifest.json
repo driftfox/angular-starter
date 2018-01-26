@@ -4,7 +4,7 @@
 	"name": "Mello Labs Angular Starter",
 	"scope": "/",
 	"display": "fullscreen",
-	"start_url": "http://127.0.0.1:8080/",
+	"start_url": "https://jerrolkrause.github.io/mello-labs-angular-starter/",
 	"short_name": "Mello Labs Angular Starter",
 	"theme_color": "transparent",
 	"description": "A rapid starter for web applications",
