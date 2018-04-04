@@ -1,5 +1,5 @@
 {
-	"ApiUrl": "/",
-	"ApiNamespace": "assets/mock-data",
-	"SignalRUrl": "/signalr/hubs"
+  "ApiUrl": "./",
+  "ApiNamespace": "assets/mock-data",
+  "SignalRUrl": "/signalr/hubs"
 }
