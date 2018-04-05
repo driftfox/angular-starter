@@ -15,7 +15,7 @@
         "/mello-labs-angular-starter/inline.315f986da667800f163f.bundle.js",
         "/mello-labs-angular-starter/main.173273f417fa64efb3e5.bundle.js",
         "/mello-labs-angular-starter/polyfills.15d74ea13bddb118eb4d.bundle.js",
-        "/mello-labs-angular-starter/styles.26842557e3cef2681612.bundle.css"
+        "/mello-labs-angular-starter/styles.5a783fec06e67e7e16b1.bundle.css"
       ],
       "patterns": []
     },
@@ -76,7 +76,7 @@
     "/mello-labs-angular-starter/polyfills.15d74ea13bddb118eb4d.bundle.js": "eb138829943fedfe2e52f47e95936d87257e2f6a",
     "/mello-labs-angular-starter/fontawesome-webfont.af7ae505a9eed503f8b8.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
     "/mello-labs-angular-starter/assets/icons/favicon-36x36.png": "c07c90a0195afffb63ec8eb62abe0632767590d0",
-    "/mello-labs-angular-starter/styles.26842557e3cef2681612.bundle.css": "27376c4c32583c85adab260c4bae57f9fea468fd",
+    "/mello-labs-angular-starter/styles.5a783fec06e67e7e16b1.bundle.css": "b88506b707ed7156dc29092d5d166859db9db2f3",
     "/mello-labs-angular-starter/fontawesome-webfont.b06871f281fee6b241d6.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
     "/mello-labs-angular-starter/assets/icons/favicon-48x48.png": "c07c90a0195afffb63ec8eb62abe0632767590d0",
     "/mello-labs-angular-starter/apple-touch-icon.png": "15abe2d99cd932cf81f00244cb9db469458911f8",
@@ -84,7 +84,7 @@
     "/mello-labs-angular-starter/assets/icons/favicon-512x512.png": "d5ba9d380948b3a656701ba8d99ae110ec5363fb",
     "/mello-labs-angular-starter/favicon.ico": "1dff7b49e72900e40abf57468befc2872e037534",
     "/mello-labs-angular-starter/assets/icons/favicon-72x72.png": "b689da63c26bfcbdc1aedc5a149eb05f08625881",
-    "/mello-labs-angular-starter/index.html": "3d54d25983836edd151d5ffbfd7a57c556726531",
+    "/mello-labs-angular-starter/index.html": "58fa388a6518fc0454fb2add69f19821c4448e1f",
     "/mello-labs-angular-starter/assets/icons/favicon-96x96.png": "f4d69d4c58c2a4b6ffc8588e9bb5a800af96ef1a",
     "/mello-labs-angular-starter/manifest.json": "a8f3dd4b0308673e9b2bc56a9bb1e5243dc45b4e",
     "/mello-labs-angular-starter/assets/img/logo.png": "c3aaa6a0c05f907bebbe2ec3993fbbb7184dfb05",

@@ -276,7 +276,7 @@ maintained libraries used by this software which have their own
 licenses; we recommend you read them, as their terms may differ from the
 terms above.
 
-@mello-labs/ui@0.2.0
+@mello-labs/ui@1.0.0
 MIT
 MIT License
 
