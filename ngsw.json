@@ -12,10 +12,10 @@
         "/mello-labs-angular-starter/index.html",
         "/mello-labs-angular-starter/manifest.json",
         "/mello-labs-angular-starter/safari-pinned-tab.svg",
-        "/mello-labs-angular-starter/inline.315f986da667800f163f.bundle.js",
-        "/mello-labs-angular-starter/main.173273f417fa64efb3e5.bundle.js",
+        "/mello-labs-angular-starter/inline.7f1fd353f5814d0b88d3.bundle.js",
+        "/mello-labs-angular-starter/main.9207773b03b7a1453f65.bundle.js",
         "/mello-labs-angular-starter/polyfills.15d74ea13bddb118eb4d.bundle.js",
-        "/mello-labs-angular-starter/styles.5a783fec06e67e7e16b1.bundle.css"
+        "/mello-labs-angular-starter/styles.a248bacb94201475528c.bundle.css"
       ],
       "patterns": []
     },
@@ -67,16 +67,16 @@
     }
   ],
   "hashTable": {
-    "/mello-labs-angular-starter/inline.315f986da667800f163f.bundle.js": "a3e7e8ffb3fd57ecff639b1e4178c46def77c2a9",
+    "/mello-labs-angular-starter/inline.7f1fd353f5814d0b88d3.bundle.js": "ca7450613823ae5190e1fa5e2584df20d3f4f508",
     "/mello-labs-angular-starter/fontawesome-webfont.674f50d287a8c48dc19b.eot": "d980c2ce873dc43af460d4d572d441304499f400",
     "/mello-labs-angular-starter/assets/icons/favicon-144x144.png": "cd740acbe91388f85669cc4f0fa5e5b290a856d2",
-    "/mello-labs-angular-starter/main.173273f417fa64efb3e5.bundle.js": "019f7b9ff3e16b547b99540496e91b0a6e248a66",
+    "/mello-labs-angular-starter/main.9207773b03b7a1453f65.bundle.js": "b4afc69d480c5c0aac03a1d2e48727c603ffc117",
     "/mello-labs-angular-starter/fontawesome-webfont.912ec66d7572ff821749.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "/mello-labs-angular-starter/assets/icons/favicon-192x192.png": "7a0f10dcaff95684e0296cade925335825a14eed",
     "/mello-labs-angular-starter/polyfills.15d74ea13bddb118eb4d.bundle.js": "eb138829943fedfe2e52f47e95936d87257e2f6a",
     "/mello-labs-angular-starter/fontawesome-webfont.af7ae505a9eed503f8b8.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
     "/mello-labs-angular-starter/assets/icons/favicon-36x36.png": "c07c90a0195afffb63ec8eb62abe0632767590d0",
-    "/mello-labs-angular-starter/styles.5a783fec06e67e7e16b1.bundle.css": "b88506b707ed7156dc29092d5d166859db9db2f3",
+    "/mello-labs-angular-starter/styles.a248bacb94201475528c.bundle.css": "07407b8c3a53ad4d7cdb39bf2b38cafce3a62c29",
     "/mello-labs-angular-starter/fontawesome-webfont.b06871f281fee6b241d6.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
     "/mello-labs-angular-starter/assets/icons/favicon-48x48.png": "c07c90a0195afffb63ec8eb62abe0632767590d0",
     "/mello-labs-angular-starter/apple-touch-icon.png": "15abe2d99cd932cf81f00244cb9db469458911f8",
@@ -84,12 +84,12 @@
     "/mello-labs-angular-starter/assets/icons/favicon-512x512.png": "d5ba9d380948b3a656701ba8d99ae110ec5363fb",
     "/mello-labs-angular-starter/favicon.ico": "1dff7b49e72900e40abf57468befc2872e037534",
     "/mello-labs-angular-starter/assets/icons/favicon-72x72.png": "b689da63c26bfcbdc1aedc5a149eb05f08625881",
-    "/mello-labs-angular-starter/index.html": "58fa388a6518fc0454fb2add69f19821c4448e1f",
+    "/mello-labs-angular-starter/index.html": "e582eecd90fc91b2d56594cd731bb8f805b02cee",
     "/mello-labs-angular-starter/assets/icons/favicon-96x96.png": "f4d69d4c58c2a4b6ffc8588e9bb5a800af96ef1a",
     "/mello-labs-angular-starter/manifest.json": "a8f3dd4b0308673e9b2bc56a9bb1e5243dc45b4e",
     "/mello-labs-angular-starter/assets/img/logo.png": "c3aaa6a0c05f907bebbe2ec3993fbbb7184dfb05",
     "/mello-labs-angular-starter/safari-pinned-tab.svg": "2fa5629fc4c22d2a0e5a0a730fad7fb1a26ae627",
-    "/mello-labs-angular-starter/assets/mock-data/env-settings.json": "3aeae28b5d5c11d2dd4eb044ae34340aef1ec468",
+    "/mello-labs-angular-starter/assets/mock-data/env-settings.json": "fce25d3a8f4679053fa76bdb08380e76fe77ef8b",
     "/mello-labs-angular-starter/assets/mock-data/login.json": "0bf2f1bc2f24df46961d441e5bc4b0f2dbd5214d",
     "/mello-labs-angular-starter/assets/mock-data/users.json": "14bb89b1ab175afe30a7f31106c880898cb6175e",
     "/mello-labs-angular-starter/assets/scripts/ie-polyfills.min.js": "ad3825a42cd6312ad7f129e1cbaa77404916f22d"
