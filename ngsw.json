@@ -12,10 +12,10 @@
         "/mello-labs-angular-starter/index.html",
         "/mello-labs-angular-starter/manifest.json",
         "/mello-labs-angular-starter/safari-pinned-tab.svg",
-        "/mello-labs-angular-starter/inline.3c00348b800eb37aa076.bundle.js",
-        "/mello-labs-angular-starter/main.815619b587dca56534cd.bundle.js",
+        "/mello-labs-angular-starter/inline.44deb32caf65f2b0257e.bundle.js",
+        "/mello-labs-angular-starter/main.0dd34b01fbecb10ed41a.bundle.js",
         "/mello-labs-angular-starter/polyfills.15d74ea13bddb118eb4d.bundle.js",
-        "/mello-labs-angular-starter/styles.a248bacb94201475528c.bundle.css"
+        "/mello-labs-angular-starter/styles.076c5f9f79fb05462946.bundle.css"
       ],
       "patterns": []
     },
@@ -67,16 +67,16 @@
     }
   ],
   "hashTable": {
-    "/mello-labs-angular-starter/inline.3c00348b800eb37aa076.bundle.js": "08cfdfd22031eab4ab94b865ea70b113fe44cce7",
+    "/mello-labs-angular-starter/inline.44deb32caf65f2b0257e.bundle.js": "7945dd920a3ac89f17577ccfeefdfb40292bbbc1",
     "/mello-labs-angular-starter/fontawesome-webfont.674f50d287a8c48dc19b.eot": "d980c2ce873dc43af460d4d572d441304499f400",
     "/mello-labs-angular-starter/assets/icons/favicon-144x144.png": "cd740acbe91388f85669cc4f0fa5e5b290a856d2",
-    "/mello-labs-angular-starter/main.815619b587dca56534cd.bundle.js": "7222ef88c80658928e0b4e5626af59da0bffe931",
+    "/mello-labs-angular-starter/main.0dd34b01fbecb10ed41a.bundle.js": "362e90df19376cc5f67ef80050841a8f5b255f05",
     "/mello-labs-angular-starter/fontawesome-webfont.912ec66d7572ff821749.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "/mello-labs-angular-starter/assets/icons/favicon-192x192.png": "7a0f10dcaff95684e0296cade925335825a14eed",
     "/mello-labs-angular-starter/polyfills.15d74ea13bddb118eb4d.bundle.js": "eb138829943fedfe2e52f47e95936d87257e2f6a",
     "/mello-labs-angular-starter/fontawesome-webfont.af7ae505a9eed503f8b8.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
     "/mello-labs-angular-starter/assets/icons/favicon-36x36.png": "c07c90a0195afffb63ec8eb62abe0632767590d0",
-    "/mello-labs-angular-starter/styles.a248bacb94201475528c.bundle.css": "07407b8c3a53ad4d7cdb39bf2b38cafce3a62c29",
+    "/mello-labs-angular-starter/styles.076c5f9f79fb05462946.bundle.css": "245a68c316e665dc36e0330d2e7908adb4e83447",
     "/mello-labs-angular-starter/fontawesome-webfont.b06871f281fee6b241d6.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
     "/mello-labs-angular-starter/assets/icons/favicon-48x48.png": "c07c90a0195afffb63ec8eb62abe0632767590d0",
     "/mello-labs-angular-starter/apple-touch-icon.png": "15abe2d99cd932cf81f00244cb9db469458911f8",
@@ -84,7 +84,7 @@
     "/mello-labs-angular-starter/assets/icons/favicon-512x512.png": "d5ba9d380948b3a656701ba8d99ae110ec5363fb",
     "/mello-labs-angular-starter/favicon.ico": "1dff7b49e72900e40abf57468befc2872e037534",
     "/mello-labs-angular-starter/assets/icons/favicon-72x72.png": "b689da63c26bfcbdc1aedc5a149eb05f08625881",
-    "/mello-labs-angular-starter/index.html": "78160e806947c5976575ec089e171f09a4058a53",
+    "/mello-labs-angular-starter/index.html": "4493a22246a87ad7abb77df0c11909e9b5de4a34",
     "/mello-labs-angular-starter/assets/icons/favicon-96x96.png": "f4d69d4c58c2a4b6ffc8588e9bb5a800af96ef1a",
     "/mello-labs-angular-starter/manifest.json": "a8f3dd4b0308673e9b2bc56a9bb1e5243dc45b4e",
     "/mello-labs-angular-starter/assets/img/logo.png": "c3aaa6a0c05f907bebbe2ec3993fbbb7184dfb05",

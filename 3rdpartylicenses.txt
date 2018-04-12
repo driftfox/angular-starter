@@ -171,7 +171,7 @@ MIT License
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE
 
-@mello-labs/datagrid@0.1.35
+@mello-labs/datagrid@
 MIT
 MIT
 
@@ -276,7 +276,7 @@ maintained libraries used by this software which have their own
 licenses; we recommend you read them, as their terms may differ from the
 terms above.
 
-@mello-labs/ui@1.0.0
+@mello-labs/ui@1.1.0
 MIT
 MIT License
 
