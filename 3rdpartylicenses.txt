@@ -134,7 +134,7 @@ MIT
 MIT
 MIT
 
-tslib@1.9.3
+tslib@1.9.2
 Apache-2.0
 Apache License
 
