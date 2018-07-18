@@ -7,18 +7,18 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/angular-starter/0.ff3499b352ea33adc6e9.js",
-        "/angular-starter/1.0c7d99f664669f4d87b5.js",
-        "/angular-starter/2.f135374713676cc9eac5.js",
+        "/angular-starter/0.ba85e9272c95e83017af.js",
+        "/angular-starter/1.39c99f780c938f8de5a4.js",
+        "/angular-starter/2.4f643355b20dfc038c45.js",
         "/angular-starter/apple-touch-icon.png",
         "/angular-starter/favicon.ico",
         "/angular-starter/index.html",
-        "/angular-starter/main.b7895404589ac4677ef3.js",
+        "/angular-starter/main.c2e02e6bff01a2d8e269.js",
         "/angular-starter/polyfills.33e60f7c818a0b56ecef.js",
-        "/angular-starter/runtime.8c7714f85adcce98ea69.js",
+        "/angular-starter/runtime.354419bd3d66f2d50a93.js",
         "/angular-starter/safari-pinned-tab.svg",
         "/angular-starter/scripts.1da0dd71dd216f6f2c46.js",
-        "/angular-starter/styles.cd79e81ec13dc93d44c0.css"
+        "/angular-starter/styles.f09ef647a732658732d9.css"
       ],
       "patterns": []
     },
@@ -71,9 +71,9 @@
     }
   ],
   "hashTable": {
-    "/angular-starter/0.ff3499b352ea33adc6e9.js": "0a4c1a28e7bafcee2a21be757e6135a2469d77c4",
-    "/angular-starter/1.0c7d99f664669f4d87b5.js": "dff1121d95eb3e3f56b35f724f8f264cfc800adc",
-    "/angular-starter/2.f135374713676cc9eac5.js": "14326b80c41f6a39784b5a33eb791ac4ae2f92dd",
+    "/angular-starter/0.ba85e9272c95e83017af.js": "3bfbc3f6e5639d6e90356c191445a76b67794f77",
+    "/angular-starter/1.39c99f780c938f8de5a4.js": "8024a2264628591b7f82172b62e3b095bb31cba6",
+    "/angular-starter/2.4f643355b20dfc038c45.js": "0fa8869aa9331ae7241284b1e903c37de11cc99d",
     "/angular-starter/apple-touch-icon.png": "15abe2d99cd932cf81f00244cb9db469458911f8",
     "/angular-starter/assets/icons/favicon-144x144.png": "cd740acbe91388f85669cc4f0fa5e5b290a856d2",
     "/angular-starter/assets/icons/favicon-192x192.png": "7a0f10dcaff95684e0296cade925335825a14eed",
@@ -94,13 +94,13 @@
     "/angular-starter/fontawesome-webfont.af7ae505a9eed503f8b8.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
     "/angular-starter/fontawesome-webfont.b06871f281fee6b241d6.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
     "/angular-starter/fontawesome-webfont.fee66e712a8a08eef580.woff": "28b782240b3e76db824e12c02754a9731a167527",
-    "/angular-starter/index.html": "99cccc2d7f5d8515c8c27dcd31c9dd011d8af5f3",
-    "/angular-starter/main.b7895404589ac4677ef3.js": "2d9e30b799508f85046981a2f8673a39354aaa88",
+    "/angular-starter/index.html": "bc3077627a0a600ff5720801978f2cdc8a0fa105",
+    "/angular-starter/main.c2e02e6bff01a2d8e269.js": "2919b056e72e8b769e9abfb332f0b20c3c0f54af",
     "/angular-starter/polyfills.33e60f7c818a0b56ecef.js": "b063f3859532343d3d39c4e68a924665d7b60b6c",
-    "/angular-starter/runtime.8c7714f85adcce98ea69.js": "0cc42dab109d243a535cc1aef074ba61d4c3b274",
+    "/angular-starter/runtime.354419bd3d66f2d50a93.js": "782e5f5fe9a71f50b4fd0beeb42f579536882847",
     "/angular-starter/safari-pinned-tab.svg": "2fa5629fc4c22d2a0e5a0a730fad7fb1a26ae627",
     "/angular-starter/scripts.1da0dd71dd216f6f2c46.js": "89a9dc8e6a52033914ad46f0cb86371b09adf224",
-    "/angular-starter/styles.cd79e81ec13dc93d44c0.css": "899edb19921dfceb42f9b11dccbf5191c13e5197"
+    "/angular-starter/styles.f09ef647a732658732d9.css": "5683f5fab7eb4aae79cfdb9312e4ba495f38f9ac"
   },
   "navigationUrls": [
     {
