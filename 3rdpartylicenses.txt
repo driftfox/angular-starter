@@ -886,7 +886,7 @@ MIT
 
 @angular/material/form-field
 
-@angular/material/expansion
+@angular/material/menu
 
 @angular/router
 MIT
@@ -895,10 +895,10 @@ MIT
 
 @angular/material/tooltip
 
-@angular/material/menu
-
 @ngrx/store
 MIT
+
+@angular/material/expansion
 
 @angular/service-worker
 MIT
