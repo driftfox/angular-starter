@@ -4,16 +4,28 @@ import { SiteModule } from '$site'; // Site modules
 import { QaComponent } from './qa.component';
 import { routing } from './qa.routes';
 import { ChartsComponent } from './routes/charts/charts.component';
-import { ChartModule, MapModule, NtsGenericModule, NtsGridModule, NtsFormsModule, NtsCalendarModule } from '$features';
+import { ChartModule, MapModule, NtsGenericModule, NtsGridModule, NtsFormsModule, NtsCalendarModule, NtsWizardModule } from '$features';
 import { MapComponent } from './routes/map/map.component';
 import { DemoModalComponent } from './components/modal/demo-modal/demo-modal.component';
 import { TablesComponent } from './routes/tables/tables.component';
 import { GridComponent } from './routes/grid/grid.component';
 import { FormsComponent } from './routes/forms/forms.component';
 import { CalendarComponent } from './routes/calendar/calendar.component';
+import { WizardComponent } from './routes/wizard/wizard.component';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, ChartModule, MapModule, NtsGenericModule, NtsGridModule, NtsFormsModule, NtsCalendarModule],
+  imports: [
+    CommonModule,
+    SiteModule,
+    routing,
+    ChartModule,
+    MapModule,
+    NtsGenericModule,
+    NtsGridModule,
+    NtsFormsModule,
+    NtsCalendarModule,
+    NtsWizardModule,
+  ],
   declarations: [
     QaComponent,
     ChartsComponent,
@@ -24,6 +36,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
     FormsComponent,
     FormsComponent,
     CalendarComponent,
+    WizardComponent,
   ],
   entryComponents: [DemoModalComponent],
 })
