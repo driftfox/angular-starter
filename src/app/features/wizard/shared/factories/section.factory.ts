@@ -21,7 +21,7 @@ class SectionControl {
   };
   constructor(public src: Wizard.Section) {
     src.routing.forEach(route => (this.routing[route.uniqueId] = { ...route }));
-    src.pages.forEach(page => (this.pages[page.slug] = { ...page }));
+    // src.pages.forEach(page => (this.pages[page.uniqueId] = { ...page }));
   }
 }
 

@@ -16,4 +16,11 @@ export const sections: Wizard.Section[] = [
     routing: routesLoanPurpose,
     pages: pagesLoanPurpose,
   },
+  {
+    title: 'Test',
+    routeStart: '',
+    settings: {},
+    routing: routesLoanPurpose,
+    pages: pagesLoanPurpose,
+  },
 ];

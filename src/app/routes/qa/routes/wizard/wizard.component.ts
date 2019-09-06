@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { sections } from './config/sections';
+import { Wizard } from 'src/app/features/wizard/wizard';
 
 @Component({
   selector: 'app-wizard',
@@ -11,8 +12,8 @@ export class WizardComponent implements OnInit {
 
   public sections = sections;
   public state: Wizard.State = {
-    sectionActive: '',
-    pageActive: '',
+    sectionActiveId: '',
+    pageActiveId: '',
     status: {
       'loan-purpose' : {
         active: false,

@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges } from '@angular/core';
 import { sectionControl } from '../../shared/factories/section.factory';
+import { WizardStateService } from '../../shared/services/wizard-state.service';
+import { Wizard } from '../../wizard';
 
 @Component({
   selector: 'nts-wizard',
@@ -11,9 +13,9 @@ export class WizardComponent implements OnInit, OnChanges {
   @Input() sections: Wizard.Section[] | undefined;
   @Input() state: Wizard.State | undefined;
 
-  public config: any | undefined;
+  public config: Record<string, Wizard.SectionControl> | undefined;
 
-  constructor() {}
+  constructor(private stateSvc: WizardStateService) {}
 
   ngOnInit() {
     if (this.sections && this.sections.length) {
@@ -54,8 +56,9 @@ export class WizardComponent implements OnInit, OnChanges {
         }
       });
     }
-
-    console.log(config);
     return config;
   }
+
+
+ 
 }
