@@ -134,6 +134,7 @@ declare namespace Wizard {
   }
 
   export interface Html extends Content {
+    type: WizardContentTypes.html;
     html: string;
   }
 

@@ -6,7 +6,7 @@ import { Wizard } from '../../wizard';
 /**
  * Base content class
  */
-class Content {
+class Content implements Wizard.Content {
   public type!: WizardContentTypes;
   public data: any | undefined = this.src.data;
   public classes = this.src.classes;
@@ -44,7 +44,8 @@ class FormField extends Content {
  * Html content type
  */
 // tslint:disable-next-line:max-classes-per-file
-class Html extends Content {
+class Html extends Content implements Wizard.Html {
+    type = WizardContentTypes.html;
   get html() {
     return this.src.html; // String replacer here
   }
@@ -58,7 +59,7 @@ class Html extends Content {
  */
 // tslint:disable-next-line:max-classes-per-file
 class Row extends Content {
-  public columns: Wizard.Column[] = [];
+  public columns: Wizard.Column[];
   constructor(public src: Wizard.Row) {
     super(src);
     // Convert all of the nested content types in each column to a control
@@ -75,12 +76,12 @@ class Row extends Content {
  * Create a content control from a content type
  * @param content 
  */
-export const contentControl = (content: Wizard.FormField | Wizard.Html | Wizard.Row) => {
+export const contentControl = <t>(content: Wizard.FormField | Wizard.Html | Wizard.Row): t | undefined => {
   switch (content.type) {
     case WizardContentTypes.formField:
       return <Wizard.FormField>new FormField(<Wizard.FormField>content);
     case WizardContentTypes.html:
-      return <Wizard.Html>new Html(<Wizard.Html>content);
+      return new Html(<Wizard.Html>content);
     case WizardContentTypes.row:
       return <Wizard.Row>new Row(<Wizard.Row>content);
     // Default to form field to make TS happy
@@ -88,3 +89,8 @@ export const contentControl = (content: Wizard.FormField | Wizard.Html | Wizard.
       console.error('A type was not specified for this content type', content);
   }
 };
+
+const temp = contentControl<Wizard.Html>(<Wizard.Html>{
+    type: WizardContentTypes.html,
+    html: ''
+})
