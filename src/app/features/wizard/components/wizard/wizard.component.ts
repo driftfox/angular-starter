@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges } from '@angular/core';
 import { sectionControl } from '../../shared/factories/section.factory';
-import { WizardStateService } from '../../shared/services/wizard-state.service';
-import { Wizard } from '../../wizard';
+import { WizardService } from '../../shared/state';
 
 @Component({
   selector: 'nts-wizard',
@@ -15,12 +14,16 @@ export class WizardComponent implements OnInit, OnChanges {
 
   public config: Record<string, Wizard.SectionControl> | undefined;
 
-  constructor(private stateSvc: WizardStateService) {}
+  constructor(private store: WizardService) {}
 
   ngOnInit() {
     if (this.sections && this.sections.length) {
-      this.config = this.createConfig(this.sections, this.state);
+      this.config = this.createConfig(this.sections);
     }
+
+    this.store.sections$.subscribe(res => console.log('Sections', res));
+    this.store.state$.subscribe(res => console.log('State', res));
+    this.store.sectionActive$.subscribe(res => console.log('Section Active', res));
   }
 
   ngOnChanges() {}
@@ -30,11 +33,20 @@ export class WizardComponent implements OnInit, OnChanges {
    * @param sections
    * @param state
    */
-  private createConfig(sections: Wizard.Section[], state?: Wizard.State) {
+  private createConfig(sections: Wizard.Section[]) {
     // Create wizard controls from supplied configuration
     const sectionControls = sections.map(section => sectionControl(section));
+
+    this.store.sectionsSet(sectionControls);
+    this.store.sectionChange('loan-purpose');
+
+    setTimeout(() => {
+      this.store.sectionChange('personal-info');
+    }, 1000);
+
     // Hold final generated config
     const config: Record<string, Wizard.SectionControl> = {};
+    /**
     // Determine the next section for each section control
     sectionControls.forEach((section, i) => {
       const sectionNext = sectionControls[i + 1];
@@ -56,9 +68,7 @@ export class WizardComponent implements OnInit, OnChanges {
         }
       });
     }
+     */
     return config;
   }
-
-
- 
 }

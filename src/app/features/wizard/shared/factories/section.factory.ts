@@ -1,18 +1,18 @@
 import { stringToSlug } from '../utils/strings.utils';
 
 class SectionControl {
-  public title = this.src.title;
-  public slug = this.src.slug ? this.src.slug : stringToSlug(this.src.title);
-  public uniqueId = this.src.uniqueId ? this.src.uniqueId : stringToSlug(this.src.title);
-  public routeStart = this.src.routeStart;
-  public settings = {
+  readonly title = this.src.title;
+  readonly slug = this.src.slug ? this.src.slug : stringToSlug(this.src.title);
+  readonly uniqueId = this.src.uniqueId ? this.src.uniqueId : stringToSlug(this.src.title);
+  readonly routeStart = this.src.routeStart;
+  readonly settings = {
     previousRequired: false,
     ...this.src.settings,
   };
-  public data = this.src.data || null;
-  public routing: Record<string, Wizard.Route> = {};
-  public pages: Record<string, Wizard.Page> = {};
-  public sectionNext: string | null = null;
+  readonly data = this.src.data || null;
+  readonly routing: Record<string, Wizard.Route> = {};
+  readonly pages: Record<string, Wizard.Page> = {};
+  readonly sectionNext: string | null = null;
   public status: Wizard.SectionStatus = {
     active: false,
     completed: false,

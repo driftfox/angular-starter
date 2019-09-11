@@ -1,13 +1,10 @@
-import { WizardContentTypes } from '../../wizard.enums';
-import { Wizard } from '../../wizard';
-
-// content: (FormField | Html | Feature | Buttons | Layout)[];
+import { isType } from '../utils/isType.util';
 
 /**
  * Base content class
  */
 class Content implements Wizard.Content {
-  public type!: WizardContentTypes;
+  public type = this.src.type;
   public data: any | undefined = this.src.data;
   public classes = this.src.classes;
   get hidden() {
@@ -20,7 +17,8 @@ class Content implements Wizard.Content {
  * Form field content type
  */
 // tslint:disable-next-line:max-classes-per-file
-class FormField extends Content {
+class FormField extends Content implements Wizard.FormField {
+  public type = this.src.type;
   public field = this.src.field;
   public formFieldType = this.src.formFieldType;
   public placeholder = this.src.placeholder;
@@ -45,7 +43,7 @@ class FormField extends Content {
  */
 // tslint:disable-next-line:max-classes-per-file
 class Html extends Content implements Wizard.Html {
-    type = WizardContentTypes.html;
+  public type = this.src.type;
   get html() {
     return this.src.html; // String replacer here
   }
@@ -55,42 +53,50 @@ class Html extends Content implements Wizard.Html {
 }
 
 /**
+ * Feature content type
+ */
+// tslint:disable-next-line:max-classes-per-file
+class Feature extends Content implements Wizard.Feature {
+  public type = this.src.type;
+  public featureId = this.src.featureId;
+  constructor(public src: Wizard.Feature) {
+    super(src);
+  }
+}
+
+/**
  * Row content type
  */
 // tslint:disable-next-line:max-classes-per-file
-class Row extends Content {
+class Row extends Content implements Wizard.Row {
+  public type = this.src.type;
   public columns: Wizard.Column[];
   constructor(public src: Wizard.Row) {
     super(src);
     // Convert all of the nested content types in each column to a control
     this.columns = src.columns.map(column => {
-        return <Wizard.Column>{
-            ...column,
-            content: column.content.map(content => contentControl(content))
-        };
+      return <Wizard.Column>{
+        ...column,
+        content: column.content.map(content => contentControl(content)),
+      };
     });
   }
 }
 
 /**
  * Create a content control from a content type
- * @param content 
+ * @param content
  */
-export const contentControl = <t>(content: Wizard.FormField | Wizard.Html | Wizard.Row): t | undefined => {
-  switch (content.type) {
-    case WizardContentTypes.formField:
-      return <Wizard.FormField>new FormField(<Wizard.FormField>content);
-    case WizardContentTypes.html:
-      return new Html(<Wizard.Html>content);
-    case WizardContentTypes.row:
-      return <Wizard.Row>new Row(<Wizard.Row>content);
-    // Default to form field to make TS happy
-    default:
-      console.error('A type was not specified for this content type', content);
+export const contentControl = (content: Wizard.FormField | Wizard.Html | Wizard.Row | Wizard.Feature) => {
+  if (isType.formField(content)) {
+    return new FormField(<Wizard.FormField>content);
+  } else if (isType.html(content)) {
+    return new Html(<Wizard.Html>content);
+  } else if (isType.row(content)) {
+    return new Row(<Wizard.Row>content);
+  } else if (isType.feature(content)) {
+    return new Feature(<Wizard.Feature>content);
+  } else {
+    console.error('A type was not specified for this content type', content);
   }
 };
-
-const temp = contentControl<Wizard.Html>(<Wizard.Html>{
-    type: WizardContentTypes.html,
-    html: ''
-})
