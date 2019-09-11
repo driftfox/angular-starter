@@ -7,10 +7,13 @@ export interface SectionStore extends EntityState<Wizard.SectionControl> {
 export interface WizardState extends EntityState<Wizard.State> {}
 
 export const uniqueId = 'uniqueId';
-export const initialUIState = {
-  sectionActive: null,
-  pageActive: null,
-  status: {},
+
+export const initialState = {
+  ui: {
+    sectionActive: null,
+    pageActive: null,
+    status: {},
+  },
 };
 
 @Injectable({
@@ -20,7 +23,7 @@ export const initialUIState = {
 export class WizardStore extends EntityStore<SectionStore, Wizard.SectionControl> {
   ui!: EntityUIStore<WizardState>;
   constructor() {
-    super({ ui: initialUIState });
+    super(initialState);
     this.createUIStore();
   }
 }

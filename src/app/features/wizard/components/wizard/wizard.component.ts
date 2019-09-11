@@ -24,6 +24,7 @@ export class WizardComponent implements OnInit, OnChanges {
     this.store.sections$.subscribe(res => console.log('Sections', res));
     this.store.state$.subscribe(res => console.log('State', res));
     this.store.sectionActive$.subscribe(res => console.log('Section Active', res));
+    this.store.pageActive$.subscribe(res => console.log('Page Active', res));
   }
 
   ngOnChanges() {}
@@ -43,7 +44,8 @@ export class WizardComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.store.sectionChange('personal-info');
     }, 1000);
-
+    
+   
     // Hold final generated config
     const config: Record<string, Wizard.SectionControl> = {};
     /**

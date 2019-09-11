@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 // import { throwError } from 'rxjs';
 // import { applyTransaction } from '@datorama/akita';
 
-import { WizardStore, initialUIState } from './wizard.store';
+import { WizardStore } from './wizard.store';
 import { WizardQuery } from './wizard.query';
 import { combineLatest } from 'rxjs';
 import { map, distinctUntilChanged } from 'rxjs/operators';
@@ -11,41 +11,43 @@ import { map, distinctUntilChanged } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class WizardService {
-  /** Entity of sections */
-  public sections$ = this.query.select().pipe(distinctUntilChanged());
+  /** Array of sections */
+  public sections$ = this.query.selectAll();
   /** Wizard state */
-  public state$ = this.query.select(store => store.ui).pipe(distinctUntilChanged());
+  public state$ = this.query.select(store => store.ui);
+
   /** Current active section */
-  public sectionActive$ = combineLatest([this.sections$, this.state$]).pipe(
-    map(([sections, state]) =>
-      sections && sections.entities && state && state.sectionActive ? sections.entities[state.sectionActive] : null,
+  public sectionActive$ = combineLatest([this.query.select(store => store.entities), this.state$]).pipe(
+    map(([sections, state]) => (sections && state && state.sectionActive ? sections[state.sectionActive] : null)),
+    distinctUntilChanged()
+  );
+
+  /** Current active page */
+  public pageActive$ = combineLatest([this.sectionActive$, this.state$]).pipe(
+    map(([sectionActive, state]) =>
+      sectionActive && sectionActive.pages && state && state.pageActive ? sectionActive.pages[state.pageActive] : null,
     ),
     distinctUntilChanged()
   );
 
-  /** A synchronous version of state state */
-  public state: Wizard.State = initialUIState;
-
-  constructor(public store: WizardStore, private query: WizardQuery) {
-    console.warn(this.store);
-  }
-
+  constructor(public store: WizardStore, private query: WizardQuery) {}
 
   public sectionsSet(sections: Wizard.SectionControl[]) {
     this.store.set(sections);
   }
 
   /**
-   * 
-   * @param state 
+   *
+   * @param state
    */
   public updateState(state: Wizard.State) {
-    this.state = {
-      ...this.state,
-      ...state,
-    };
-    this.store.update({
-      ui: this.state,
+    this.store.update(store => {
+      return {
+        ui: {
+          ...store.ui,
+          ...state,
+        },
+      };
     });
   }
 
@@ -54,12 +56,13 @@ export class WizardService {
    * @param sectionId
    */
   public sectionChange(sectionActive: string) {
-    this.state = {
-      ...this.state,
-      sectionActive: sectionActive,
-    };
-    this.store.update({
-      ui: this.state,
+    this.store.update(store => {
+      return {
+        ui: {
+          ...store.ui,
+          sectionActive: sectionActive,
+        },
+      };
     });
   }
 
