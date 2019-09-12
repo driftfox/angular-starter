@@ -7,6 +7,7 @@ import { WizardStore } from './wizard.store';
 import { WizardQuery } from './wizard.query';
 import { combineLatest } from 'rxjs';
 import { map, distinctUntilChanged } from 'rxjs/operators';
+import { applyTransaction } from '@datorama/akita';
 // import { environment } from '$env';
 
 @Injectable({ providedIn: 'root' })
@@ -18,16 +19,16 @@ export class WizardService {
 
   /** Current active section */
   public sectionActive$ = combineLatest([this.query.select(store => store.entities), this.state$]).pipe(
-    map(([sections, state]) => (sections && state && state.sectionActive ? sections[state.sectionActive] : null)),
-    distinctUntilChanged()
+    map(([sections, state]) => (sections && state && state.sectionActiveId ? sections[state.sectionActiveId] : null)),
+    distinctUntilChanged(),
   );
 
   /** Current active page */
   public pageActive$ = combineLatest([this.sectionActive$, this.state$]).pipe(
     map(([sectionActive, state]) =>
-      sectionActive && sectionActive.pages && state && state.pageActive ? sectionActive.pages[state.pageActive] : null,
+      sectionActive && sectionActive.pages && state && state.sectionActiveId ? sectionActive.pages[state.sectionActiveId] : null,
     ),
-    distinctUntilChanged()
+    distinctUntilChanged(),
   );
 
   constructor(public store: WizardStore, private query: WizardQuery) {}
@@ -56,11 +57,36 @@ export class WizardService {
    * @param sectionId
    */
   public sectionChange(sectionActive: string) {
+    applyTransaction(() => {
+      /**
+      this.store.update(e => e.uniqueId === sectionActive, {
+        status: { active: true },
+      });
+      */
+      // this.store.update(sectionActive, {...entity.status, active: true}});
+
+      // Update store state
+      this.store.update(store => {
+        return {
+          ui: {
+            ...store.ui,
+            sectionActive: sectionActive,
+          },
+        };
+      });
+    });
+  }
+
+  /**
+   * Change active section
+   * @param sectionId
+   */
+  public pageChange(pageActiveId: string) {
     this.store.update(store => {
       return {
         ui: {
           ...store.ui,
-          sectionActive: sectionActive,
+          pageActiveId: pageActiveId,
         },
       };
     });

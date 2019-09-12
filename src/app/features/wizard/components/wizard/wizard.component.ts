@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
 import { sectionControl } from '../../shared/factories/section.factory';
-import { WizardService } from '../../shared/state';
+import { WizardStateService } from '../../shared/services/wizard-state.service';
 
 @Component({
   selector: 'nts-wizard',
@@ -8,69 +8,86 @@ import { WizardService } from '../../shared/state';
   styleUrls: ['./wizard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WizardComponent implements OnInit, OnChanges {
+export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() sections: Wizard.Section[] | undefined;
   @Input() state: Wizard.State | undefined;
 
-  public config: Record<string, Wizard.SectionControl> | undefined;
+  @Input() sectionActiveId: string | undefined;
+  @Input() pageActiveId: string | undefined;
 
-  constructor(private store: WizardService) {}
+  private loaded = false;
+
+  constructor(private store: WizardStateService) {}
 
   ngOnInit() {
-    if (this.sections && this.sections.length) {
-      this.config = this.createConfig(this.sections);
-    }
-
-    this.store.sections$.subscribe(res => console.log('Sections', res));
-    this.store.state$.subscribe(res => console.log('State', res));
-    this.store.sectionActive$.subscribe(res => console.log('Section Active', res));
-    this.store.pageActive$.subscribe(res => console.log('Page Active', res));
+    // this.store.sections$.subscribe(res => console.log('Sections', res));
+    // this.store.state$.subscribe(res => console.log('State', res));
+    // this.store.sectionActive$.subscribe(res => console.log('Section Active', res));
+    // this.store.pageActive$.subscribe(res => console.log('Page Active', res));
   }
 
-  ngOnChanges() {}
+  ngOnChanges(model: SimpleChanges) {
+    // Ignore changes until app is loaded
+    if (!this.loaded) {
+      return;
+    }
+    // When new sections are passed in
+    if (model.sections && this.sections) {
+      this.store.sectionsAdd(this.sections.map(section => sectionControl(section)));
+      // TODO: Need to reset wizard if this happens
+    }
+
+    // When a new sectionActive is passed in
+    if (model.sectionActive && this.sectionActiveId) {
+      this.store.sectionChange(this.sectionActiveId);
+    }
+
+    // When a new state object is passed in
+    if (model.state) {
+      // TODO: Handle state object changes
+    }
+  }
+
+  ngAfterViewInit() {
+    // Attach templates
+
+    // Initialze app
+    this.initialize();
+    // Mark app loaded to enable ngOnChanges
+    this.loaded = true;
+  }
 
   /**
-   * Generate the configuration to power the wizard
-   * @param sections
-   * @param state
+   * Create the initial state of the wizard
    */
-  private createConfig(sections: Wizard.Section[]) {
-    // Create wizard controls from supplied configuration
-    const sectionControls = sections.map(section => sectionControl(section));
+  private initialize() {
+    // Null check
+    if (!this.sections) {
+      console.warn('No sections passed to wizard');
+      return;
+    }
 
-    this.store.sectionsSet(sectionControls);
-    this.store.sectionChange('loan-purpose');
+    // Null check sections
+    // Convert sections to section controls
+    const sectionControls = this.sections.map(section => sectionControl(section));
+    console.log('sectionControls', sectionControls);
+    sectionControls[0].setActive();
+    // Load section controls into store
+    this.store.sectionsAdd(sectionControls);
 
     setTimeout(() => {
-      this.store.sectionChange('personal-info');
-    }, 1000);
+      sectionControls[1].setActive();
+    })
     
-   
-    // Hold final generated config
-    const config: Record<string, Wizard.SectionControl> = {};
-    /**
-    // Determine the next section for each section control
-    sectionControls.forEach((section, i) => {
-      const sectionNext = sectionControls[i + 1];
-      const sectionNextId = sectionNext && sectionNext.uniqueId ? sectionNext.uniqueId : null;
-      section.sectionNext = sectionNextId;
-      // Add the section control to the record
-      if (!config[section.uniqueId]) {
-        config[section.uniqueId] = section;
-      } else {
-        console.error(`A unique ID of ${section.uniqueId} was already found for '${section.title}'. Please change the unique ID or title.`);
-      }
-    });
-
-    // Check if the state property is set, if so update the section controls with their current state
-    if (state) {
-      Object.keys(state.status).forEach(key => {
-        if (config[key] && state) {
-          config[key].status = { ...config[key].status, ...state.status[key] };
-        }
-      });
+    // Determine starting section
+    // First see if one was supplied via state object, then check sectionActiveID input then default to first section
+    if (this.state && this.state.sectionActiveId) {
+      this.store.sectionChange(this.state.sectionActiveId);
+    } else if (this.sectionActiveId) {
+      this.store.sectionChange(this.sectionActiveId);
+    } else {
+      this.store.sectionChange(sectionControls[0].uniqueId);
     }
-     */
-    return config;
   }
+
 }

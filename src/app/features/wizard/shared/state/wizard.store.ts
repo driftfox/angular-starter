@@ -10,8 +10,8 @@ export const uniqueId = 'uniqueId';
 
 export const initialState = {
   ui: {
-    sectionActive: null,
-    pageActive: null,
+    sectionActiveId: null,
+    pageActiveId: null,
     status: {},
   },
 };
