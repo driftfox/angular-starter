@@ -1,6 +1,6 @@
 import { stringToSlug } from '../utils/strings.utils';
 
-class PageControl {
+class PageControl { //  implements Wizard.PageControl
   readonly title = this.src.title;
   readonly slug = this.src.slug ? this.src.slug : stringToSlug(this.src.title);
   readonly uniqueId = this.src.uniqueId ? this.src.uniqueId : stringToSlug(this.src.title);

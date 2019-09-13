@@ -1,3 +1,1 @@
-export const pagesLoanPurpose: Wizard.Page[] = [
-
-]
+export const pagesLoanPurpose: Wizard.Page[] = [];

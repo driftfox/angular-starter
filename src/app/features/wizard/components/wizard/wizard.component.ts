@@ -20,9 +20,9 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(private store: WizardStateService) {}
 
   ngOnInit() {
-    // this.store.sections$.subscribe(res => console.log('Sections', res));
-    // this.store.state$.subscribe(res => console.log('State', res));
-    // this.store.sectionActive$.subscribe(res => console.log('Section Active', res));
+    this.store.sections$.subscribe(res => console.log('Sections', res));
+    this.store.state$.subscribe(res => console.log('State', res));
+    this.store.sectionActive$.subscribe(res => console.log('Section Active', res));
     // this.store.pageActive$.subscribe(res => console.log('Page Active', res));
   }
 
@@ -69,25 +69,22 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
 
     // Null check sections
     // Convert sections to section controls
-    const sectionControls = this.sections.map(section => sectionControl(section));
-    console.log('sectionControls', sectionControls);
-    sectionControls[0].setActive();
+    const sectionControls: Wizard.SectionControl[] = this.sections.map(section => sectionControl(section));
+    // Load state into store
+    this.store.stateCreate(sectionControls, this.state);
+
     // Load section controls into store
     this.store.sectionsAdd(sectionControls);
 
+    // Set start section
+    // const sectionStart = this.state && this.state.sectionActiveId ? this.state.sectionActiveId : sectionControls[0].uniqueId;
+    // this.store.sectionChange(sectionStart);
+   
     setTimeout(() => {
-      sectionControls[1].setActive();
-    })
+      // this.store.sectionChange('personal-info');
+    }, 5000);
+
     
-    // Determine starting section
-    // First see if one was supplied via state object, then check sectionActiveID input then default to first section
-    if (this.state && this.state.sectionActiveId) {
-      this.store.sectionChange(this.state.sectionActiveId);
-    } else if (this.sectionActiveId) {
-      this.store.sectionChange(this.sectionActiveId);
-    } else {
-      this.store.sectionChange(sectionControls[0].uniqueId);
-    }
   }
 
 }

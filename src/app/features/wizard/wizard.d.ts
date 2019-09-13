@@ -2,7 +2,8 @@ declare namespace Wizard {
 
   export interface State {
     sectionActiveId: string | null;
-    pageActiveId: string | null;
+    routeActiveId: string | null;
+    routePath: string[];
     status: Record<string, SectionStatus>;
   }
 
@@ -14,7 +15,7 @@ declare namespace Wizard {
     /** Date this section was completed */
     completedDate: Date | null;
     /** Last currently visited page */
-    pageLast: string | null;
+    routeLast: string | null;
     /** Has this section been started */
     started: boolean;
     /** Date this section was started */
@@ -49,12 +50,6 @@ declare namespace Wizard {
     routing: Record<string, Wizard.Route>;
     pages: Record<string, Wizard.Page>;
     src: Section;
-    status: SectionStatus;
-    // Methods
-    setActive: () => void;
-    setInactive: () => void;
-    setComplete: () => void;
-    setIncomplete: () => void;
   }
 
   export interface PageControl extends Page {

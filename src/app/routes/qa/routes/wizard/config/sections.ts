@@ -4,21 +4,21 @@ import { routesLoanPurpose } from './routing/loan-purpose';
 export const sections: Wizard.Section[] = [
   {
     title: 'Loan Purpose',
-    routeStart: '',
+    routeStart: 'routeA',
     settings: {},
     routing: routesLoanPurpose,
     pages: pagesLoanPurpose,
   },
   {
     title: 'Personal Info',
-    routeStart: '',
+    routeStart: 'routeA',
     settings: {},
     routing: routesLoanPurpose,
     pages: pagesLoanPurpose,
   },
   {
     title: 'Test',
-    routeStart: '',
+    routeStart: 'routeA',
     settings: {},
     routing: routesLoanPurpose,
     pages: pagesLoanPurpose,
