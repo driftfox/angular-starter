@@ -1,14 +1,14 @@
 // import { Lens } from 'monocle-ts';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 
 export class WizardStateService {
   /** All sections */
-  public sections$ = new BehaviorSubject<Wizard.SectionControl[] | null>(null);
+  public sections$ = new Subject<Wizard.SectionControl[] | null>();
   private sections: Wizard.SectionControl[] | undefined;
 
   /** Wizard State */
-  public state$ = new BehaviorSubject<Wizard.State | null>(null);
+  public state$ = new Subject<Wizard.State | null>();
   private state: Wizard.State = {
     sectionActiveId: null,
     routeActiveId: null,
