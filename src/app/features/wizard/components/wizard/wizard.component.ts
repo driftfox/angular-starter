@@ -23,7 +23,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     this.store.sections$.subscribe(res => console.log('Sections', res));
     this.store.state$.subscribe(res => console.log('State', res));
     this.store.sectionActive$.subscribe(res => console.log('Section Active', res));
-    // this.store.pageActive$.subscribe(res => console.log('Page Active', res));
+    this.store.pageActive$.subscribe(res => console.log('Page Active', res));
   }
 
   ngOnChanges(model: SimpleChanges) {

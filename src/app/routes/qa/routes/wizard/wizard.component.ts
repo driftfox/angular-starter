@@ -11,8 +11,8 @@ export class WizardComponent implements OnInit {
 
   public sections = sections;
   public state = {
-    sectionActiveId: '',
-    pageActiveId: '',
+    sectionActiveId: null,
+    pageActiveId: null,
     status: {
       'loan-purpose' : {
         active: false,

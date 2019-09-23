@@ -26,6 +26,16 @@ export class WizardStateService {
     distinctUntilChanged(),
   );
 
+  /** Current active page */
+  public pageActive$ = combineLatest([this.sectionActive$, this.state$]).pipe(
+    map(([section, state]) =>
+      section && state && state.routeActiveId && section.routing[state.routeActiveId]
+        ? section.pages[section.routing[state.routeActiveId].pageId]
+        : undefined,
+    ),
+    distinctUntilChanged(),
+  );
+
   constructor() {}
 
   /**
@@ -62,6 +72,20 @@ export class WizardStateService {
 
     // Update state with new section id and statuses
     this.state = { ...this.state, sectionActiveId: sectionId, status: status };
+    this.state$.next(this.state);
+  }
+
+  /**
+   *  Change the active route
+   * @param routeId
+   */
+  public routeChange(routeId: string) {
+    if (!this.sections) {
+      return;
+    }
+
+    // Update state with new section id and statuses
+    this.state = { ...this.state, routeActiveId: routeId };
     this.state$.next(this.state);
   }
 

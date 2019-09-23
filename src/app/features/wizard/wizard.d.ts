@@ -119,7 +119,16 @@ declare namespace Wizard {
   }
 
   export interface Route {
+    /** Unique ID for this route */
     uniqueId: string;
+    /** ID of the page to display when this route is active */
+    pageId: string;
+    /** A string of the next route if linear or a rulegroup array if the next route is dynamic */
+    routeNext: string | any[];
+  }
+
+  export interface RouteControl extends Route {
+    routeNext: string;
   }
 
   /**
