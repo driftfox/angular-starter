@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
 import { sectionControl } from '../../shared/factories/section.factory';
 import { WizardStateService } from '../../shared/services/wizard-state.service';
+import { WizardStateChange } from '../../wizard.enums';
 
 @Component({
   selector: 'nts-wizard',
@@ -39,7 +40,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
 
     // When a new sectionActive is passed in
     if (model.sectionActive && this.sectionActiveId) {
-      this.store.sectionChange(this.sectionActiveId);
+      // this.store.sectionChange(this.sectionActiveId);
     }
 
     // When a new state object is passed in
@@ -79,12 +80,15 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     // Set start section
     // const sectionStart = this.state && this.state.sectionActiveId ? this.state.sectionActiveId : sectionControls[0].uniqueId;
     // this.store.sectionChange(sectionStart);
-   
+
     setTimeout(() => {
-      // this.store.sectionChange('personal-info');
-    }, 5000);
+      this.store.stateChange(WizardStateChange.sectionGoTo, 'test');
+    }, 1000);
 
-    
+    setTimeout(() => {
+     //  this.store.stateChange(WizardStateChange.sectionPrevious);
+    }, 2000);
+
+
   }
-
 }

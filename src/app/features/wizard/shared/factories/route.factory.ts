@@ -2,7 +2,13 @@ class RouteControl implements Wizard.RouteControl {
   readonly id = this.src.id;
   readonly pageId = this.src.pageId;
   get routeNext() {
-    return '';
+    if (Array.isArray(this.src.routeNext)) {
+      console.warn('Evaluate rules group');
+      return '';
+    } else {
+      return this.src.routeNext;
+    }
+    
   }
 
   constructor(public src: Wizard.Route) {}

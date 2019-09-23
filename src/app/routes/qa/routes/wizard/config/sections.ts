@@ -1,9 +1,12 @@
 import { pagesLoanPurpose } from './pages/loan-purpose';
 import { routesLoanPurpose } from './routing/loan-purpose';
+import { routesPersonal } from './routing/personal';
+import { pagesPersonal } from './pages/personal';
 
 export const sections: Wizard.Section[] = [
   {
     title: 'Loan Purpose',
+    id: 'loan-purpose',
     routeStart: 'routeA',
     settings: {},
     routes: routesLoanPurpose,
@@ -11,13 +14,15 @@ export const sections: Wizard.Section[] = [
   },
   {
     title: 'Personal Info',
-    routeStart: 'routeA',
+    id: 'personal-info',
+    routeStart: 'routePersonalA',
     settings: {},
-    routes: routesLoanPurpose,
-    pages: pagesLoanPurpose,
+    routes: routesPersonal,
+    pages: pagesPersonal,
   },
   {
     title: 'Test',
+    id: 'test',
     routeStart: 'routeA',
     settings: {},
     routes: routesLoanPurpose,

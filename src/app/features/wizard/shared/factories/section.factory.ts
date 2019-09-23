@@ -1,4 +1,3 @@
-import { stringToSlug } from '../utils/strings.utils';
 import { pageControl } from './page.factory';
 import { routeControl } from './route.factory';
 
@@ -6,10 +5,8 @@ class SectionControl implements Wizard.SectionControl {
   get title() {
     return this.src.title;
   }
-
-  readonly slug = this.src.slug ? this.src.slug : stringToSlug(this.src.title);
-  readonly id = this.src.uniqueId;
-  readonly uniqueId = this.src.uniqueId ? this.src.uniqueId : stringToSlug(this.src.title);
+  readonly id = this.src.id;
+  readonly slug = this.src.slug || this.src.id;
   readonly routeStart = this.src.routeStart;
   readonly settings = { ...this.src.settings };
   readonly data = { ...this.src.data } || null;
