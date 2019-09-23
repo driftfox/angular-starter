@@ -1,5 +1,6 @@
 import { stringToSlug } from '../utils/strings.utils';
 import { pageControl } from './page.factory';
+import { routeControl } from './route.factory';
 
 class SectionControl implements Wizard.SectionControl {
   get title() {
@@ -7,19 +8,22 @@ class SectionControl implements Wizard.SectionControl {
   }
 
   readonly slug = this.src.slug ? this.src.slug : stringToSlug(this.src.title);
+  readonly id = this.src.uniqueId;
   readonly uniqueId = this.src.uniqueId ? this.src.uniqueId : stringToSlug(this.src.title);
   readonly routeStart = this.src.routeStart;
   readonly settings = { ...this.src.settings };
   readonly data = { ...this.src.data } || null;
-  readonly routing: Record<string, Wizard.Route> = {};
+  readonly routes: Record<string, Wizard.Route> = {};
   readonly pages: Record<string, Wizard.Page> = {};
   readonly sectionNext: string | null = null;
 
   constructor(public src: Wizard.Section) {
-    src.pages.forEach(page => {
-      const pageCntrl = pageControl(page);
-      this.pages[pageCntrl.uniqueId] = pageCntrl;
-    });
+    if (src.pages && src.pages.length) {
+      src.pages.forEach(page => this.pages[page.id] = pageControl(page));
+    }
+    if (src.routes && src.routes.length) {
+      src.routes.forEach(route => this.routes[route.id] = routeControl(route));
+    }
   }
 }
 

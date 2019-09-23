@@ -29,8 +29,8 @@ export class WizardStateService {
   /** Current active page */
   public pageActive$ = combineLatest([this.sectionActive$, this.state$]).pipe(
     map(([section, state]) =>
-      section && state && state.routeActiveId && section.routing[state.routeActiveId]
-        ? section.pages[section.routing[state.routeActiveId].pageId]
+      section && state && state.routeActiveId && section.routes[state.routeActiveId]
+        ? section.pages[section.routes[state.routeActiveId].pageId]
         : undefined,
     ),
     distinctUntilChanged(),
