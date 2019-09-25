@@ -49,54 +49,6 @@ export class WizardStateService {
     this.sections$.next(this.sections);
   }
 
-  /**
-   * Wizard state change
-   * @param state
-  public stateChange(change: WizardStateChange, data?: any) {
-    if (!this.sections || !this.state) {
-      return;
-    }
-    // console.log('stateChange', change, data);
-
-    // Get current section index
-    const sectionCurrentIndex = this.sections.findIndex(section => section.id === this.state.sectionActiveId);
-
-    switch (change) {
-      case WizardStateChange.sectionNext:
-        // Check if next section index would exceed # of sections, if so wizard is complete
-        if (sectionCurrentIndex + 1 >= this.sections.length) {
-          // Wizard complete
-          console.warn('Wizard Complete');
-        } else {
-          // Get id of next section
-          const sectionNextId = this.sections[sectionCurrentIndex + 1].id;
-          this.sectionChange(sectionNextId);
-        }
-        break;
-      case WizardStateChange.sectionPrevious:
-        // Check that previous index doesn't go below 0
-        const sectionPrevId = sectionCurrentIndex - 1 < 0 ? this.sections[0].id : this.sections[sectionCurrentIndex - 1].id;
-        this.sectionChange(sectionPrevId);
-        break;
-      case WizardStateChange.sectionGoTo:
-        this.sectionChange(data);
-        break;
-      case WizardStateChange.routeNext:
-        this.routeChange(data);
-        break;
-      case WizardStateChange.routePrevious:
-        this.routeChange(data);
-        break;
-      case WizardStateChange.routeGoTo:
-        this.routeChange(data);
-        break;
-      case WizardStateChange.actionCustom:
-        console.log('Action!');
-        break;
-    }
-  }
-  */
-
   public formChange() {
     /**
      * Form change types:
@@ -107,9 +59,10 @@ export class WizardStateService {
   }
 
   /**
-   * Change active section
-   * Sets active status for requested section and sets all others to inactive
-   * @param sectionActiveId
+   * 
+   * @param action Which direction or section to change to
+   * @param sectionId The ID of the next section
+   * @param routeStartId A route within the next section
    */
   public sectionChange(action: Wizard.Transition = 'next', sectionId?: string, routeStartId?: string) {
     if (!this.sections) {
@@ -162,8 +115,9 @@ export class WizardStateService {
   }
 
   /**
-   *  Change the active route
-   * @param routeId
+   * Change the active route
+   * @param action  Which direction or route to change to
+   * @param routeId  If a goto action, the ID of the route to go to next
    */
   public routeChange(action: Wizard.Transition = 'next', routeId?: string) {
     if (!this.sections || !this.state.routeActiveId) {
@@ -216,15 +170,7 @@ export class WizardStateService {
       return;
     }
 
-    /**
-    // Add new route to route path
-    routePath =
-      action === 'next' || action === 'goto'
-        ? [...this.state.routePath, routeId]
-        : (this.state.routePath.slice(0, this.state.routePath.length - 1) as string[]);
-         */
-
-    // Update state with new section id and statuses
+    // Update state with new route and route path
     this.state = { ...this.state, routeActiveId: routeId, routePath: routePath };
     this.state$.next(this.state);
   }
