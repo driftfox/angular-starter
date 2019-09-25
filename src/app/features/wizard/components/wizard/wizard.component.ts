@@ -75,28 +75,30 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     // Load state into store
     this.store.stateChange(sectionControls, this.state);
     
-
     // Set start section
     // const sectionStart = this.state && this.state.sectionActiveId ? this.state.sectionActiveId : sectionControls[0].uniqueId;
     // this.store.sectionChange(sectionStart);
 
     setTimeout(() => {
       this.store.routeChange('next');
+      this.store.routeChange('next');
+      this.store.routeChange('next');
     }, 1000);
 
     setTimeout(() => {
-      this.store.routeChange('next');
+      this.store.sectionChange('prev');
+      this.store.routeChange('prev');
+
     }, 2000);
 
     setTimeout(() => {
-      // this.store.routeChange('next');
+     this.store.sectionChange('next');
+     this.store.routeChange('next');
+     this.store.routeChange('next');
     }, 3000);
 
     setTimeout(() => {
-      this.store.routeChange('prev');
-      this.store.routeChange('prev');
-      this.store.routeChange('prev');
-      // this.store.routeChange('goto', 'routeC');
+      this.store.routeChange('next');
     }, 4000);
 
 

@@ -10,6 +10,7 @@ class RouteControl implements Wizard.RouteControl {
     }
     
   }
+  readonly sectionComplete = this.src.sectionComplete;
 
   constructor(public src: Wizard.Route) {}
 }

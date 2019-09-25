@@ -156,8 +156,8 @@ export class WizardStateService {
     }
     // Since this is a section change, a new starting route needs to be supplied. Default to routeStart if not supplied
     const routeId = routeStartId || sectionCurrent.routeStart;
-    // Update state with new section id and statuses
-    this.state = { ...this.state, sectionActiveId: sectionId, routeActiveId: routeId, status: status };
+    // Update state with new section id and statuses, reset routePath
+    this.state = { ...this.state, sectionActiveId: sectionId, routeActiveId: routeId, status: status, routePath: [routeId] };
     this.state$.next(this.state);
   }
 
@@ -166,7 +166,25 @@ export class WizardStateService {
    * @param routeId
    */
   public routeChange(action: Wizard.Transition = 'next', routeId?: string) {
-    if (!this.sections) {
+    if (!this.sections || !this.state.routeActiveId) {
+      return;
+    }
+
+    // Get current section index
+    const sectionActive = this.sections.find(section => section.id === this.state.sectionActiveId) as Wizard.SectionControl;
+    // Get current route
+    const routeCurrent = sectionActive.routes[this.state.routeActiveId];
+    // Validate route exists
+    if (!routeCurrent) {
+      console.error(
+        'routeChange: Invalid route. Unable to find a route of "' + this.state.routeActiveId + '" in "' + this.state.sectionActiveId + '"',
+      );
+      return;
+    }
+
+    // Check if this route is marked section complete, if so go to next section
+    if (routeCurrent && routeCurrent.sectionComplete) {
+      this.sectionChange();
       return;
     }
 
@@ -175,13 +193,10 @@ export class WizardStateService {
     // Check if this is a previous or next section change
     switch (action) {
       case 'next':
-        // Get current section index
-        const sectionActive = this.sections.find(section => section.id === this.state.sectionActiveId);
-        if (!sectionActive || !this.state.routeActiveId) {
-          console.error('routeChange: Unable to find section for route change');
+        routeId = routeCurrent.routeNext;
+        if (!routeId) {
           return;
         }
-        routeId = sectionActive.routes[this.state.routeActiveId].routeNext;
         routePath = [...this.state.routePath, routeId];
         break;
       case 'prev':

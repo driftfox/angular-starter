@@ -1,7 +1,8 @@
 declare namespace Wizard {
 
-
   export type Transition = 'next' | 'prev' | 'goto';
+  export type ContentType = 'formField' | 'html' | 'feature' | 'row';
+  export type ContentArray = FormField | Html | Row | Feature;
 
   export interface State {
     /** ID of active section */
@@ -132,21 +133,19 @@ declare namespace Wizard {
     /** ID of the page to display when this route is active */
     pageId: string;
     /** A string of the next route if linear or a rulegroup array if the next route is dynamic */
-    routeNext: string | any[];
+    routeNext?: string | any[];
     sectionComplete?: true;
   }
 
   export interface RouteControl extends Route {
-    routeNext: string;
+    routeNext?: string;
   }
 
   /**
    * Content Types
    */
 
-  export type ContentType = 'formField' | 'html' | 'feature' | 'row';
-  export type ContentArray = FormField | Html | Row | Feature;
-
+ 
   export interface Content {
     /** Type of content */
     type: ContentType;

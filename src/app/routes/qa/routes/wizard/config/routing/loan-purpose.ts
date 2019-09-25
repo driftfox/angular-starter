@@ -1,17 +1,17 @@
 export const routesLoanPurpose: Wizard.Route[] = [
     {
-        id: 'routeA',
+        id: 'lpRouteA',
         pageId: 'pageA',
-        routeNext: 'routeB'
+        routeNext: 'lpRouteB'
     },
     {
-        id: 'routeB',
+        id: 'lpRouteB',
         pageId: 'pageB',
-        routeNext: 'routeC'
+        routeNext: 'lpRouteC'
     },
     {
-        id: 'routeC',
+        id: 'lpRouteC',
         pageId: 'pageC',
-        routeNext: ''
+        sectionComplete: true,
     },
 ];

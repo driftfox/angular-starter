@@ -2,16 +2,16 @@ export const routesPersonal: Wizard.Route[] = [
     {
         id: 'routePersonalA',
         pageId: 'pageA',
-        routeNext: 'routeB'
+        routeNext: 'routePersonalB'
     },
     {
         id: 'routePersonalB',
         pageId: 'pageB',
-        routeNext: 'routeC'
+        routeNext: 'routePersonalC'
     },
     {
         id: 'routePersonalC',
         pageId: 'pageC',
-        routeNext: ''
+        sectionComplete: true
     },
 ];
