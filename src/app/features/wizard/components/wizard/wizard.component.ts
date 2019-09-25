@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
 import { sectionControl } from '../../shared/factories/section.factory';
 import { WizardStateService } from '../../shared/services/wizard-state.service';
-import { WizardStateChange } from '../../wizard.enums';
 
 @Component({
   selector: 'nts-wizard',
@@ -71,23 +70,34 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     // Null check sections
     // Convert sections to section controls
     const sectionControls: Wizard.SectionControl[] = this.sections.map(section => sectionControl(section));
-    // Load state into store
-    this.store.stateCreate(sectionControls, this.state);
-
     // Load section controls into store
     this.store.sectionsAdd(sectionControls);
+    // Load state into store
+    this.store.stateChange(sectionControls, this.state);
+    
 
     // Set start section
     // const sectionStart = this.state && this.state.sectionActiveId ? this.state.sectionActiveId : sectionControls[0].uniqueId;
     // this.store.sectionChange(sectionStart);
 
     setTimeout(() => {
-      this.store.stateChange(WizardStateChange.sectionGoTo, 'test');
+      this.store.routeChange('next');
     }, 1000);
 
     setTimeout(() => {
-     //  this.store.stateChange(WizardStateChange.sectionPrevious);
+      this.store.routeChange('next');
     }, 2000);
+
+    setTimeout(() => {
+      // this.store.routeChange('next');
+    }, 3000);
+
+    setTimeout(() => {
+      this.store.routeChange('prev');
+      this.store.routeChange('prev');
+      this.store.routeChange('prev');
+      // this.store.routeChange('goto', 'routeC');
+    }, 4000);
 
 
   }

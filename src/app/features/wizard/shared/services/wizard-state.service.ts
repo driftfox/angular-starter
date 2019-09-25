@@ -1,7 +1,6 @@
 // import { Lens } from 'monocle-ts';
 import { combineLatest, Subject } from 'rxjs';
 import { map, distinctUntilChanged, filter } from 'rxjs/operators';
-import { WizardStateChange } from '../../wizard.enums';
 
 export class WizardStateService {
   /** All sections */
@@ -15,7 +14,7 @@ export class WizardStateService {
     routeActiveId: null,
     routePath: [],
     status: {},
-    arrayIndexes: {}
+    arrayIndexes: {},
   };
 
   /** Current active section */
@@ -35,7 +34,7 @@ export class WizardStateService {
         ? section.pages[section.routes[state.routeActiveId].pageId]
         : undefined,
     ),
-    filter(val => val ? true : false), // State and sections change independently, this ensures no nulls slip through on section change
+    filter(val => (val ? true : false)), // State and sections change independently, this ensures no nulls slip through on section change
     distinctUntilChanged(),
   );
 
@@ -53,7 +52,6 @@ export class WizardStateService {
   /**
    * Wizard state change
    * @param state
-   */
   public stateChange(change: WizardStateChange, data?: any) {
     if (!this.sections || !this.state) {
       return;
@@ -97,6 +95,7 @@ export class WizardStateService {
         break;
     }
   }
+  */
 
   public formChange() {
     /**
@@ -112,10 +111,37 @@ export class WizardStateService {
    * Sets active status for requested section and sets all others to inactive
    * @param sectionActiveId
    */
-  private sectionChange(sectionId: string, routeStartId?: string) {
+  public sectionChange(action: Wizard.Transition = 'next', sectionId?: string, routeStartId?: string) {
     if (!this.sections) {
       return;
     }
+
+    // Get current section index
+    const sectionCurrentIndex = this.sections.findIndex(section => section.id === this.state.sectionActiveId);
+
+    // Check if this is a previous or next section change
+    switch (action) {
+      case 'next':
+        // Check if next section index would exceed # of sections, if so wizard is complete
+        if (sectionCurrentIndex + 1 >= this.sections.length) {
+          // Wizard complete, TODO fire complete logic
+          console.warn('Wizard Complete');
+        } else {
+          // Get id of next section
+          sectionId = this.sections[sectionCurrentIndex + 1].id;
+        }
+        break;
+      case 'prev':
+        // Check that previous index doesn't go below 0
+        sectionId = sectionCurrentIndex - 1 < 0 ? this.sections[0].id : this.sections[sectionCurrentIndex - 1].id;
+        break;
+    }
+
+    if (!sectionId) {
+      console.error('sectionChange: Something weird just happened getting the section Id');
+      return;
+    }
+
     // Update statuses. Mark all as inactive except active section
     const status: Record<string, Wizard.SectionStatus> = {};
     Object.keys(this.state.status).forEach(key => (status[key] = { ...this.state.status[key], active: false }));
@@ -125,7 +151,7 @@ export class WizardStateService {
     const sectionCurrent = this.sections.find(section => section.id === sectionId);
     // Null check for current section
     if (!sectionCurrent) {
-      console.error('No section found for ' + sectionId);
+      console.error('sectionChange: No section found for ' + sectionId);
       return;
     }
     // Since this is a section change, a new starting route needs to be supplied. Default to routeStart if not supplied
@@ -139,13 +165,52 @@ export class WizardStateService {
    *  Change the active route
    * @param routeId
    */
-  public routeChange(routeId: string) {
+  public routeChange(action: Wizard.Transition = 'next', routeId?: string) {
     if (!this.sections) {
       return;
     }
 
+    let routePath: string[] = [];
+
+    // Check if this is a previous or next section change
+    switch (action) {
+      case 'next':
+        // Get current section index
+        const sectionActive = this.sections.find(section => section.id === this.state.sectionActiveId);
+        if (!sectionActive || !this.state.routeActiveId) {
+          console.error('routeChange: Unable to find section for route change');
+          return;
+        }
+        routeId = sectionActive.routes[this.state.routeActiveId].routeNext;
+        routePath = [...this.state.routePath, routeId];
+        break;
+      case 'prev':
+        // Route ID of previous route by extracting from routePath
+        routeId = this.state.routePath.length > 1 ? this.state.routePath[this.state.routePath.length - 1] : this.state.routePath[0];
+        // Remove the last route from the route path, making sure that the array doesn't go down to 0
+        routePath =
+          this.state.routePath.length > 1 ? this.state.routePath.slice(0, this.state.routePath.length - 1) : [...this.state.routePath];
+        break;
+      case 'goto':
+        routePath = routeId ? [...this.state.routePath, routeId] : [...this.state.routePath];
+        break;
+    }
+
+    if (!routeId) {
+      console.error('routeChange: No routeId found');
+      return;
+    }
+
+    /**
+    // Add new route to route path
+    routePath =
+      action === 'next' || action === 'goto'
+        ? [...this.state.routePath, routeId]
+        : (this.state.routePath.slice(0, this.state.routePath.length - 1) as string[]);
+         */
+
     // Update state with new section id and statuses
-    this.state = { ...this.state, routeActiveId: routeId };
+    this.state = { ...this.state, routeActiveId: routeId, routePath: routePath };
     this.state$.next(this.state);
   }
 
@@ -154,7 +219,7 @@ export class WizardStateService {
    * @param sections
    * @param state
    */
-  public stateCreate(sections: Wizard.SectionControl[], state?: Wizard.State) {
+  public stateChange(sections: Wizard.SectionControl[], state?: Wizard.State) {
     this.state = state
       ? { ...this.state, ...state }
       : {
@@ -162,7 +227,7 @@ export class WizardStateService {
           routeActiveId: sections[0].routeStart,
           routePath: [sections[0].routeStart],
           status: this.statusCreate(sections),
-          arrayIndexes: {}
+          arrayIndexes: {},
         };
     this.state$.next(this.state);
     return this.state;

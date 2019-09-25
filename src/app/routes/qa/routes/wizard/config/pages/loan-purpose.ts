@@ -1,16 +1,16 @@
 export const pagesLoanPurpose: Wizard.Page[] = [
     {
-        title: 'Hello World',
+        title: 'LP - Hello World',
         id: 'pageA',
         content: []
     },
     {
-        title: 'Page 2',
+        title: 'LP - Page 2',
         id: 'pageB',
         content: []
     },
     {
-        title: 'Page 3',
+        title: 'LP - Page 3',
         id: 'pageC',
         content: []
     }
