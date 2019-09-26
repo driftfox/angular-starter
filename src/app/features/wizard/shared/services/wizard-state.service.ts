@@ -41,9 +41,9 @@ export class WizardStateService {
   /** Current active section */
   public sectionActive$ = combineLatest([this.sections$, this.state$]).pipe(
     map(([sections, state]) =>
-      sections && sections.length && state && state.sectionActiveId
+      sections && state && state.sectionActiveId
         ? sections[state.sectionActiveId]
-        : undefined,
+        : null,
     ),
     distinctUntilChanged(),
   );
