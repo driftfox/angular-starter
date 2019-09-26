@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
 import { sectionControl } from '../../shared/factories/section.factory';
 import { WizardStateService } from '../../shared/services/wizard-state.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'nts-wizard',
@@ -11,6 +12,7 @@ import { WizardStateService } from '../../shared/services/wizard-state.service';
 export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() sections: Wizard.Section[] | undefined;
   @Input() state: Wizard.State | undefined;
+  @Input() form: FormGroup | undefined;
 
   @Input() sectionActiveId: string | undefined;
   @Input() pageActiveId: string | undefined;
@@ -32,8 +34,8 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
       return;
     }
     // When new sections are passed in
-    if (model.sections && this.sections) {
-      this.store.sectionsAdd(this.sections.map(section => sectionControl(section)));
+    if (model.sections && this.sections && this.form) {
+      this.store.sectionsAdd(this.sections.map(section => sectionControl(section, this.form as FormGroup))); // Not picking up null check
       // TODO: Need to reset wizard if this happens
     }
 
@@ -62,19 +64,20 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
    */
   private initialize() {
     // Null check
-    if (!this.sections) {
-      console.warn('No sections passed to wizard');
+    if (!this.sections || !this.form) {
+      console.warn('No sections or form passed to wizard');
       return;
     }
 
     // Convert sections to section controls
-    const sectionControls: Wizard.SectionControl[] = this.sections.map(section => sectionControl(section));
+    // Not picking up null check
+    const sectionControls: Wizard.SectionControl[] = this.sections.map(section => sectionControl(section, this.form as FormGroup));
     // Load section controls into store
     this.store.sectionsAdd(sectionControls);
     // Update store state. Load state if supplied, if not generate default one
     this.store.stateChange(this.state || this.store.stateCreateDefault(sectionControls));
-   
 
+    /**
     setTimeout(() => {
       this.store.routeChange('next');
       this.store.routeChange('next');
@@ -96,7 +99,6 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     setTimeout(() => {
       this.store.routeChange('next');
     }, 4000);
-
-
+ */
   }
 }

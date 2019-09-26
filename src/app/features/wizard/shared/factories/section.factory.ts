@@ -1,5 +1,6 @@
 import { pageControl } from './page.factory';
 import { routeControl } from './route.factory';
+import { FormGroup } from '@angular/forms';
 
 class SectionControl implements Wizard.SectionControl {
   get title() {
@@ -10,11 +11,11 @@ class SectionControl implements Wizard.SectionControl {
   readonly routeStart = this.src.routeStart;
   readonly settings = { ...this.src.settings };
   readonly data = { ...this.src.data } || null;
-  readonly routes: Record<string, Wizard.Route> = {};
-  readonly pages: Record<string, Wizard.Page> = {};
+  readonly routes: Record<string, Wizard.RouteControl> = {};
+  readonly pages: Record<string, Wizard.PageControl> = {};
   readonly sectionNext: string | null = null;
 
-  constructor(public src: Wizard.Section) {
+  constructor(public src: Wizard.Section, public form: FormGroup) {
     if (src.pages && src.pages.length) {
       src.pages.forEach(page => this.pages[page.id] = pageControl(page));
     }
@@ -28,6 +29,6 @@ class SectionControl implements Wizard.SectionControl {
  * Create a new sectionControl from a section
  * @param section
  */
-export const sectionControl = (section: Wizard.Section): Wizard.SectionControl => {
-  return new SectionControl(section);
+export const sectionControl = (section: Wizard.Section, form: FormGroup): Wizard.SectionControl => {
+  return new SectionControl(section, form);
 };
