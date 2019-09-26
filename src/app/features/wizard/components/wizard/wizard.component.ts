@@ -9,10 +9,12 @@ import {
   ChangeDetectorRef,
   Output,
   EventEmitter,
+  OnDestroy,
 } from '@angular/core';
 import { WizardStateService } from '../../shared/services/wizard-state.service';
 import { FormGroup } from '@angular/forms';
 import { audit } from '../../shared/utils/audit.util';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
   selector: 'nts-wizard',
@@ -20,7 +22,7 @@ import { audit } from '../../shared/utils/audit.util';
   styleUrls: ['./wizard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
+export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() sections: Wizard.Section[] | undefined;
   @Input() state: Wizard.State | undefined;
   @Input() form: FormGroup | undefined;
@@ -30,6 +32,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
   /** Run some helpful checking on incoming configuration to catch common errors and issues */
   @Input() debug = true;
 
+  @Output() stateChange = new EventEmitter<Wizard.State>();
   @Output() wizardComplete = new EventEmitter<void>();
 
   public loaded = false;
@@ -37,11 +40,10 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(public store: WizardStateService, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.store.wizardComplete$.subscribe(() => this.wizardComplete.emit());
-    this.store.sections$.subscribe(res => console.log('Sections', res));
-    this.store.state$.subscribe(res => console.log('State', res));
-    this.store.sectionActive$.subscribe(section => console.log('Section Active', section));
-    this.store.pageActive$.subscribe(res => console.log('Page Active', res));
+    // Notify parent of state changes
+    this.store.state$.pipe(untilDestroyed(this)).subscribe(state => this.stateChange.emit(state));
+    // Notify parent when wizard is complete
+    this.store.wizardComplete$.pipe(untilDestroyed(this)).subscribe(() => this.wizardComplete.emit());
   }
 
   ngOnChanges(model: SimpleChanges) {
@@ -94,7 +96,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     if (this.debug) {
       audit.sectionCheck(this.sections);
     }
-    
+
     // Update store state. Load state if supplied, if not generate default one
     this.store.stateChange(this.state || this.store.stateCreateDefault(this.sections));
 
@@ -130,4 +132,6 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
   public routePrev() {
     this.store.routeChange('prev');
   }
+
+  ngOnDestroy() {}
 }
