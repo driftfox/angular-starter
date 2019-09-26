@@ -53,7 +53,7 @@ export class WizardStateService {
     map(([section, state]) =>
       section && state && state.routeActiveId && section.routes[state.routeActiveId]
         ? section.pages[section.routes[state.routeActiveId].pageId]
-        : undefined,
+        : null,
     ),
     filter(val => (val ? true : false)), // State and sections change independently, this ensures no nulls slip through on section change
     distinctUntilChanged(),
@@ -62,14 +62,15 @@ export class WizardStateService {
   constructor() {}
 
   /**
-   * Add sections
+   * Add sections to wizard
    * @param sections
    */
   public sectionsAdd(sections: Wizard.Section[], form: FormGroup) {
     const sectionRecord: Record<string, Wizard.SectionControl> = {};
-
     sections.forEach((section, i) => {
+      // Create section controls
       const control = sectionControl(section, form);
+      // Add props for relationships between sections, IE prev and next
       control.sectionNextId = sections[i + 1] ? sections[i + 1].id : null;
       control.sectionPreviousId = sections[i - 1] ? sections[i - 1].id : null;
       sectionRecord[control.id] = control;
@@ -95,6 +96,7 @@ export class WizardStateService {
    */
   public sectionChange(action: Wizard.Transition = 'next', sectionId?: string, routeStartId?: string) {
     if (!this.sections || !this.state.sectionActiveId) {
+      console.error('sectionChange missing arguments');
       return;
     }
 
@@ -150,6 +152,7 @@ export class WizardStateService {
    */
   public routeChange(action: Wizard.Transition = 'next', routeId?: string) {
     if (!this.sections || !this.state.routeActiveId || !this.state.sectionActiveId) {
+      console.error('routeChange missing arguments');
       return;
     }
 
