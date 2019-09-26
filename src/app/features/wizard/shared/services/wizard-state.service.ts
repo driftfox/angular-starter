@@ -163,7 +163,7 @@ export class WizardStateService {
       );
       return;
     }
-    
+
     // Check if this route is marked section complete, if so go to next section
     if (routeCurrent && routeCurrent.sectionComplete) {
       this.sectionChange();

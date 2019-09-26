@@ -129,20 +129,11 @@ declare namespace Wizard {
     onPrevious?: Function;
   }
 
-  export interface Route {
-    /** Unique ID for this route */
-    id: string;
-    /** ID of the page to display when this route is active */
-    pageId: string;
-    /** A string of the next route if linear or a rulegroup array if the next route is dynamic */
-    routeNext?: string | any[];
-    /** If this is the last route in the section */
-    sectionComplete?: true;
+  export type Route = MarkRequired<RouteSrc, 'routeNext'> | MarkRequired<RouteSrc, 'sectionComplete'>;
+
+  export interface RouteControl extends RouteSrc {
+    routeNext?: string;
   }
-
-  
-
-  export type RouteControl = MarkRequired<RouteControl, 'routeNext'> | MarkRequired<RouteControl, 'sectionComplete'>;
 
   /**
    * Content Types
@@ -235,9 +226,29 @@ declare namespace Wizard {
 
 // Don't want these exported in the namespace
 
-interface RouteSafe extends Route {
-  routeNext?: string;
+interface RouteSrc {
+   /** Unique ID for this route */
+   id: string;
+   /** ID of the page to display when this route is active */
+   pageId: string;
+   /** A string of the next route if linear or a rulegroup array if the next route is dynamic */
+   routeNext?: string | any[];
+   /** If this is the last route in the section */
+   sectionComplete?: true;
 }
+
+// Don't export these from the namespace
+interface RouteSrc {
+  /** Unique ID for this route */
+  id: string;
+  /** ID of the page to display when this route is active */
+  pageId: string;
+  /** A string of the next route if linear or a rulegroup array if the next route is dynamic */
+  routeNext?: string | any[];
+  /** If this is the last route in the section */
+  sectionComplete?: true;
+}
+
 
 /**
  * Marks keys in RS as required
