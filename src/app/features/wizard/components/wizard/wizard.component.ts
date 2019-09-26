@@ -18,7 +18,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
 
   private loaded = false;
 
-  constructor(private store: WizardStateService) {}
+  constructor(public store: WizardStateService) {}
 
   ngOnInit() {
     this.store.sections$.subscribe(res => console.log('Sections', res));

@@ -10,12 +10,12 @@ export class WizardStateService {
   private _sections: Record<string, Wizard.SectionControl> | null = null;
 
   public get sections(): Record<string, Wizard.SectionControl> | null {
-    return this._sections ? {...this._sections} : null; 
+    return this._sections ? { ...this._sections } : null;
   }
 
   public set sections(sections: Record<string, Wizard.SectionControl> | null) {
     if (sections) {
-      this._sections = {...sections};
+      this._sections = { ...sections };
       this.sections$.next(this._sections);
     }
   }
@@ -31,7 +31,7 @@ export class WizardStateService {
   };
 
   public set state(state: Wizard.State) {
-    this._state = state;
+    this._state = { ...state };
     this.state$.next(this._state);
   }
   public get state(): Wizard.State {
@@ -40,11 +40,7 @@ export class WizardStateService {
 
   /** Current active section */
   public sectionActive$ = combineLatest([this.sections$, this.state$]).pipe(
-    map(([sections, state]) =>
-      sections && state && state.sectionActiveId
-        ? sections[state.sectionActiveId]
-        : null,
-    ),
+    map(([sections, state]) => (sections && state && state.sectionActiveId ? sections[state.sectionActiveId] : null)),
     distinctUntilChanged(),
   );
 
@@ -167,7 +163,7 @@ export class WizardStateService {
       );
       return;
     }
-
+    
     // Check if this route is marked section complete, if so go to next section
     if (routeCurrent && routeCurrent.sectionComplete) {
       this.sectionChange();
@@ -209,7 +205,7 @@ export class WizardStateService {
 
   /**
    * Update the state of the wizard. Accepts partial replacements which are merged with the existing state
-   * @param state 
+   * @param state
    */
   public stateChange(state: Partial<Wizard.State>) {
     this.state = { ...this.state, ...state };
@@ -217,7 +213,7 @@ export class WizardStateService {
 
   /**
    * Generate a default state object from the sections
-   * @param sections 
+   * @param sections
    */
   public stateCreateDefault(sections: Wizard.Section[]) {
     const state: Wizard.State = {

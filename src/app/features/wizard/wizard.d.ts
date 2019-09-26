@@ -95,7 +95,7 @@ declare namespace Wizard {
     /** Use a custom validator for this page */
     validator?: PageValidator;
     /** Is this the last page in the section, go to next section */
-    isLastPage?: boolean;
+    // isLastPage?: boolean;
     // content: (FormField | Html | Feature | Buttons | ContentColumns)[];
     /** Show the back button */
     showButtonBack?: boolean;
@@ -136,12 +136,15 @@ declare namespace Wizard {
     pageId: string;
     /** A string of the next route if linear or a rulegroup array if the next route is dynamic */
     routeNext?: string | any[];
+    /** If this is the last route in the section */
     sectionComplete?: true;
   }
 
-  export interface RouteControl extends Route {
+  interface RouteSafe extends Route {
     routeNext?: string;
   }
+
+  export type RouteControl = MarkRequired<RouteControl, 'routeNext'> | MarkRequired<RouteControl, 'sectionComplete'>;
 
   /**
    * Content Types
@@ -236,4 +239,4 @@ declare namespace Wizard {
  * Marks keys in RS as required
  */
 type MarkRequired<T extends Record<any, any>, RS extends keyof T> = Required<Pick<T, RS>> & Pick<T, Exclude<keyof T, RS>>;
-type SomeDataHelper = MarkRequired<SomeData, 'propA'> | MarkRequired<SomeData, 'propB'>;
+// type SomeDataHelper = MarkRequired<SomeData, 'propA'> | MarkRequired<SomeData, 'propB'>;

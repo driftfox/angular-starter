@@ -1,2 +1,6 @@
 <p>wizard works!</p>
-<wiz-section></wiz-section>
+<div id="nts-wizard" *ngIf="{ section: store.sectionActive$ | async, page: store.pageActive$ | async } as wiz">
+    <wiz-page [page]="wiz.page"></wiz-page>
+ 
+</div>
+
