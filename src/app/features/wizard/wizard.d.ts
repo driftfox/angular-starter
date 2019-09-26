@@ -1,5 +1,4 @@
 declare namespace Wizard {
-
   export type Transition = 'next' | 'prev' | 'goto';
   export type ContentType = 'formField' | 'html' | 'feature' | 'row';
   export type ContentArray = FormField | Html | Row | Feature;
@@ -145,7 +144,6 @@ declare namespace Wizard {
    * Content Types
    */
 
- 
   export interface Content {
     /** Type of content */
     type: ContentType;
@@ -230,3 +228,9 @@ declare namespace Wizard {
     email?: boolean;
   }
 }
+
+/**
+ * Marks keys in RS as required
+ */
+type MarkRequired<T extends Record<any, any>, RS extends keyof T> = Required<Pick<T, RS>> & Pick<T, Exclude<keyof T, RS>>;
+type SomeDataHelper = MarkRequired<SomeData, 'propA'> | MarkRequired<SomeData, 'propB'>;

@@ -5,17 +5,36 @@ import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 export class WizardStateService {
   /** All sections */
   public sections$ = new Subject<Wizard.SectionControl[]>();
-  private sections: Wizard.SectionControl[] | undefined;
+  private _sections: Wizard.SectionControl[] | null = null;
+
+  public get sections(): Wizard.SectionControl[] | null {
+    return this._sections ? [...this._sections] : null; 
+  }
+
+  public set sections(sections: Wizard.SectionControl[] | null) {
+    if (sections) {
+      this._sections = [...sections];
+      this.sections$.next(this._sections);
+    }
+  }
 
   /** Wizard State */
   public state$ = new Subject<Wizard.State>();
-  private state: Wizard.State = {
+  private _state: Wizard.State = {
     sectionActiveId: null,
     routeActiveId: null,
     routePath: [],
     status: {},
     arrayIndexes: {},
   };
+
+  public set state(state: Wizard.State) {
+    this._state = state;
+    this.state$.next(this._state);
+  }
+  public get state(): Wizard.State {
+    return { ...this._state };
+  }
 
   /** Current active section */
   public sectionActive$ = combineLatest([this.sections$, this.state$]).pipe(
@@ -45,8 +64,7 @@ export class WizardStateService {
    * @param sections
    */
   public sectionsAdd(sections: Wizard.SectionControl[]) {
-    this.sections = [...sections];
-    this.sections$.next(this.sections);
+    this.sections = sections;
   }
 
   public formChange() {
@@ -59,10 +77,10 @@ export class WizardStateService {
   }
 
   /**
-   * 
+   * Change the current active section
    * @param action Which direction or section to change to
    * @param sectionId The ID of the next section
-   * @param routeStartId A route within the next section
+   * @param routeStartId An optional route within the next section
    */
   public sectionChange(action: Wizard.Transition = 'next', sectionId?: string, routeStartId?: string) {
     if (!this.sections) {
@@ -90,6 +108,7 @@ export class WizardStateService {
         break;
     }
 
+    // Null check
     if (!sectionId) {
       console.error('sectionChange: Something weird just happened getting the section Id');
       return;
@@ -110,8 +129,7 @@ export class WizardStateService {
     // Since this is a section change, a new starting route needs to be supplied. Default to routeStart if not supplied
     const routeId = routeStartId || sectionCurrent.routeStart;
     // Update state with new section id and statuses, reset routePath
-    this.state = { ...this.state, sectionActiveId: sectionId, routeActiveId: routeId, status: status, routePath: [routeId] };
-    this.state$.next(this.state);
+    this.stateChange({ sectionActiveId: sectionId, routeActiveId: routeId, status: status, routePath: [routeId] });
   }
 
   /**
@@ -165,43 +183,38 @@ export class WizardStateService {
         break;
     }
 
+    // Null check
     if (!routeId) {
       console.error('routeChange: No routeId found');
       return;
     }
 
     // Update state with new route and route path
-    this.state = { ...this.state, routeActiveId: routeId, routePath: routePath };
-    this.state$.next(this.state);
+    this.stateChange({ routeActiveId: routeId, routePath: routePath });
   }
 
   /**
-   * Create initial state
-   * @param sections
-   * @param state
+   * Update the state of the wizard. Accepts partial replacements which are merged with the existing state
+   * @param state 
    */
-  public stateChange(sections: Wizard.SectionControl[], state?: Wizard.State) {
-    this.state = state
-      ? { ...this.state, ...state }
-      : {
-          sectionActiveId: sections[0].id,
-          routeActiveId: sections[0].routeStart,
-          routePath: [sections[0].routeStart],
-          status: this.statusCreate(sections),
-          arrayIndexes: {},
-        };
-    this.state$.next(this.state);
-    return this.state;
+  public stateChange(state: Partial<Wizard.State>) {
+    this.state = { ...this.state, ...state };
   }
 
   /**
-   * Genereate the default list of statuses from the sections
-   * @param sections
+   * Generate a default state object from the sections
+   * @param sections 
    */
-  private statusCreate(sections: Wizard.SectionControl[]) {
-    const statuses: Record<string, Wizard.SectionStatus> = {};
+  public stateCreateDefault(sections: Wizard.SectionControl[]) {
+    const state: Wizard.State = {
+      sectionActiveId: sections[0].id,
+      routeActiveId: sections[0].routeStart,
+      routePath: [sections[0].routeStart],
+      status: {},
+      arrayIndexes: {},
+    };
     sections.forEach(section => {
-      statuses[section.id] = {
+      state.status[section.id] = {
         active: false,
         completed: false,
         completedDate: null,
@@ -210,6 +223,6 @@ export class WizardStateService {
         startedDate: null,
       };
     });
-    return statuses;
+    return state;
   }
 }

@@ -67,17 +67,13 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
       return;
     }
 
-    // Null check sections
     // Convert sections to section controls
     const sectionControls: Wizard.SectionControl[] = this.sections.map(section => sectionControl(section));
     // Load section controls into store
     this.store.sectionsAdd(sectionControls);
-    // Load state into store
-    this.store.stateChange(sectionControls, this.state);
-    
-    // Set start section
-    // const sectionStart = this.state && this.state.sectionActiveId ? this.state.sectionActiveId : sectionControls[0].uniqueId;
-    // this.store.sectionChange(sectionStart);
+    // Update store state. Load state if supplied, if not generate default one
+    this.store.stateChange(this.state || this.store.stateCreateDefault(sectionControls));
+   
 
     setTimeout(() => {
       this.store.routeChange('next');
