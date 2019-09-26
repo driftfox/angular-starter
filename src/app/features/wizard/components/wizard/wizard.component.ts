@@ -7,6 +7,8 @@ import {
   AfterViewInit,
   SimpleChanges,
   ChangeDetectorRef,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { WizardStateService } from '../../shared/services/wizard-state.service';
 import { FormGroup } from '@angular/forms';
@@ -28,14 +30,17 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
   /** Run some helpful checking on incoming configuration to catch common errors and issues */
   @Input() debug = true;
 
+  @Output() wizardComplete = new EventEmitter<void>();
+
   public loaded = false;
 
   constructor(public store: WizardStateService, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.store.wizardComplete$.subscribe(() => this.wizardComplete.emit());
     this.store.sections$.subscribe(res => console.log('Sections', res));
     this.store.state$.subscribe(res => console.log('State', res));
-    this.store.sectionActive$.subscribe(res => console.log('Section Active', res));
+    this.store.sectionActive$.subscribe(section => console.log('Section Active', section));
     this.store.pageActive$.subscribe(res => console.log('Page Active', res));
   }
 
@@ -85,7 +90,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     // Not picking up null check
     // Load section controls into store
     this.store.sectionsAdd(this.sections, this.form);
-    
+
     if (this.debug) {
       audit.sectionCheck(this.sections);
     }

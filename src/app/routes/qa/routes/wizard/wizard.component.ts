@@ -39,4 +39,8 @@ export class WizardComponent implements OnInit {
   ngOnInit() {
   }
 
+  public wizardComplete() {
+    console.warn('Wizard Complete, do something cool');
+  }
+
 }

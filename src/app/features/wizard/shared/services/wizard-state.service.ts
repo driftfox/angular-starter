@@ -55,11 +55,14 @@ export class WizardStateService {
     distinctUntilChanged(),
   );
 
+  public wizardComplete$ = new Subject<void>();
+
   constructor() {}
 
   /**
    * Add sections to wizard
-   * @param sections
+   * @param sections 
+   * @param form 
    */
   public sectionsAdd(sections: Wizard.Section[], form: FormGroup) {
     const sectionRecord: Record<string, Wizard.SectionControl> = {};
@@ -75,6 +78,9 @@ export class WizardStateService {
     this.sections = sectionRecord;
   }
 
+  /**
+   * 
+   */
   public formChange() {
     /**
      * Form change types:
@@ -98,6 +104,12 @@ export class WizardStateService {
 
     // Get current section index
     const sectionCurrent = this.sections[this.state.sectionActiveId];
+
+    // If this is the last section in the series, fire wizard complete action
+    if (!sectionCurrent.sectionNextId) {
+      this.wizardComplete$.next();
+      return;
+    }
 
     // Check if this is a previous or next section change
     switch (action) {
@@ -161,6 +173,12 @@ export class WizardStateService {
       console.error(
         'routeChange: Invalid route. Unable to find a route of "' + this.state.routeActiveId + '" in "' + this.state.sectionActiveId + '"',
       );
+      return;
+    }
+
+    // Check if this is the last route in the wizard
+    if (routeCurrent && routeCurrent.sectionComplete && sectionActive.wizardComplete) {
+      this.wizardComplete$.next();
       return;
     }
 
