@@ -13,7 +13,9 @@ class SectionControl implements Wizard.SectionControl {
   readonly data = { ...this.src.data } || null;
   readonly routes: Record<string, Wizard.RouteControl> = {};
   readonly pages: Record<string, Wizard.PageControl> = {};
-  readonly sectionNext: string | null = null;
+  readonly wizardComplete = this.src.wizardComplete;
+  public sectionNextId: string | null = null;
+  public sectionPreviousId: string | null = null;
 
   constructor(public src: Wizard.Section, public form: FormGroup) {
     if (src.pages && src.pages.length) {

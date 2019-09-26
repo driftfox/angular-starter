@@ -1,19 +1,21 @@
 // import { Lens } from 'monocle-ts';
 import { combineLatest, Subject } from 'rxjs';
 import { map, distinctUntilChanged, filter } from 'rxjs/operators';
+import { sectionControl } from '../factories/section.factory';
+import { FormGroup } from '@angular/forms';
 
 export class WizardStateService {
   /** All sections */
-  public sections$ = new Subject<Wizard.SectionControl[]>();
-  private _sections: Wizard.SectionControl[] | null = null;
+  public sections$ = new Subject<Record<string, Wizard.SectionControl>>();
+  private _sections: Record<string, Wizard.SectionControl> | null = null;
 
-  public get sections(): Wizard.SectionControl[] | null {
-    return this._sections ? [...this._sections] : null; 
+  public get sections(): Record<string, Wizard.SectionControl> | null {
+    return this._sections ? {...this._sections} : null; 
   }
 
-  public set sections(sections: Wizard.SectionControl[] | null) {
+  public set sections(sections: Record<string, Wizard.SectionControl> | null) {
     if (sections) {
-      this._sections = [...sections];
+      this._sections = {...sections};
       this.sections$.next(this._sections);
     }
   }
@@ -40,7 +42,7 @@ export class WizardStateService {
   public sectionActive$ = combineLatest([this.sections$, this.state$]).pipe(
     map(([sections, state]) =>
       sections && sections.length && state && state.sectionActiveId
-        ? sections.find(section => section.id === state.sectionActiveId)
+        ? sections[state.sectionActiveId]
         : undefined,
     ),
     distinctUntilChanged(),
@@ -63,8 +65,17 @@ export class WizardStateService {
    * Add sections
    * @param sections
    */
-  public sectionsAdd(sections: Wizard.SectionControl[]) {
-    this.sections = sections;
+  public sectionsAdd(sections: Wizard.Section[], form: FormGroup) {
+    const sectionRecord: Record<string, Wizard.SectionControl> = {};
+
+    sections.forEach((section, i) => {
+      const control = sectionControl(section, form);
+      control.sectionNextId = sections[i + 1] ? sections[i + 1].id : null;
+      control.sectionPreviousId = sections[i - 1] ? sections[i - 1].id : null;
+      sectionRecord[control.id] = control;
+    });
+
+    this.sections = sectionRecord;
   }
 
   public formChange() {
@@ -83,28 +94,28 @@ export class WizardStateService {
    * @param routeStartId An optional route within the next section
    */
   public sectionChange(action: Wizard.Transition = 'next', sectionId?: string, routeStartId?: string) {
-    if (!this.sections) {
+    if (!this.sections || !this.state.sectionActiveId) {
       return;
     }
 
     // Get current section index
-    const sectionCurrentIndex = this.sections.findIndex(section => section.id === this.state.sectionActiveId);
+    const sectionCurrent = this.sections[this.state.sectionActiveId];
 
     // Check if this is a previous or next section change
     switch (action) {
       case 'next':
         // Check if next section index would exceed # of sections, if so wizard is complete
-        if (sectionCurrentIndex + 1 >= this.sections.length) {
+        if (sectionCurrent.wizardComplete || !sectionCurrent.sectionNextId) {
           // Wizard complete, TODO fire complete logic
           console.warn('Wizard Complete');
         } else {
           // Get id of next section
-          sectionId = this.sections[sectionCurrentIndex + 1].id;
+          sectionId = sectionCurrent.sectionNextId;
         }
         break;
       case 'prev':
         // Check that previous index doesn't go below 0
-        sectionId = sectionCurrentIndex - 1 < 0 ? this.sections[0].id : this.sections[sectionCurrentIndex - 1].id;
+        sectionId = sectionCurrent.sectionPreviousId ? sectionCurrent.sectionPreviousId : sectionCurrent.id;
         break;
     }
 
@@ -120,14 +131,14 @@ export class WizardStateService {
     status[sectionId] = { ...status[sectionId], active: true };
 
     // Get current section
-    const sectionCurrent = this.sections.find(section => section.id === sectionId);
+    // const sectionCurrent = this.sections.find(section => section.id === sectionId);
     // Null check for current section
     if (!sectionCurrent) {
       console.error('sectionChange: No section found for ' + sectionId);
       return;
     }
     // Since this is a section change, a new starting route needs to be supplied. Default to routeStart if not supplied
-    const routeId = routeStartId || sectionCurrent.routeStart;
+    const routeId = routeStartId || this.sections[sectionId].routeStart;
     // Update state with new section id and statuses, reset routePath
     this.stateChange({ sectionActiveId: sectionId, routeActiveId: routeId, status: status, routePath: [routeId] });
   }
@@ -138,12 +149,12 @@ export class WizardStateService {
    * @param routeId  If a goto action, the ID of the route to go to next
    */
   public routeChange(action: Wizard.Transition = 'next', routeId?: string) {
-    if (!this.sections || !this.state.routeActiveId) {
+    if (!this.sections || !this.state.routeActiveId || !this.state.sectionActiveId) {
       return;
     }
 
     // Get current section index
-    const sectionActive = this.sections.find(section => section.id === this.state.sectionActiveId) as Wizard.SectionControl;
+    const sectionActive = this.sections[this.state.sectionActiveId];
     // Get current route
     const routeCurrent = sectionActive.routes[this.state.routeActiveId];
     // Validate route exists
@@ -205,7 +216,7 @@ export class WizardStateService {
    * Generate a default state object from the sections
    * @param sections 
    */
-  public stateCreateDefault(sections: Wizard.SectionControl[]) {
+  public stateCreateDefault(sections: Wizard.Section[]) {
     const state: Wizard.State = {
       sectionActiveId: sections[0].id,
       routeActiveId: sections[0].routeStart,
