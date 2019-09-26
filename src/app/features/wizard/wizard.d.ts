@@ -140,9 +140,7 @@ declare namespace Wizard {
     sectionComplete?: true;
   }
 
-  interface RouteSafe extends Route {
-    routeNext?: string;
-  }
+  
 
   export type RouteControl = MarkRequired<RouteControl, 'routeNext'> | MarkRequired<RouteControl, 'sectionComplete'>;
 
@@ -233,6 +231,12 @@ declare namespace Wizard {
     maxLength?: number;
     email?: boolean;
   }
+}
+
+// Don't want these exported in the namespace
+
+interface RouteSafe extends Route {
+  routeNext?: string;
 }
 
 /**
