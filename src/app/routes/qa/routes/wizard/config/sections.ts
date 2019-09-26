@@ -23,7 +23,7 @@ export const sections: Wizard.Section[] = [
   {
     title: 'Test',
     id: 'test',
-    routeStart: 'routeA',
+    routeStart: 'lpRouteA',
     settings: {},
     routes: routesLoanPurpose,
     pages: pagesLoanPurpose,

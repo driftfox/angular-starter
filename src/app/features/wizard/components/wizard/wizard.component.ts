@@ -1,6 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, AfterViewInit, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  OnChanges,
+  AfterViewInit,
+  SimpleChanges,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { WizardStateService } from '../../shared/services/wizard-state.service';
 import { FormGroup } from '@angular/forms';
+import { audit } from '../../shared/utils/audit.util';
 
 @Component({
   selector: 'nts-wizard',
@@ -15,6 +25,8 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() sectionActiveId: string | undefined;
   @Input() pageActiveId: string | undefined;
+  /** Run some helpful checking on incoming configuration to catch common errors and issues */
+  @Input() debug = true;
 
   public loaded = false;
 
@@ -34,7 +46,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     }
     // When new sections are passed in
     if (model.sections && this.sections && this.form) {
-      this.store.sectionsAdd(this.sections, this.form); // Not picking up null check
+      this.store.sectionsAdd(this.sections, this.form);
       // TODO: Need to reset wizard if this happens
     }
 
@@ -73,6 +85,11 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     // Not picking up null check
     // Load section controls into store
     this.store.sectionsAdd(this.sections, this.form);
+    
+    if (this.debug) {
+      audit.sectionCheck(this.sections);
+    }
+    
     // Update store state. Load state if supplied, if not generate default one
     this.store.stateChange(this.state || this.store.stateCreateDefault(this.sections));
 

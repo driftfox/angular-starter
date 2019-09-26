@@ -148,7 +148,7 @@ export class WizardStateService {
    */
   public routeChange(action: Wizard.Transition = 'next', routeId?: string) {
     if (!this.sections || !this.state.routeActiveId || !this.state.sectionActiveId) {
-      console.error('routeChange missing arguments');
+      console.error('routeChange: Missing arguments');
       return;
     }
 
@@ -165,7 +165,7 @@ export class WizardStateService {
     }
 
     // Check if this route is marked section complete, if so go to next section
-    if (routeCurrent && routeCurrent.sectionComplete) {
+    if (routeCurrent && routeCurrent.sectionComplete && action !== 'prev') {
       this.sectionChange();
       return;
     }
@@ -183,7 +183,7 @@ export class WizardStateService {
         break;
       case 'prev':
         // Route ID of previous route by extracting from routePath
-        routeId = this.state.routePath.length > 1 ? this.state.routePath[this.state.routePath.length - 1] : this.state.routePath[0];
+        routeId = this.state.routePath.length > 1 ? this.state.routePath[this.state.routePath.length - 2] : this.state.routePath[0];
         // Remove the last route from the route path, making sure that the array doesn't go down to 0
         routePath =
           this.state.routePath.length > 1 ? this.state.routePath.slice(0, this.state.routePath.length - 1) : [...this.state.routePath];
