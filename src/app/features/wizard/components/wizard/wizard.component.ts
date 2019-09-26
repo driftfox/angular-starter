@@ -35,6 +35,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   @Output() stateChange = new EventEmitter<Wizard.State>();
   @Output() wizardComplete = new EventEmitter<void>();
 
+  /** App has finished loading */
   public loaded = false;
 
   constructor(public store: WizardStateService, private ref: ChangeDetectorRef) {}
