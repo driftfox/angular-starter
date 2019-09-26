@@ -64,10 +64,10 @@ declare namespace Wizard {
   }
 
   export interface Page {
-    /** Human readable page title */
-    title: string;
     /** Distinct unique ID or GUID for this page. If not supplied, will be generated from title */
     id: string;
+     /** Human readable page title */
+     title?: string;
     /** URL safe string for use in routing. If not supplied, ID will be used*/
     slug?: string;
     /** Data is used to store page information not used by the wizard */

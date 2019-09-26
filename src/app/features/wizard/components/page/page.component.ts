@@ -1,17 +1,23 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'wiz-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageComponent implements OnInit {
-  @Input() page: Wizard.PageControl | undefined;
+  @Input() page!: Wizard.PageControl;
 
-  constructor() { }
+  @Output() sectionChange = new EventEmitter<any>();
+  @Output() routeChange = new EventEmitter<any>();
 
-  ngOnInit() {
+  constructor() {}
+
+  ngOnInit() {}
+
+  public routeNext() {
   }
 
+  public routePrev() {}
 }

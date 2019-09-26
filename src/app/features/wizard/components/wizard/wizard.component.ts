@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, AfterViewInit, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { WizardStateService } from '../../shared/services/wizard-state.service';
 import { FormGroup } from '@angular/forms';
 
@@ -16,9 +16,9 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() sectionActiveId: string | undefined;
   @Input() pageActiveId: string | undefined;
 
-  private loaded = false;
+  public loaded = false;
 
-  constructor(public store: WizardStateService) {}
+  constructor(public store: WizardStateService, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.store.sections$.subscribe(res => console.log('Sections', res));
@@ -56,6 +56,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     this.initialize();
     // Mark app loaded to enable ngOnChanges
     this.loaded = true;
+    this.ref.detectChanges();
   }
 
   /**
@@ -75,7 +76,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     // Update store state. Load state if supplied, if not generate default one
     this.store.stateChange(this.state || this.store.stateCreateDefault(this.sections));
 
-    /** */
+    /**
     setTimeout(() => {
       this.store.routeChange('next');
       this.store.routeChange('next');
@@ -91,12 +92,20 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
     setTimeout(() => {
      this.store.sectionChange('next');
      this.store.routeChange('next');
-     this.store.routeChange('next');
+     // this.store.routeChange('next');
     }, 3000);
 
     setTimeout(() => {
-      this.store.routeChange('next');
+      // this.store.routeChange('next');
     }, 4000);
+ */
+  }
 
+  public routeNext() {
+    this.store.routeChange('next');
+  }
+
+  public routePrev() {
+    this.store.routeChange('prev');
   }
 }

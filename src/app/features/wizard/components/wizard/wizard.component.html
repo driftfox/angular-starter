@@ -1,6 +1,9 @@
-<p>wizard works!</p>
 <div id="nts-wizard" *ngIf="{ section: store.sectionActive$ | async, page: store.pageActive$ | async } as wiz">
+  <ng-container *ngIf="loaded">
     <wiz-page [page]="wiz.page"></wiz-page>
- 
+    <div class="d-flex">
+      <button class="nts-wiz-prev" class="w-50" (click)="routePrev()">Previous</button>
+      <button class="nts-wiz-next" class="w-50" (click)="routeNext()">Next</button>
+    </div>
+  </ng-container>
 </div>
-

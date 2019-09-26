@@ -1,6 +1,6 @@
 export const pagesPersonal: Wizard.Page[] = [
     {
-        title: 'Personal Intro',
+        title: 'Personal Page 1',
         id: 'pageA',
         content: []
     },
