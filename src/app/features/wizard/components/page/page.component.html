@@ -1,2 +1,2 @@
-<h2>{{page?.title}}</h2>
-<wiz-content></wiz-content>
+<h2 *ngIf="page.title">{{ page.title }}</h2>
+<wiz-content [pageContent]="page.content"></wiz-content>

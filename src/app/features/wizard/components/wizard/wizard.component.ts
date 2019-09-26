@@ -32,6 +32,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   /** Run some helpful checking on incoming configuration to catch common errors and issues */
   @Input() debug = true;
 
+  @Output() ready = new EventEmitter<any>();
   @Output() stateChange = new EventEmitter<Wizard.State>();
   @Output() wizardComplete = new EventEmitter<void>();
 
@@ -45,6 +46,8 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
     this.store.state$.pipe(untilDestroyed(this)).subscribe(state => this.stateChange.emit(state));
     // Notify parent when wizard is complete
     this.store.wizardComplete$.pipe(untilDestroyed(this)).subscribe(() => this.wizardComplete.emit());
+
+    this.store.pageActive$.subscribe(page => console.log(page));
   }
 
   ngOnChanges(model: SimpleChanges) {

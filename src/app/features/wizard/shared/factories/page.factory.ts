@@ -17,7 +17,6 @@ class PageControl implements Wizard.PageControl {
     return Object.keys(this.controlsById).map(key => this.controlsById[key]);
   }
   
-
   get valid() {
     return true;
   }
