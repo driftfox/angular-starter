@@ -7,7 +7,7 @@ export const sections: Wizard.Section[] = [
   {
     title: 'Loan Purpose',
     id: 'loan-purpose',
-    routeStart: 'lpRouteA',
+    routeStart: 'loan-type',
     settings: {},
     routes: routesLoanPurpose,
     pages: pagesLoanPurpose,
@@ -20,6 +20,7 @@ export const sections: Wizard.Section[] = [
     routes: routesPersonal,
     pages: pagesPersonal,
   },
+  /**
   {
     title: 'Test',
     id: 'test',
@@ -28,4 +29,5 @@ export const sections: Wizard.Section[] = [
     routes: routesLoanPurpose,
     pages: pagesLoanPurpose,
   },
+   */
 ];

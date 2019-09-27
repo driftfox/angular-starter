@@ -32,7 +32,7 @@ export class AuthService {
   /** How often to refresh the token after user interaction */
   private tokenRefreshInterval = 60 * 1000; // 60 seconds default, 60 * 1000
   /** How long should the user be idle before loading the modal */
-  private idleDuration = 5 * 60; // 5 minutes default, 5 * 60
+  private idleDuration = 15 * 60; // 5 minutes default, 5 * 60
   /** Is the current timer expired */
   private logoutModalVisible = false;
 

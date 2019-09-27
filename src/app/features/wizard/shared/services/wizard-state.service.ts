@@ -1,5 +1,5 @@
 // import { Lens } from 'monocle-ts';
-import { combineLatest, Subject } from 'rxjs';
+import { combineLatest, Subject, BehaviorSubject } from 'rxjs';
 import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { sectionControl } from '../factories/section.factory';
 import { FormGroup } from '@angular/forms';
@@ -7,6 +7,8 @@ import { FormGroup } from '@angular/forms';
 export class WizardStateService {
   /** Base URL of wizard without route params */
   public baseUrl: string | undefined;
+  /** Hold route params which are pushed from the component */
+  public routeParams$ = new BehaviorSubject<Wizard.RouteParams>({});
 
   /** All sections */
   public sections$ = new Subject<Record<string, Wizard.SectionControl>>();
@@ -42,16 +44,16 @@ export class WizardStateService {
   }
 
   /** Current active section */
-  public sectionActive$ = combineLatest([this.sections$, this.state$]).pipe(
-    map(([sections, state]) => (sections && state && state.sectionActiveId ? sections[state.sectionActiveId] : null)),
+  public sectionActive$ = combineLatest([this.sections$, this.routeParams$]).pipe(
+    map(([sections, routeParams]) => (sections && routeParams && routeParams.sectionId ? sections[routeParams.sectionId] : null)),
     distinctUntilChanged(),
   );
 
   /** Current active page */
-  public pageActive$ = combineLatest([this.sectionActive$, this.state$]).pipe(
-    map(([section, state]) =>
-      section && state && state.routeActiveId && section.routes[state.routeActiveId]
-        ? section.pages[section.routes[state.routeActiveId].pageId]
+  public pageActive$ = combineLatest([this.sectionActive$, this.routeParams$]).pipe(
+    map(([section, routeParams]) =>
+      section && routeParams && routeParams.routeId && section.routes[routeParams.routeId]
+        ? section.pages[section.routes[routeParams.routeId].pageId]
         : null,
     ),
     filter(val => (val ? true : false)), // State and sections change independently, this ensures no nulls slip through on section change
@@ -64,8 +66,8 @@ export class WizardStateService {
 
   /**
    * Add sections to wizard
-   * @param sections 
-   * @param form 
+   * @param sections
+   * @param form
    */
   public sectionsAdd(sections: Wizard.Section[], form: FormGroup) {
     const sectionRecord: Record<string, Wizard.SectionControl> = {};
@@ -79,10 +81,11 @@ export class WizardStateService {
     });
 
     this.sections = sectionRecord;
+    return this.sections;
   }
 
   /**
-   * 
+   *
    */
   public formChange() {
     /**

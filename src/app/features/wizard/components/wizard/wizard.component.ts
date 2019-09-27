@@ -16,7 +16,6 @@ import { FormGroup } from '@angular/forms';
 import { audit } from '../../shared/utils/audit.util';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { ActivatedRoute, Router } from '@angular/router';
-import { baseUrlWithoutParams } from '../../shared/utils/strings.utils';
 
 @Component({
   selector: 'nts-wizard',
@@ -45,24 +44,32 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
 
   ngOnInit() {
     // Get base url of wizard location
-    this.store.baseUrl = '/' + this.route.pathFromRoot
-        .map(path => path && path.routeConfig && path.routeConfig.path ? path.routeConfig.path.split('/')[0] : null)
+    this.store.baseUrl =
+      '/' +
+      this.route.pathFromRoot
+        .map(path => (path && path.routeConfig && path.routeConfig.path ? path.routeConfig.path.split('/')[0] : null))
         .filter(x => x as string)
         .join('/');
 
-    // Notify parent of state changes
+    // On state changes */
     this.store.state$.pipe(untilDestroyed(this)).subscribe(state => {
-
+      // Update route
+      this.router.navigate([this.store.baseUrl, state.sectionActiveId, state.routeActiveId]);
+      // Emit changes to parent
       this.stateChange.emit(state);
     });
+    
+
     // Notify parent when wizard is complete
     this.store.wizardComplete$.pipe(untilDestroyed(this)).subscribe(() => this.wizardComplete.emit());
 
-    this.store.pageActive$.subscribe(page => console.log(page));
+    // Push route params to the service
+    // Services do not get route changes from the router because they are instantiated first
+    this.route.params.pipe(untilDestroyed(this)).subscribe((params) =>  this.store.routeParams$.next(<Wizard.RouteParams>params));
 
-    this.route.params.subscribe(params => {
-      console.log(params);
-    });
+    // Dev stuff
+    this.store.sectionActive$.subscribe(page => console.log('Section Active', page));
+    this.store.pageActive$.subscribe(page => console.log('Page Active', page));
   }
 
   ngOnChanges(model: SimpleChanges) {
@@ -88,7 +95,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   }
 
   ngAfterViewInit() {
-    // Attach templates
+    // TODO: Attach templates
 
     // Initialze app
     this.initialize();
@@ -110,38 +117,15 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
     // Convert sections to section controls
     // Not picking up null check
     // Load section controls into store
-    this.store.sectionsAdd(this.sections, this.form);
+     this.store.sectionsAdd(this.sections, this.form);
 
     if (this.debug) {
       audit.sectionCheck(this.sections);
     }
 
+    const state = this.state || this.store.stateCreateDefault(this.sections);
     // Update store state. Load state if supplied, if not generate default one
-    this.store.stateChange(this.state || this.store.stateCreateDefault(this.sections));
-
-    /**
-    setTimeout(() => {
-      this.store.routeChange('next');
-      this.store.routeChange('next');
-      this.store.routeChange('next');
-    }, 1000);
-
-    setTimeout(() => {
-      this.store.sectionChange('prev');
-      this.store.routeChange('prev');
-
-    }, 2000);
-
-    setTimeout(() => {
-     this.store.sectionChange('next');
-     this.store.routeChange('next');
-     // this.store.routeChange('next');
-    }, 3000);
-
-    setTimeout(() => {
-      // this.store.routeChange('next');
-    }, 4000);
- */
+    this.store.stateChange(state);
   }
 
   public routeNext() {

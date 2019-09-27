@@ -5,7 +5,6 @@ import { contentControl } from './content.factory';
 class PageControl implements Wizard.PageControl {
   readonly title = this.src.title;
   readonly id = this.src.id;
-  readonly slug = this.src.slug || this.src.id;
   readonly data = { ...this.src.data } || {};
   readonly settings = this.src.settings ? { ...this.src.settings } : {};
   readonly events = this.src.events ? this.src.events : {};

@@ -47,6 +47,11 @@ const routes: Routes = [
     data: { title: 'Wizard' },
   },
   {
+    path: 'wizard/:sectionId',
+    component: WizardComponent,
+    data: { title: 'Wizard' },
+  },
+  {
     path: 'wizard',
     component: WizardComponent,
     data: { title: 'Wizard' },
