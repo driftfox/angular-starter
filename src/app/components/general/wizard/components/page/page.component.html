@@ -1,0 +1,31 @@
+<div class="nts-wiz-page">
+    <!-- Page title-->
+  <div class="ui-g" *ngIf="page.title">
+    <div class="ui-g-12">
+      <h2>{{ page.title }}</h2>
+    </div>
+  </div>
+  <!-- Loop through all the content for this page -->
+  <ng-container *ngFor="let content of page.content">
+      <!-- If content type = row, loop through the row/column/content items-->
+    <ng-container *ngIf="content.type === 'row'">
+      <div class="ui-g">
+        <ng-container *ngFor="let column of content.columns">
+          <div class="ui-g-12 ui-lg-{{ column.columnSize }}">
+            <ng-container *ngFor="let contentSub of column.content">
+              <wiz-content [content]="contentSub"></wiz-content>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+    <!-- All other content types other than row-->
+    <ng-container *ngIf="content.type !== 'row'">
+      <div class="ui-g">
+        <div class="ui-g-12">
+          <wiz-content [content]="content"></wiz-content>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
