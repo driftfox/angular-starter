@@ -10,7 +10,7 @@ declare namespace Wizard {
     sectionId?: string;
     routeId?: string;
   }
-
+  
   export interface State {
     /** ID of active section */
     sectionActiveId: string | null;
@@ -175,37 +175,8 @@ declare namespace Wizard {
     content: ContentArray[];
   }
 
-  export interface FormField extends Content {
-    type: 'formField';
-    /** Field or property in the loan model */
-    field: string;
-    formFieldType: NtsForms.FormFieldType;
-    placeholder?: string;
-    hint?: string;
-    tooltip?: string;
-    prefix?: string;
-    suffix?: string;
-    min?: number;
-    max?: number;
-    maxlength?: number;
-    rows?: number;
-    options?: SelectItem[] | string[];
+  export type FormField = FormFieldMulti | FormFieldSingle;
 
-    /** If a select or button group. This is only for fixed properties, alterntnatively use datafields */
-    formFieldData?: FormFieldData[];
-    /** If a select or button group, use this data from inside the dataField input */
-    dataField?: string;
-    /** Format to pass to the pipe for custom control */
-    format?: string;
-    validators?: Validators | null;
-
-    disabled?: boolean;
-    /** Should this formfield be a standalone formcontrol instead of being part of the parent formgroup */
-    // standalone?: boolean;
-    /** Show the error message if error */
-    // showError?: boolean;
-    // errorCustom?: string;
-  }
   export interface FormFieldControl extends FormField {
     formControl: FormControl;
   }
@@ -241,6 +212,59 @@ interface RouteSrc {
   routeNext?: string | any[];
   /** If this is the last route in the section */
   sectionComplete?: true;
+}
+
+interface FormFieldSingle extends FormFieldSrc {
+  formFieldType:
+    | 'text'
+    | 'number'
+    | 'currency'
+    | 'phoneNumber'
+    | 'email'
+    | 'ssn'
+    | 'password'
+    | 'colorpicker'
+    | 'textarea'
+    | 'autoComplete'
+    | 'date';
+}
+
+interface FormFieldMulti extends FormFieldSrc {
+  formFieldType:
+    | 'select' 
+    | 'dropdown'
+    | 'checkbox'
+    | 'checkboxBoolean'
+    | 'radio'
+    | 'toggle';
+  options: SelectItem[] | string[];
+}
+
+interface FormFieldSrc extends Content {
+  type: 'formField';
+  /** Field or property in the loan model */
+  field: string;
+  formFieldType: NtsForms.FormFieldType;
+  placeholder?: string;
+  hint?: string;
+  tooltip?: string;
+  prefix?: string;
+  suffix?: string;
+  min?: number;
+  max?: number;
+  maxlength?: number;
+  rows?: number;
+  // options?: SelectItem[] | string[];
+
+  /** If a select or button group. This is only for fixed properties, alterntnatively use datafields */
+  formFieldData?: FormFieldData[];
+  /** If a select or button group, use this data from inside the dataField input */
+  dataField?: string;
+  /** Format to pass to the pipe for custom control */
+  format?: string;
+  validators?: Validators | null;
+
+  disabled?: boolean;
 }
 
 /**

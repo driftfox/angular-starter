@@ -15,7 +15,7 @@ export class WizardComponent implements OnInit {
 
   public form = this.fb.group({
     loanPurpose: ['Hello World'],
-    select: []
+    select: [],
   });
 
   constructor(private fb: FormBuilder) {}
@@ -26,6 +26,7 @@ export class WizardComponent implements OnInit {
       this.state = JSON.parse(state);
     }
     this.form.valueChanges.subscribe(val => console.warn('Form Changes', val));
+
   }
 
   public stateChange(state: Wizard.State) {

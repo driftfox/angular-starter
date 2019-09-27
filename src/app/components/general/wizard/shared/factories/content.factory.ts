@@ -37,7 +37,7 @@ class FormField extends Content implements Wizard.FormFieldControl {
   public format = this.src.format;
   public validators = this.src.validators ? { ...this.src.validators } : null;
   public disabled = this.src.disabled;
-  public options = this.src.options;
+  public options = this.src.formFieldType === ('select' || 'checkbox' || 'dropdown' || 'radio' || 'toggle') ? this.src.options : undefined;
   constructor(public src: Wizard.FormField, public form: FormGroup) {
     super(src);
   }
