@@ -53,19 +53,22 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
 
     // On state changes */
     this.store.state$.pipe(untilDestroyed(this)).subscribe(state => {
-      // Update route
+      // Update route. Active section and route look at router params
       this.router.navigate([this.store.baseUrl, state.sectionActiveId, state.routeActiveId]);
       // Emit changes to parent
       this.stateChange.emit(state);
     });
-    
 
     // Notify parent when wizard is complete
     this.store.wizardComplete$.pipe(untilDestroyed(this)).subscribe(() => this.wizardComplete.emit());
 
     // Push route params to the service
     // Services do not get route changes from the router because they are instantiated first
-    this.route.params.pipe(untilDestroyed(this)).subscribe((params) =>  this.store.routeParams$.next(<Wizard.RouteParams>params));
+    this.route.params.pipe(untilDestroyed(this)).subscribe(params => this.store.routeParams$.next(<Wizard.RouteParams>params));
+
+    if (this.debug && this.sections) {
+      audit.sectionCheck(this.sections);
+    }
 
     // Dev stuff
     this.store.sectionActive$.subscribe(page => console.log('Section Active', page));
@@ -97,8 +100,11 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   ngAfterViewInit() {
     // TODO: Attach templates
 
-    // Initialze app
-    this.initialize();
+    if (this.sections && this.form) {
+      // Initialze app
+      this.initialize();
+    }
+
     // Mark app loaded to enable ngOnChanges
     this.loaded = true;
     this.ref.detectChanges();
@@ -117,21 +123,23 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
     // Convert sections to section controls
     // Not picking up null check
     // Load section controls into store
-     this.store.sectionsAdd(this.sections, this.form);
+    this.store.sectionsAdd(this.sections, this.form);
 
-    if (this.debug) {
-      audit.sectionCheck(this.sections);
-    }
-
-    const state = this.state || this.store.stateCreateDefault(this.sections);
     // Update store state. Load state if supplied, if not generate default one
+    const state = this.state || this.store.stateCreateDefault(this.sections);
     this.store.stateChange(state);
   }
 
+  /**
+   * Go to next route or section
+   */
   public routeNext() {
     this.store.routeChange('next');
   }
 
+  /**
+   * Go to previous route or section
+   */
   public routePrev() {
     this.store.routeChange('prev');
   }

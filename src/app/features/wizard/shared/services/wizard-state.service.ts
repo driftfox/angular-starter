@@ -7,17 +7,15 @@ import { FormGroup } from '@angular/forms';
 export class WizardStateService {
   /** Base URL of wizard without route params */
   public baseUrl: string | undefined;
-  /** Hold route params which are pushed from the component */
+  /** Hold route params which are pushed from the wizard component */
   public routeParams$ = new BehaviorSubject<Wizard.RouteParams>({});
 
   /** All sections */
   public sections$ = new Subject<Record<string, Wizard.SectionControl>>();
   private _sections: Record<string, Wizard.SectionControl> | null = null;
-
   public get sections(): Record<string, Wizard.SectionControl> | null {
     return this._sections ? { ...this._sections } : null;
   }
-
   public set sections(sections: Record<string, Wizard.SectionControl> | null) {
     if (sections) {
       this._sections = { ...sections };
@@ -34,7 +32,6 @@ export class WizardStateService {
     status: {},
     arrayIndexes: {},
   };
-
   public set state(state: Wizard.State) {
     this._state = { ...state };
     this.state$.next(this._state);
@@ -46,6 +43,7 @@ export class WizardStateService {
   /** Current active section */
   public sectionActive$ = combineLatest([this.sections$, this.routeParams$]).pipe(
     map(([sections, routeParams]) => (sections && routeParams && routeParams.sectionId ? sections[routeParams.sectionId] : null)),
+    filter(val => (val ? true : false)), // Null check
     distinctUntilChanged(),
   );
 
@@ -60,6 +58,7 @@ export class WizardStateService {
     distinctUntilChanged(),
   );
 
+  /** Notify parent component when wizard is complete */
   public wizardComplete$ = new Subject<void>();
 
   constructor() {}
@@ -155,8 +154,12 @@ export class WizardStateService {
     }
     // Since this is a section change, a new starting route needs to be supplied. Default to routeStart if not supplied
     const routeId = routeStartId || this.sections[sectionId].routeStart;
-    // Update state with new section id and statuses, reset routePath
-    this.stateChange({ sectionActiveId: sectionId, routeActiveId: routeId, status: status, routePath: [routeId] });
+
+    // Only change state if section is different
+    if (this.state.sectionActiveId !== sectionId) {
+      // Update state with new section id and statuses, reset routePath
+      this.stateChange({ sectionActiveId: sectionId, routeActiveId: routeId, status: status, routePath: [routeId] });
+    }
   }
 
   /**
@@ -223,8 +226,11 @@ export class WizardStateService {
       return;
     }
 
-    // Update state with new route and route path
-    this.stateChange({ routeActiveId: routeId, routePath: routePath });
+    // Only update state if new route is different
+    if (this.state.routeActiveId !== routeId) {
+      // Update state with new route and route path
+      this.stateChange({ routeActiveId: routeId, routePath: routePath });
+    }
   }
 
   /**

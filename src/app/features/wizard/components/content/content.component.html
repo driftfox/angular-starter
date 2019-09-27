@@ -1,15 +1,11 @@
 <div class="nts-wizard-content">
   <div *ngIf="content?.type === 'html' && content.html" [innerHtml]="content.html"></div>
-  <!--
-  <ng-container *ngFor="let content of pageContent">
-    <ng-container *ngIf="content.type === 'row'">
-      Test
-    </ng-container>
-    <ng-container *ngIf="content.type !== 'row'">
-      <ng-container *ngTemplateOutlet="contentTemplate; context: { content: content }"></ng-container>
-    </ng-container>
-  </ng-container>
-  -->
+
+  <div *ngIf="content?.type === 'formField'">
+    {{ content.field }}
+    <nts-form-field [placeholder]="content.placeholder" [formControl]="content.formControl"></nts-form-field>
+  </div>
+
 </div>
 
 <!--

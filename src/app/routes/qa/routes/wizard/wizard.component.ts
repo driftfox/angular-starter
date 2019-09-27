@@ -27,7 +27,6 @@ export class WizardComponent implements OnInit {
 
   public stateChange(state: Wizard.State) {
     localStorage.setItem('wizard', JSON.stringify(state));
-    console.log(state);
   }
 
   public wizardComplete() {
