@@ -1,3 +1,5 @@
+import { Wizard } from '../../wizard';
+
 /**
  * Check for common errors and issues in the wizard configuration
  */

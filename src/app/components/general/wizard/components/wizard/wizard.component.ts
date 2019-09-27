@@ -16,6 +16,7 @@ import { FormGroup } from '@angular/forms';
 import { audit } from '../../shared/utils/audit.util';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Wizard } from '../../wizard';
 
 @Component({
   selector: 'nts-wizard',

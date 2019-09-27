@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Wizard } from '../../wizard';
 
 @Component({
   selector: 'wiz-page',

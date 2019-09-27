@@ -1,6 +1,7 @@
 import { isType } from '../utils/isType.util';
 import { AbstractControl, FormGroup, FormControl } from '@angular/forms';
 import { contentControl } from './content.factory';
+import { Wizard } from '../../wizard';
 
 class PageControl implements Wizard.PageControl {
   readonly title = this.src.title;
@@ -32,7 +33,7 @@ class PageControl implements Wizard.PageControl {
     this.content = this.src.content
       .map(content => {
         const control = contentControl(content, this.form);
-        if (isType.formFieldControl(control)) {
+        if (isType.formFieldControl(control) && control) {
           this.controlsById[control.field] = control.formControl;
         }
         return control;

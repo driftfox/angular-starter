@@ -1,6 +1,7 @@
 import { pageControl } from './page.factory';
 import { routeControl } from './route.factory';
 import { FormGroup } from '@angular/forms';
+import { Wizard } from '../../wizard';
 
 class SectionControl implements Wizard.SectionControl {
   get title() {

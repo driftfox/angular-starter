@@ -1,7 +1,10 @@
+import { SelectItem } from 'primeng/api';
+
 declare namespace Wizard {
   export type Transition = 'next' | 'prev' | 'goto';
   export type ContentType = 'formField' | 'html' | 'feature' | 'row';
   export type ContentArray = FormField | Html | Row | Feature;
+  export type ContentArrayControl = FormFieldControl | Html | Row | Feature;
 
   export interface RouteParams {
     sectionId?: string;
@@ -176,31 +179,17 @@ declare namespace Wizard {
     type: 'formField';
     /** Field or property in the loan model */
     field: string;
-    formFieldType:
-      | 'text'
-      | 'number'
-      | 'select'
-      | 'textarea'
-      | 'checkbox'
-      | 'buttonGroup'
-      | 'toggle'
-      | 'iconGroup'
-      | 'currency'
-      | 'phoneNumber'
-      | 'email'
-      | 'date'
-      | 'autoComplete'
-      | 'ssn'
-      | 'autoCompleteAddress'
-      | 'mapAutoCompleteCity'
-      | 'mapAutoCompleteZip';
+    formFieldType: NtsForms.FormFieldType;
     placeholder?: string;
     hint?: string;
     tooltip?: string;
     prefix?: string;
     suffix?: string;
-    minlength?: number;
+    min?: number;
+    max?: number;
     maxlength?: number;
+    rows?: number;
+    options?: SelectItem[] | string[];
 
     /** If a select or button group. This is only for fixed properties, alterntnatively use datafields */
     formFieldData?: FormFieldData[];
@@ -217,7 +206,6 @@ declare namespace Wizard {
     // showError?: boolean;
     // errorCustom?: string;
   }
-
   export interface FormFieldControl extends FormField {
     formControl: FormControl;
   }

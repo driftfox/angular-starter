@@ -1,3 +1,5 @@
+import { Wizard } from '../../wizard';
+
 class RouteControl implements Wizard.RouteControl {
   readonly id = this.src.id;
   readonly pageId = this.src.pageId;
@@ -8,7 +10,6 @@ class RouteControl implements Wizard.RouteControl {
     } else {
       return this.src.routeNext;
     }
-    
   }
   readonly sectionComplete = this.src.sectionComplete;
 

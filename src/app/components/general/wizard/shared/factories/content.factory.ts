@@ -1,5 +1,6 @@
 import { isType } from '../utils/isType.util';
 import { FormGroup } from '@angular/forms';
+import { Wizard } from '../../wizard';
 
 /**
  * Base content class
@@ -30,13 +31,13 @@ class FormField extends Content implements Wizard.FormFieldControl {
   public tooltip = this.src.tooltip;
   public prefix = this.src.prefix;
   public suffix = this.src.suffix;
-  public minlength = this.src.minlength;
   public maxlength = this.src.maxlength;
   public dataField = this.src.dataField;
   public formFieldData = this.src.formFieldData;
   public format = this.src.format;
   public validators = this.src.validators ? { ...this.src.validators } : null;
   public disabled = this.src.disabled;
+  public options = this.src.options;
   constructor(public src: Wizard.FormField, public form: FormGroup) {
     super(src);
   }

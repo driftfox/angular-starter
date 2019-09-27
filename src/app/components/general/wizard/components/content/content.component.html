@@ -1,11 +1,22 @@
 <div class="nts-wizard-content">
-  <div *ngIf="content?.type === 'html' && content.html" [innerHtml]="content.html"></div>
+  <div *ngIf="isType.html(content)" [innerHtml]="content.html"></div>
 
-  <div *ngIf="content?.type === 'formField'">
-    {{ content.field }}
-    <nts-form-field [placeholder]="content.placeholder" [formControl]="content.formControl"></nts-form-field>
+  <div  *ngIf="isType.formField(content)">
+    <nts-form-field
+      [type]="content.formFieldType"
+      [formControl]="content.formControl"
+      [prefix]="content.prefix"
+      [suffix]="content.suffix"
+      [hint]="content.hint"
+      [tooltip]="content.tooltip"
+      [min]="content.min"
+      [max]="content.max"
+      [maxlength]="content.maxlength"
+      [placeholder]="content.placeholder"
+      [options]="content.options"
+      [rows]="content.rows"
+    ></nts-form-field>
   </div>
-
 </div>
 
 <!--

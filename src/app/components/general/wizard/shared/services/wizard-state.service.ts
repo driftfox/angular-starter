@@ -3,6 +3,7 @@ import { combineLatest, Subject, BehaviorSubject } from 'rxjs';
 import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { sectionControl } from '../factories/section.factory';
 import { FormGroup } from '@angular/forms';
+import { Wizard } from '../../wizard';
 
 export class WizardStateService {
   /** Base URL of wizard without route params */

@@ -1,3 +1,5 @@
+import { Wizard } from 'src/app/components/general/wizard/wizard';
+
 export const pagesLoanPurpose: Wizard.Page[] = [
   {
     title: 'Loan Purpose - Page 1',
@@ -10,7 +12,24 @@ export const pagesLoanPurpose: Wizard.Page[] = [
       {
         type: 'formField',
         field: 'loanPurpose',
-        formFieldType: 'text'
+        formFieldType: 'text',
+        placeholder: 'This is a placeholder',
+      },
+      {
+        type: 'formField',
+        field: 'select',
+        formFieldType: 'checkbox',
+        placeholder: 'This is a placeholder',
+        options: [
+          {
+            label: 'Option 1',
+            value: 1,
+          },
+          {
+            label: 'Option 2',
+            value: 2,
+          },
+        ],
       },
       {
         type: 'row',

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { sections } from './config/sections';
 import { FormBuilder } from '@angular/forms';
+import { Wizard } from 'src/app/components/general/wizard/wizard';
 
 @Component({
   selector: 'app-wizard',
@@ -14,6 +15,7 @@ export class WizardComponent implements OnInit {
 
   public form = this.fb.group({
     loanPurpose: ['Hello World'],
+    select: []
   });
 
   constructor(private fb: FormBuilder) {}
@@ -23,6 +25,7 @@ export class WizardComponent implements OnInit {
     if (state) {
       this.state = JSON.parse(state);
     }
+    this.form.valueChanges.subscribe(val => console.warn('Form Changes', val));
   }
 
   public stateChange(state: Wizard.State) {
