@@ -1,4 +1,5 @@
 import { isType } from '../utils/isType.util';
+import { FormGroup } from '@angular/forms';
 
 /**
  * Base content class
@@ -17,10 +18,13 @@ class Content implements Wizard.Content {
  * Form field content type
  */
 // tslint:disable-next-line:max-classes-per-file
-class FormField extends Content implements Wizard.FormField {
+class FormField extends Content implements Wizard.FormFieldControl {
   public type = this.src.type;
   public field = this.src.field;
   public formFieldType = this.src.formFieldType;
+  get formControl(): any {
+    return this.form.get(this.src.field);
+  }
   public placeholder = this.src.placeholder;
   public hint = this.src.hint;
   public tooltip = this.src.tooltip;
@@ -33,7 +37,7 @@ class FormField extends Content implements Wizard.FormField {
   public format = this.src.format;
   public validators = this.src.validators ? { ...this.src.validators } : null;
   public disabled = this.src.disabled;
-  constructor(public src: Wizard.FormField) {
+  constructor(public src: Wizard.FormField, public form: FormGroup) {
     super(src);
   }
 }
@@ -74,15 +78,6 @@ class Row extends Content implements Wizard.Row {
 
   constructor(public src: Wizard.Row) {
     super(src);
-    // Convert all of the nested content types in each column to a control
-    /**
-    this.columns = src.columns.map(column => {
-      return <Wizard.Column>{
-        ...column,
-        content: column.content.map(content => contentControl(content)),
-      };
-    });
-     */
   }
 }
 
@@ -90,9 +85,9 @@ class Row extends Content implements Wizard.Row {
  * Create a content control from a content type
  * @param content
  */
-export const contentControl = (content: Wizard.FormField | Wizard.Html | Wizard.Row | Wizard.Feature) => {
+export const contentControl = (content: Wizard.FormField | Wizard.Html | Wizard.Row | Wizard.Feature, form: FormGroup) => {
   if (isType.formField(content)) {
-    return new FormField(<Wizard.FormField>content);
+    return new FormField(<Wizard.FormField>content, form);
   } else if (isType.html(content)) {
     return new Html(<Wizard.Html>content);
   } else if (isType.row(content)) {

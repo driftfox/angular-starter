@@ -216,6 +216,10 @@ declare namespace Wizard {
     // errorCustom?: string;
   }
 
+  export interface FormFieldControl extends FormField {
+    formControl: FormControl;
+  }
+
   export interface Validators {
     required?: boolean;
     minLength?: number;

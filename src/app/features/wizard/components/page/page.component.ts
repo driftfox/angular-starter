@@ -15,11 +15,6 @@ export class PageComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.page.content)
   }
 
-  public routeNext() {
-  }
-
-  public routePrev() {}
 }

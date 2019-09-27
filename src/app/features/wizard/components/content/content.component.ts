@@ -11,6 +11,5 @@ export class ContentComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.content);
   }
 }

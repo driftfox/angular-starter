@@ -19,7 +19,7 @@ class SectionControl implements Wizard.SectionControl {
 
   constructor(public src: Wizard.Section, public form: FormGroup) {
     if (src.pages && src.pages.length) {
-      src.pages.forEach(page => this.pages[page.id] = pageControl(page));
+      src.pages.forEach(page => this.pages[page.id] = pageControl(page, this.form));
     }
     if (src.routes && src.routes.length) {
       src.routes.forEach(route => this.routes[route.id] = routeControl(route));

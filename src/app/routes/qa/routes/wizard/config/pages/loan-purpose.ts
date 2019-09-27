@@ -8,6 +8,11 @@ export const pagesLoanPurpose: Wizard.Page[] = [
         html: '<strong>Hello World</strong>',
       },
       {
+        type: 'formField',
+        field: 'loanPurpose',
+        formFieldType: 'text'
+      },
+      {
         type: 'row',
         columns: [
           {

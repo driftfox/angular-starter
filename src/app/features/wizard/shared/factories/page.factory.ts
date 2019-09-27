@@ -1,5 +1,5 @@
 import { isType } from '../utils/isType.util';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl } from '@angular/forms';
 import { contentControl } from './content.factory';
 
 class PageControl implements Wizard.PageControl {
@@ -12,13 +12,14 @@ class PageControl implements Wizard.PageControl {
 
   readonly content = this.src.content;
 
-  readonly controlsById: { [key: string]: AbstractControl } = {};
+  readonly controlsById: { [key: string]: FormControl } = {};
   get controls() {
     return Object.keys(this.controlsById).map(key => this.controlsById[key]);
   }
   
   get valid() {
-    return true;
+    // TODO: Support page level validation
+    return this.validControls;
   }
   get validControls() {
     return this.controls.reduce((a: boolean, b: AbstractControl) => (b.invalid ? false : a), true);
@@ -27,13 +28,13 @@ class PageControl implements Wizard.PageControl {
     return !this.valid;
   }
 
-  constructor(public src: Wizard.Page) {
+  constructor(public src: Wizard.Page, public form: FormGroup) {
     // Convert content to controls, add null check
     this.content = this.src.content
       .map(content => {
-        const control = contentControl(content);
-        if (isType.formField(content)) {
-          // this.controlsById[content.field] = control;
+        const control = contentControl(content, this.form);
+        if (isType.formFieldControl(control)) {
+          this.controlsById[control.field] = control.formControl;
         }
         return control;
       })
@@ -43,6 +44,6 @@ class PageControl implements Wizard.PageControl {
   public controlsMarkAsTouched() {}
 }
 
-export const pageControl = (page: Wizard.Page) => {
-  return new PageControl(page);
+export const pageControl = (page: Wizard.Page, form: FormGroup) => {
+  return new PageControl(page, form);
 };
