@@ -103,7 +103,7 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   @Input() autocomplete: string | undefined;
 
   /** Pass formcontrol reference */
-  public formControl!: FormControl;
+  @Input() formControl!: FormControl;
   /** Does the current input have focus or data. Used to toggle the label */
   public focused = false;
 
@@ -129,12 +129,14 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Check if required, set required flag
-    if (this.ngControl && this.ngControl.control) {
-      this.required = isRequired(this.ngControl);
-      this.formControl = <FormControl>this.ngControl.control;
-    } else {
-      this.formControl = new FormControl();
+    if (!this.formControl) {
+      // Check if required, set required flag
+      if (this.ngControl && this.ngControl.control) {
+        this.required = isRequired(this.ngControl);
+        this.formControl = <FormControl>this.ngControl.control;
+      } else {
+        this.formControl = new FormControl();
+      }
     }
 
     // If this is an options based control, determine if it is a string array or an object array

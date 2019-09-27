@@ -8,6 +8,7 @@ import { TablesComponent } from './routes/tables/tables.component';
 import { GridComponent } from './routes/grid/grid.component';
 import { FormsComponent } from './routes/forms/forms.component';
 import { CalendarComponent } from './routes/calendar/calendar.component';
+import { WizardComponent } from './routes/wizard/wizard.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,21 @@ const routes: Routes = [
     path: 'calendar',
     component: CalendarComponent,
     data: { title: 'Calendar' },
+  },
+  {
+    path: 'wizard/:sectionId/:routeId',
+    component: WizardComponent,
+    data: { title: 'Wizard' },
+  },
+  {
+    path: 'wizard/:sectionId',
+    component: WizardComponent,
+    data: { title: 'Wizard' },
+  },
+  {
+    path: 'wizard',
+    component: WizardComponent,
+    data: { title: 'Wizard' },
   },
   {
     path: '',

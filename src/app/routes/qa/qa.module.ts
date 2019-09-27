@@ -11,6 +11,7 @@ import {
   NtsGridModule,
   NtsFormsModule,
   NtsCalendarModule,
+  NtsWizardModule,
 } from '$general';
 import { MapComponent } from './routes/map/map.component';
 import { DemoModalComponent } from './components/modal/demo-modal/demo-modal.component';
@@ -18,6 +19,7 @@ import { TablesComponent } from './routes/tables/tables.component';
 import { GridComponent } from './routes/grid/grid.component';
 import { FormsComponent } from './routes/forms/forms.component';
 import { CalendarComponent } from './routes/calendar/calendar.component';
+import { WizardComponent } from './routes/wizard/wizard.component';
 
 @NgModule({
   imports: [
@@ -30,6 +32,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
     NtsGridModule,
     NtsFormsModule,
     NtsCalendarModule,
+    NtsWizardModule,
   ],
   declarations: [
     QaComponent,
@@ -41,6 +44,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
     FormsComponent,
     FormsComponent,
     CalendarComponent,
+    WizardComponent,
   ],
   entryComponents: [DemoModalComponent],
 })
