@@ -1,4 +1,6 @@
 <div class="nts-wizard-content">
+  <div *ngIf="content?.type === 'html' && content.html" [innerHtml]="content.html"></div>
+  <!--
   <ng-container *ngFor="let content of pageContent">
     <ng-container *ngIf="content.type === 'row'">
       Test
@@ -7,9 +9,12 @@
       <ng-container *ngTemplateOutlet="contentTemplate; context: { content: content }"></ng-container>
     </ng-container>
   </ng-container>
+  -->
 </div>
 
+<!--
 <ng-template #contentTemplate let-content="content">
-  <!-- HTML -->
+ 
   <div *ngIf="content.type === 'html' && content.html" [innerHtml]="content.html"></div>
 </ng-template>
+-->

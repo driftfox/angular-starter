@@ -70,7 +70,8 @@ class Feature extends Content implements Wizard.Feature {
 // tslint:disable-next-line:max-classes-per-file
 class Row extends Content implements Wizard.Row {
   public type = this.src.type;
-  public columns!: Wizard.Column[];
+  public columns = this.src.columns;
+
   constructor(public src: Wizard.Row) {
     super(src);
     // Convert all of the nested content types in each column to a control

@@ -11,7 +11,7 @@ export const pagesLoanPurpose: Wizard.Page[] = [
         type: 'row',
         columns: [
           {
-            columnSize: 6,
+            columnSize: 9,
             content: [
               {
                 type: 'html',
@@ -20,7 +20,7 @@ export const pagesLoanPurpose: Wizard.Page[] = [
             ],
           },
           {
-            columnSize: 6,
+            columnSize: 3,
             content: [
               {
                 type: 'html',
