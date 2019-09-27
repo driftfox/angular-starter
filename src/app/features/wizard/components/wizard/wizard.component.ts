@@ -51,7 +51,10 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
         .join('/');
 
     // Notify parent of state changes
-    this.store.state$.pipe(untilDestroyed(this)).subscribe(state => this.stateChange.emit(state));
+    this.store.state$.pipe(untilDestroyed(this)).subscribe(state => {
+
+      this.stateChange.emit(state);
+    });
     // Notify parent when wizard is complete
     this.store.wizardComplete$.pipe(untilDestroyed(this)).subscribe(() => this.wizardComplete.emit());
 
