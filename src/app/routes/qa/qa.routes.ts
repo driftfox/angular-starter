@@ -42,6 +42,11 @@ const routes: Routes = [
     data: { title: 'Calendar' },
   },
   {
+    path: 'wizard/:sectionId/:routeId',
+    component: WizardComponent,
+    data: { title: 'Wizard' },
+  },
+  {
     path: 'wizard',
     component: WizardComponent,
     data: { title: 'Wizard' },

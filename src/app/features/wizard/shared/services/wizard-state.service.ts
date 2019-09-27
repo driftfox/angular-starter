@@ -5,6 +5,9 @@ import { sectionControl } from '../factories/section.factory';
 import { FormGroup } from '@angular/forms';
 
 export class WizardStateService {
+  /** Base URL of wizard without route params */
+  public baseUrl: string | undefined;
+
   /** All sections */
   public sections$ = new Subject<Record<string, Wizard.SectionControl>>();
   private _sections: Record<string, Wizard.SectionControl> | null = null;

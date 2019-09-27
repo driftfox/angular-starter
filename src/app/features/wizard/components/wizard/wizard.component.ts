@@ -15,6 +15,8 @@ import { WizardStateService } from '../../shared/services/wizard-state.service';
 import { FormGroup } from '@angular/forms';
 import { audit } from '../../shared/utils/audit.util';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { ActivatedRoute, Router } from '@angular/router';
+import { baseUrlWithoutParams } from '../../shared/utils/strings.utils';
 
 @Component({
   selector: 'nts-wizard',
@@ -39,15 +41,25 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   /** App has finished loading */
   public loaded = false;
 
-  constructor(public store: WizardStateService, private ref: ChangeDetectorRef) {}
+  constructor(public store: WizardStateService, private ref: ChangeDetectorRef, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
+    // Get base url of wizard location
+    this.store.baseUrl = '/' + this.route.pathFromRoot
+        .map(path => path && path.routeConfig && path.routeConfig.path ? path.routeConfig.path.split('/')[0] : null)
+        .filter(x => x as string)
+        .join('/');
+
     // Notify parent of state changes
     this.store.state$.pipe(untilDestroyed(this)).subscribe(state => this.stateChange.emit(state));
     // Notify parent when wizard is complete
     this.store.wizardComplete$.pipe(untilDestroyed(this)).subscribe(() => this.wizardComplete.emit());
 
     this.store.pageActive$.subscribe(page => console.log(page));
+
+    this.route.params.subscribe(params => {
+      console.log(params);
+    });
   }
 
   ngOnChanges(model: SimpleChanges) {
