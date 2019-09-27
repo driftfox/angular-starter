@@ -18,7 +18,7 @@ class PageControl implements Wizard.PageControl {
   }
   
   get valid() {
-    // TODO: Support page level validation
+    // TODO: Support page level validation not just field level validation
     return this.validControls;
   }
   get validControls() {
