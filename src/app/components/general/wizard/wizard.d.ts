@@ -177,8 +177,10 @@ declare namespace Wizard {
 
   export type FormField = FormFieldMulti | FormFieldSingle;
 
-  export interface FormFieldControl extends FormField {
+  // TODO: FormFieldControl typechecker has a problem extending type FormField
+  export interface FormFieldControl extends FormFieldSrc {
     formControl: FormControl;
+    options?: SelectItem[] | string[];
   }
 
   export interface Validators {
