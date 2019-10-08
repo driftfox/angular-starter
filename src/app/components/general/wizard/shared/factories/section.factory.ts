@@ -18,9 +18,9 @@ class SectionControl implements Wizard.SectionControl {
   public sectionNextId: string | null = null;
   public sectionPreviousId: string | null = null;
 
-  constructor(public src: Wizard.Section, public form: FormGroup) {
+  constructor(public src: Wizard.Section, public form: FormGroup, public state: Wizard.State) {
     if (src.pages && src.pages.length) {
-      src.pages.forEach(page => this.pages[page.id] = pageControl(page, this.form));
+      src.pages.forEach(page => this.pages[page.id] = pageControl(page, this.form, this.state));
     }
     if (src.routes && src.routes.length) {
       src.routes.forEach(route => this.routes[route.id] = routeControl(route));
@@ -32,6 +32,6 @@ class SectionControl implements Wizard.SectionControl {
  * Create a new sectionControl from a section
  * @param section
  */
-export const sectionControl = (section: Wizard.Section, form: FormGroup): Wizard.SectionControl => {
-  return new SectionControl(section, form);
+export const sectionControl = (section: Wizard.Section, form: FormGroup, state: Wizard.State): Wizard.SectionControl => {
+  return new SectionControl(section, form, state);
 };

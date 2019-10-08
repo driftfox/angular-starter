@@ -41,6 +41,9 @@ export class WizardStateService {
     return { ...this._state };
   }
 
+  /** Reference to index changes within arrays */
+  public arrayIndexes = new FormGroup({});
+
   /** Current active section */
   public sectionActive$ = combineLatest([this.sections$, this.routeParams$]).pipe(
     map(([sections, routeParams]) => (sections && routeParams && routeParams.sectionId ? sections[routeParams.sectionId] : null)),
@@ -69,11 +72,11 @@ export class WizardStateService {
    * @param sections
    * @param form
    */
-  public sectionsAdd(sections: Wizard.Section[], form: FormGroup) {
+  public sectionsAdd(sections: Wizard.Section[], form: FormGroup, state: Wizard.State) {
     const sectionRecord: Record<string, Wizard.SectionControl> = {};
     sections.forEach((section, i) => {
       // Create section controls
-      const control = sectionControl(section, form);
+      const control = sectionControl(section, form, state);
       // Add props for relationships between sections, IE prev and next
       control.sectionNextId = sections[i + 1] ? sections[i + 1].id : null;
       control.sectionPreviousId = sections[i - 1] ? sections[i - 1].id : null;

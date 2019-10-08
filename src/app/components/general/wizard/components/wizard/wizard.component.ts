@@ -82,8 +82,8 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
       return;
     }
     // When new sections are passed in
-    if (model.sections && this.sections && this.form) {
-      this.store.sectionsAdd(this.sections, this.form);
+    if (model.sections && this.sections && this.form && this.state) {
+      this.store.sectionsAdd(this.sections, this.form, this.state);
       // TODO: Need to reset wizard if this happens
     }
 
@@ -121,14 +121,23 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit, OnDest
       return;
     }
 
-    // Convert sections to section controls
-    // Not picking up null check
-    // Load section controls into store
-    this.store.sectionsAdd(this.sections, this.form);
-
     // Update store state. Load state if supplied, if not generate default one
     const state = this.state || this.store.stateCreateDefault(this.sections);
     this.store.stateChange(state);
+    this.store.stateChange({ arrayIndexes: { Hello: 4 } });
+    // Load section controls into store
+    this.store.sectionsAdd(this.sections, this.form, this.store.state);
+
+    /**
+    let stateTemp = {
+      name: 'Jerrol',
+      get myName() {
+        return this.name;
+      }
+    }
+    stateTemp = {...stateTemp, name: 'Bryant'};
+    console.log(stateTemp);
+    */
   }
 
   /**

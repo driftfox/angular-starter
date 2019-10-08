@@ -28,11 +28,11 @@ class PageControl implements Wizard.PageControl {
     return !this.valid;
   }
 
-  constructor(public src: Wizard.Page, public form: FormGroup) {
+  constructor(public src: Wizard.Page, public form: FormGroup, public state: Wizard.State) {
     // Convert content to controls, add null check
     this.content = this.src.content
       .map(content => {
-        const control = contentControl(content, this.form);
+        const control = contentControl(content, this.form, this.state);
         if (isType.formFieldControl(control) && control) {
           this.controlsById[control.field] = control.formControl;
         }
@@ -44,6 +44,6 @@ class PageControl implements Wizard.PageControl {
   public controlsMarkAsTouched() {}
 }
 
-export const pageControl = (page: Wizard.Page, form: FormGroup) => {
-  return new PageControl(page, form);
+export const pageControl = (page: Wizard.Page, form: FormGroup, state: Wizard.State) => {
+  return new PageControl(page, form, state);
 };

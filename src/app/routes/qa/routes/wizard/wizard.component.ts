@@ -15,7 +15,32 @@ export class WizardComponent implements OnInit {
 
   public form = this.fb.group({
     loanPurpose: ['Hello World'],
-    select: [],
+    select: this.fb.array([0, 1, 2, 3, 4]),
+    select2: this.fb.array([
+      this.fb.group({
+        hello: 'world',
+      }),
+      this.fb.group({
+        hello: 'world',
+      }),
+    ]),
+    level1: this.fb.group({
+      'hello': 'world',
+      level2: this.fb.array([
+        this.fb.group({
+          level3: 'level3',
+          level4: this.fb.group({
+            level5: 'level5',
+          }),
+        }),
+        this.fb.group({
+          level3: 'level3',
+          level4: this.fb.group({
+            level5: 'level5',
+          }),
+        }),
+      ]),
+    }),
   });
 
   constructor(private fb: FormBuilder) {}
@@ -26,7 +51,6 @@ export class WizardComponent implements OnInit {
       this.state = JSON.parse(state);
     }
     this.form.valueChanges.subscribe(val => console.warn('Form Changes', val));
-
   }
 
   public stateChange(state: Wizard.State) {

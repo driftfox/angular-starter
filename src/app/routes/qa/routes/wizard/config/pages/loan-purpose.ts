@@ -9,12 +9,33 @@ export const pagesLoanPurpose: Wizard.Page[] = [
         type: 'html',
         html: '<strong>Hello World</strong>',
       },
+      /**
       {
         type: 'formField',
         field: 'loanPurpose',
         formFieldType: 'text',
         placeholder: 'This is a placeholder',
       },
+      {
+        type: 'formField',
+        field: 'level1.hello',
+        formFieldType: 'text',
+        placeholder: 'This is a placeholder',
+      },
+      {
+        type: 'formField',
+        field: 'select2.1.hello',
+        formFieldType: 'text',
+        placeholder: 'This is a placeholder',
+      },
+       */
+      {
+        type: 'formField',
+        field: 'level1.level2.1.level4.level5',
+        formFieldType: 'text',
+        placeholder: 'This is a placeholder',
+      },
+      /**
       {
         type: 'formField',
         field: 'select',
@@ -54,6 +75,7 @@ export const pagesLoanPurpose: Wizard.Page[] = [
           },
         ],
       },
+       */
     ],
   },
   {
