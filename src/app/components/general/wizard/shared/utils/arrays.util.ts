@@ -11,7 +11,7 @@ export const arrayIndexMapping = (path: string, form: FormGroup, arrayIndexes?: 
   const arrayIndexes2: ArrayIndex = {
     'level1.level2': 0,
     'level1.level2.0.level3.level4': 2,
-    'hello' : 42
+    hello: 42,
   };
 
   const pathArray = path.split('.');
@@ -37,25 +37,22 @@ export const arrayIndexMapping = (path: string, form: FormGroup, arrayIndexes?: 
     // Now loop over the nearly generated path array
     // Search inside the indexes record for path matches
     for (let i = 0; i < arrayNew.length; i++) {
-        const element = arrayNew[i];
-        // If a path match was found then an index override was found in the indexes array
-        if (typeof arrayIndexes2[element] !== 'undefined') {
-            arrayNew[i + 1] = String(arrayIndexes2[element]);
-            delete arrayIndexes2[element];
-            // Figure out if any NESTED paths are in the array
-            Object.keys(arrayIndexes2).forEach(key => {
-            
-                if (key.startsWith(element)) {
-                    console.warn(element, ' - ', key)
-                }
-             });
-        } else {
-            break;
-        }
-        
+      const element = arrayNew[i];
+      // If a path match was found then an index override was found in the indexes array
+      if (typeof arrayIndexes2[element] !== 'undefined') {
+        arrayNew[i + 1] = String(arrayIndexes2[element]);
+        delete arrayIndexes2[element];
+        // Figure out if any NESTED paths are in the array
+        Object.keys(arrayIndexes2).forEach(key => {
+          if (key.startsWith(element)) {
+            console.warn(element, ' - ', key.replace(element, ''));
+          }
+        });
+      } else {
+        break;
+      }
     }
     console.log(arrayNew.join('.'));
-
   }
 
   return form.get(path);

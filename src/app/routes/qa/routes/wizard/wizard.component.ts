@@ -35,9 +35,14 @@ export class WizardComponent implements OnInit {
         }),
         this.fb.group({
           level3: 'level3',
-          level4: this.fb.group({
-            level5: 'level5',
-          }),
+          level4: this.fb.array([
+            this.fb.group({
+              level5: 'level5a',
+            }),
+            this.fb.group({
+              level5: 'level5b',
+            }),
+          ])
         }),
       ]),
     }),

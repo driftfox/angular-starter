@@ -31,9 +31,15 @@ export const pagesLoanPurpose: Wizard.Page[] = [
        */
       {
         type: 'formField',
-        field: 'level1.level2.1.level4.level5',
+        field: 'level1.level2.1.level4',
         formFieldType: 'text',
-        placeholder: 'This is a placeholder',
+        placeholder: 'Array Test 1',
+      },
+      {
+        type: 'formField',
+        field: 'level1.level2.1.level4.0.level5',
+        formFieldType: 'text',
+        placeholder: 'Array Test 2',
       },
       /**
       {
