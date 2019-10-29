@@ -2,15 +2,36 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError, take } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { applyTransaction } from '@datorama/akita';
-
-import { TempStore, uniqueId } from './temp.store';
-import { TempQuery } from './temp.query';
+import { applyTransaction, EntityState, EntityStore, QueryEntity, StoreConfig } from '@datorama/akita';
 import { environment } from '$env';
 
-const url =
-  environment.endpoints.apiUrl + '//jsonplaceholder.typicode.com/users';
+/** Configuration */
+interface StoreState extends EntityState<Models.User> {}
+const url = environment.endpoints.apiUrl + '//jsonplaceholder.typicode.com/users';
+const uniqueId = 'id';
 
+/** Store */
+@Injectable({ providedIn: 'root' })
+@StoreConfig({ name: 'users', idKey: uniqueId, resettable: true }) // , cache: { ttl: null }
+export class TempStore extends EntityStore<StoreState, Models.User> {
+  constructor() {
+    super({ modifying: false, loading: false });
+  }
+}
+
+/** Query */
+// tslint:disable-next-line:max-classes-per-file
+@Injectable({ providedIn: 'root' })
+export class TempQuery extends QueryEntity<StoreState, Models.User> {
+  public users$ = this.select();
+
+  constructor(protected store: TempStore) {
+    super(store);
+  }
+}
+
+/** Service */
+// tslint:disable-next-line:max-classes-per-file
 @Injectable({ providedIn: 'root' })
 export class TempService {
   constructor(
