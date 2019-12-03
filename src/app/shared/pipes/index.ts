@@ -9,3 +9,4 @@ export * from './slug.pipe';
 export * from './sort.pipe';
 export * from './string.pipe';
 export * from './text-case.pipe';
+export * from './limit.pipe';

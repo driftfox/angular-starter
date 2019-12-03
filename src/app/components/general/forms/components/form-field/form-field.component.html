@@ -29,7 +29,10 @@
 
         <!-- Button group -->
         <ng-container *ngSwitchCase="'buttonGroup'">
-          <p-selectButton [options]="options" [formControl]="formControl"></p-selectButton>
+          <p-selectButton
+            [options]="options"
+            [formControl]="formControl"
+          ></p-selectButton>
         </ng-container>
 
         <!-- Toggle -->
@@ -47,19 +50,34 @@
               'ui-focus': !!formControl.value || focused
             }"
           >
-            <textarea pInputTextarea [name]="name" [id]="id" [rows]="rows" [formControl]="formControl"></textarea>
-            <label for="float-input" *ngIf="placeholderFloat">{{ placeholder }}</label>
+            <textarea
+              pInputTextarea
+              [name]="name"
+              [id]="id"
+              [rows]="rows"
+              [formControl]="formControl"
+            ></textarea>
+            <label for="float-input" *ngIf="placeholderFloat">{{
+              placeholder
+            }}</label>
           </span>
         </ng-container>
 
         <!-- Select -->
         <ng-container *ngSwitchCase="'select'">
-          <select class="ui-widget ui-dropdown ui-corner-all" [formControl]="formControl">
+          <select
+            class="ui-widget ui-dropdown ui-corner-all"
+            [formControl]="formControl"
+          >
             <option [ngValue]="null" disabled>-- Please Select --</option>
             <ng-container *ngFor="let option of options">
               <option
                 [ngValue]="option[optionValue]"
-                *ngIf="option[optionValue] !== undefined && option[optionLabel] !== undefined; else optionsSelectStringArray"
+                *ngIf="
+                  option[optionValue] !== undefined &&
+                    option[optionLabel] !== undefined;
+                  else optionsSelectStringArray
+                "
               >
                 {{ option[optionLabel] }}
               </option>
@@ -93,22 +111,26 @@
               [name]="name"
               [id]="id"
               [formControl]="formControl"
-              [label]="option[optionLabel] !== undefined ? option[optionLabel] : option"
-              [value]="option[optionValue] !== undefined ? option[optionValue] : option"
+              [label]="
+                option[optionLabel] !== undefined ? option[optionLabel] : option
+              "
+              [value]="
+                option[optionValue] !== undefined ? option[optionValue] : option
+              "
             ></p-checkbox>
           </div>
         </ng-container>
 
         <!-- Single checkbox that returns a boolean value -->
         <ng-container *ngSwitchCase="'checkboxBoolean'">
-            <p-checkbox
-              class="nts-checkbox-boolean"
-              [binary]="true"
-              [name]="name"
-              [id]="id"
-              [formControl]="formControl"
-              [label]="placeholder"
-            ></p-checkbox>
+          <p-checkbox
+            class="nts-checkbox-boolean"
+            [binary]="true"
+            [name]="name"
+            [id]="id"
+            [formControl]="formControl"
+            [label]="placeholder"
+          ></p-checkbox>
         </ng-container>
 
         <!-- Radio -->
@@ -118,8 +140,12 @@
               [name]="name"
               [id]="id"
               [formControl]="formControl"
-              [label]="option[optionLabel] !== undefined ? option[optionLabel] : option"
-              [value]="option[optionValue] !== undefined ? option[optionValue] : option"
+              [label]="
+                option[optionLabel] !== undefined ? option[optionLabel] : option
+              "
+              [value]="
+                option[optionValue] !== undefined ? option[optionValue] : option
+              "
             ></p-radioButton>
           </div>
         </ng-container>
@@ -127,8 +153,14 @@
     </div>
 
     <!-- Tooltip-->
-    <div class="nts-form-field-tooltip" *ngIf="tooltip" [ngClass]="{ 'mt-3': placeholderFloat && placeholder }">
-      <a [pTooltip]="tooltip" tooltipPosition="bottom"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+    <div
+      class="nts-form-field-tooltip"
+      *ngIf="tooltip"
+      [ngClass]="{ 'mt-3': placeholderFloat && placeholder }"
+    >
+      <a [pTooltip]="tooltip" tooltipPosition="bottom"
+        ><i class="fa fa-question-circle" aria-hidden="true"></i
+      ></a>
     </div>
   </div>
 
@@ -136,25 +168,44 @@
   <div class="nts-form-field-hint" [innerHtml]="hint" *ngIf="hint"></div>
 
   <!-- Errors -->
-  <div *ngIf="formControl?.invalid && formControl?.touched && formControl?.errors && showError" class="red pt-1 anim-fade-in">
-    <div *ngIf="errorCustom && formControl?.errors?.required" [innerHtml]="errorCustom"></div>
+  <div
+    *ngIf="
+      formControl?.invalid &&
+      formControl?.touched &&
+      formControl?.errors &&
+      showError
+    "
+    class="red pt-1 anim-fade-in"
+  >
+    <div
+      *ngIf="errorCustom && formControl?.errors?.required"
+      [innerHtml]="errorCustom"
+    ></div>
     <div *ngIf="!errorCustom && formControl?.errors?.required" class="small">
       {{ placeholder || 'This field' }} is <strong>required</strong>
     </div>
 
     <div *ngIf="formControl?.errors?.minlength" class="small">
-      Please enter at least <strong>{{ formControl?.errors?.minlength?.requiredLength }}</strong> characters
+      Please enter at least
+      <strong>{{ formControl?.errors?.minlength?.requiredLength }}</strong>
+      characters
     </div>
     <div *ngIf="formControl?.errors?.maxlength" class="small">
-      Please enter less than <strong>{{ formControl?.errors?.maxlength?.requiredLength }}</strong> characters
+      Please enter less than
+      <strong>{{ formControl?.errors?.maxlength?.requiredLength }}</strong>
+      characters
     </div>
     <div *ngIf="formControl?.errors?.min" class="small">
-      Please enter a number that is greater than <strong>{{ formControl?.errors?.min?.min }}</strong>
+      Please enter a number that is greater than
+      <strong>{{ formControl?.errors?.min?.min }}</strong>
     </div>
     <div *ngIf="formControl?.errors?.max" class="small">
-      Please enter a number that is less than <strong>{{ formControl?.errors?.max?.max }}</strong>
+      Please enter a number that is less than
+      <strong>{{ formControl?.errors?.max?.max }}</strong>
     </div>
-    <div *ngIf="formControl?.errors?.email" class="small">Please enter a valid <strong>email address</strong></div>
+    <div *ngIf="formControl?.errors?.email" class="small">
+      Please enter a valid <strong>email address</strong>
+    </div>
   </div>
 </div>
 
@@ -162,11 +213,24 @@
     Generic field types
   -->
 <ng-template #generic>
-  <div class="ui-inputgroup" [ngClass]="{ 'ui-inputgroup': prefix || suffix, 'mt-3': placeholderFloat && placeholder }">
-    <span class="ui-inputgroup-addon" *ngIf="prefix" [innerHtml]="prefix"></span>
+  <div
+    class="ui-inputgroup"
+    [ngClass]="{
+      'ui-inputgroup': prefix || suffix,
+      'mt-3': placeholderFloat && placeholder
+    }"
+  >
+    <span
+      class="ui-inputgroup-addon"
+      *ngIf="prefix"
+      [innerHtml]="prefix"
+    ></span>
     <span
       class="ui-input-float d-flex align-items-stretch"
-      [ngClass]="{ 'ui-float-label': placeholderFloat, 'ui-focus': !!formControl.value || focused }"
+      [ngClass]="{
+        'ui-float-label': placeholderFloat,
+        'ui-focus': !!formControl.value || focused
+      }"
     >
       <ng-container [ngSwitch]="type">
         <!-- Color picker-->
@@ -185,7 +249,10 @@
             />
             <span class="ui-inputgroup-addon p-0">
               <!-- Colorpicker errors out if ngModel isn't present -->
-              <p-colorPicker [(ngModel)]="model" (onChange)="formControl.patchValue($event.value)"></p-colorPicker>
+              <p-colorPicker
+                [(ngModel)]="model"
+                (onChange)="formControl.patchValue($event.value)"
+              ></p-colorPicker>
             </span>
           </div>
         </ng-container>
@@ -200,7 +267,13 @@
             mask="(999) 999-9999"
             [unmask]="unmask"
             [formControl]="formControl"
-            [placeholder]="!placeholder ? '(___) ___-____' : placeholderFloat ? '' : placeholder"
+            [placeholder]="
+              !placeholder
+                ? '(___) ___-____'
+                : placeholderFloat
+                ? ''
+                : placeholder
+            "
             (onFocus)="focused = true; cursorPositionSet(field, 1)"
             (onBlur)="focused = false"
           ></p-inputMask>
@@ -235,7 +308,9 @@
             class="w-100"
             [unmask]="unmask"
             mask="999-99-9999"
-            [placeholder]="!placeholder ? '___-__-____' : placeholderFloat ? '' : placeholder"
+            [placeholder]="
+              !placeholder ? '___-__-____' : placeholderFloat ? '' : placeholder
+            "
             [formControl]="formControl"
             (onFocus)="focused = true; cursorPositionSet(field, 0)"
             (onBlur)="focused = false"
@@ -253,13 +328,21 @@
               mask="99/99/9999"
               placeholder="mm/dd/yyyy"
               slotChar="mm/dd/yyyy"
-              [placeholder]="!placeholder ? '' : placeholderFloat ? '' : placeholder"
+              [placeholder]="
+                !placeholder ? '' : placeholderFloat ? '' : placeholder
+              "
               [formControl]="formControl"
               (onFocus)="focused = true; cursorPositionSet(field, 0)"
               (onBlur)="focused = false"
             ></p-inputMask>
             <span class="ui-inputgroup-addon">
-              <p-calendar #date dateFormat="mm/dd/yy" [showIcon]="true" (onSelect)="dateChange(date)" [appendTo]="field"></p-calendar>
+              <p-calendar
+                #date
+                dateFormat="mm/dd/yy"
+                [showIcon]="true"
+                (onSelect)="dateChange(date)"
+                [appendTo]="field"
+              ></p-calendar>
             </span>
           </div>
         </ng-container>
@@ -282,9 +365,17 @@
         </ng-container>
       </ng-container>
 
-      <label for="float-input" *ngIf="placeholderFloat" [innerHtml]="placeholder"></label>
+      <label
+        for="float-input"
+        *ngIf="placeholderFloat"
+        [innerHtml]="placeholder"
+      ></label>
     </span>
-    <span class="ui-inputgroup-addon" *ngIf="suffix" [innerHtml]="suffix"></span>
+    <span
+      class="ui-inputgroup-addon"
+      *ngIf="suffix"
+      [innerHtml]="suffix"
+    ></span>
   </div>
 </ng-template>
 

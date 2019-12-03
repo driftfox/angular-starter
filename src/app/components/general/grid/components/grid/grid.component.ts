@@ -199,7 +199,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
       LicenseManager.setLicenseKey(this.license);
     }
     // Load column definitions from gridState first if present, if not fall back to columnDefs
-    if (this.gridState.columnDefs.length) {
+    if (this.gridState && this.gridState.columnDefs.length) {
       const cols = columnsTemplateAttach(
         this.gridState.columnDefs,
         this.columnTemplates,
@@ -564,7 +564,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   /** When data in the grid changes */
   public gridRowDataChanged() {
     // Whenever data is loaded into the grid the filters are wiped out. Check if filters are present and reload them
-    if (this.gridLoaded && this.gridState.filters) {
+    if (this.gridLoaded && this.gridState && this.gridState.filters) {
       Object.keys(this.gridState.filters).forEach(key => {
         const instance = this.grid.api.getFilterInstance(key);
         instance.setModel(this.gridState.filters[key]);

@@ -15,6 +15,9 @@ export class TableColumnDirective {
 
   // Header Templates
   @Input()
-  @ContentChild(TableColumnHeaderDirective, { read: TemplateRef, static: false })
+  @ContentChild(TableColumnHeaderDirective, {
+    read: TemplateRef,
+    static: false,
+  })
   templateHeader!: TemplateRef<any>;
 }

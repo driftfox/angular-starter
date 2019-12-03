@@ -69,7 +69,14 @@ export class NtsSignalRService {
         .build();
     }
     // Start signalR
-    const hubConnection = (<any>this.hubConnection).start();
+    const hubConnection = this.hubConnection.start();
+    // If this connection disconnects, keep restarting it until it reconnects
+    this.hubConnection.onclose(() =>
+      setTimeout(
+        () => this.connectionStart(signalRUrl, this.token, retryTime),
+        retryTime,
+      ),
+    );
     // Watch status
     hubConnection
       // If any queued ID's, attach ON event to the observable
@@ -80,7 +87,7 @@ export class NtsSignalRService {
           this.queuedIDs = {}; // Reset queue
         }
       })
-      // If error on start, retry every 10 seconds
+      // If error on start, retry
       .catch(() => {
         // If retry specified
         if (retryTime) {

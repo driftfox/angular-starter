@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, ViewEncapsulation, Self, Optional, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewEncapsulation,
+  Self,
+  Optional,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { NgControl, FormControl } from '@angular/forms';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { isRequired } from '../../utils/isRequired.util';
@@ -8,6 +17,26 @@ import { slugCreateUniqueId } from '../../utils/slug.util';
 import { currencyChange } from '../../utils/currency.util';
 import { formControlGetFieldName } from '../../utils/formFieldName.util';
 
+export type FormFieldType =
+  | 'text'
+  | 'number' // Uses type="number" and ensures the value in the form is a number
+  // | 'numberAsString' // Uses type="number" but keeps the numeric value as a string (default behavior)
+  | 'currency'
+  | 'phoneNumber'
+  | 'email'
+  | 'ssn'
+  | 'password'
+  | 'colorpicker'
+  // Non text input types
+  | 'select' // Native browser select
+  | 'dropdown' // NgPrime dropdown
+  | 'textarea'
+  | 'checkbox'
+  | 'checkboxBoolean'
+  | 'radio'
+  | 'toggle'
+  | 'autoComplete'
+  | 'date';
 
 /**
  * Tools for rapidly creating and managing forms
@@ -26,7 +55,7 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   /** Some ui controls need an ngModel to store data if a form control is not supplied */
   public model: any;
 
-  @Input() type: NtsForms.FormFieldType = 'text';
+  @Input() type: FormFieldType = 'text';
   /** Determine if this is a generic fieldtype */
   public fieldType!: string;
   /** Placeholder text */
@@ -83,7 +112,7 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   @Input() autocomplete: string | undefined;
 
   /** Pass formcontrol reference */
-  @Input() formControl!: FormControl;
+  public formControl!: FormControl;
   /** Does the current input have focus or data. Used to toggle the label */
   public focused = false;
 
@@ -109,14 +138,12 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (!this.formControl) {
-      // Check if required, set required flag
-      if (this.ngControl && this.ngControl.control) {
-        this.required = isRequired(this.ngControl);
-        this.formControl = <FormControl>this.ngControl.control;
-      } else {
-        this.formControl = new FormControl();
-      }
+    // Check if required, set required flag
+    if (this.ngControl && this.ngControl.control) {
+      this.required = isRequired(this.ngControl);
+      this.formControl = <FormControl>this.ngControl.control;
+    } else {
+      this.formControl = new FormControl();
     }
 
     // If this is an options based control, determine if it is a string array or an object array
@@ -126,13 +153,17 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
 
     // If field type is a dropdown, add a null option
     if (this.type === 'dropdown' && this.options && this.optionIsObjectsArray) {
-      this.optionsOutput = this.dropdownAddNullOption(<SelectItem[]>this.options);
+      this.optionsOutput = this.dropdownAddNullOption(<SelectItem[]>(
+        this.options
+      ));
     }
 
     // Set model for default
     this.model = this.formControl.value;
     // Update model if form control changes
-    this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe(val => (this.model = val));
+    this.formControl.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe(val => (this.model = val));
 
     // Determine if this is a generic field type
     this.fieldType = [
@@ -152,7 +183,9 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
 
     // Determine if the control needs to generate a unique id and or name property from the placeholder or the field name
     if ((this.placeholder && (!this.name || !this.id)) || !this.placeholder) {
-      const name = this.placeholder ? this.placeholder : formControlGetFieldName(this.formControl);
+      const name = this.placeholder
+        ? this.placeholder
+        : formControlGetFieldName(this.formControl);
       // Create slug, ensure slug is unique
       const slug = slugCreateUniqueId(name, NtsFormFieldComponent);
       // If name not supplied, autogenerate one from the placeholder
@@ -214,23 +247,30 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
    * Filter the available autocomplete terms based on the query typed by the user
    * @param result
    */
-  public autoCompleteFilterTerms(result: { originalEvent: Event; query: string }) {
+  public autoCompleteFilterTerms(result: {
+    originalEvent: Event;
+    query: string;
+  }) {
     const term = result.query.toLowerCase().trim();
     if (this.options && this.options.length) {
       if (typeof this.options[0] === 'object') {
-        this.autoCompleteSuggestions = (<SelectItem[]>this.options).filter(option => {
-          const optionTerm = String((<any>option)[this.optionLabel])
-            .toLowerCase()
-            .trim();
-          return optionTerm.indexOf(term) !== -1 ? true : false;
-        });
+        this.autoCompleteSuggestions = (<SelectItem[]>this.options).filter(
+          option => {
+            const optionTerm = String((<any>option)[this.optionLabel])
+              .toLowerCase()
+              .trim();
+            return optionTerm.indexOf(term) !== -1 ? true : false;
+          },
+        );
       } else if (typeof this.options[0] === 'string') {
-        this.autoCompleteSuggestions = (<string[]>this.options).filter(option => {
-          const optionTerm = String(option)
-            .toLowerCase()
-            .trim();
-          return optionTerm.indexOf(term) !== -1 ? true : false;
-        });
+        this.autoCompleteSuggestions = (<string[]>this.options).filter(
+          option => {
+            const optionTerm = String(option)
+              .toLowerCase()
+              .trim();
+            return optionTerm.indexOf(term) !== -1 ? true : false;
+          },
+        );
       } else {
         console.error('Unknown types in options array');
       }
@@ -251,7 +291,10 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
    */
   private dropdownAddNullOption(options: SelectItem[]): SelectItem[] {
     // Make sure a default null value was not passed
-    const hasNull = options.reduce((a, b) => (a || b.value === null ? true : false), false);
+    const hasNull = options.reduce(
+      (a, b) => (a || b.value === null ? true : false),
+      false,
+    );
     if (!hasNull) {
       const option: any = { disabled: true, styleClass: 'disabled' }; // SelectItem
       option[this.optionLabel] = '-- Please Select --';

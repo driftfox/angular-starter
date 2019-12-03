@@ -1,6 +1,13 @@
-<div class="grid-state py-1" *ngIf="gridState?.sorts?.length || gridGroups?.length || gridFilters?.length">
+<div
+  class="grid-state py-1"
+  *ngIf="gridState?.sorts?.length || gridGroups?.length || gridFilters?.length"
+>
   <!-- Clear all button -->
-  <button class="btn btn-xs btn-outline-primary btn-grid-sort float-right" title="Remove all" (click)="reset()">
+  <button
+    class="btn btn-xs btn-outline-primary btn-grid-sort float-right"
+    title="Remove all"
+    (click)="reset()"
+  >
     <span class="mr-1">Clear All</span>
     <i class="fa fa-remove"></i>
   </button>
@@ -8,8 +15,15 @@
   <!-- Sort Option -->
   <div class="d-inline-block mr-2" *ngIf="gridState?.sorts?.length">
     <span class="mr-1">Sorted By:</span>
-    <button class="btn btn-xs btn-outline-primary btn-grid-sort mr-2" title="Remove sorting" (click)="removeSort()">
-      <span class="mr-1">{{ gridState.sorts[0].colId | textCase }}, {{ gridState.sorts[0].sort | textCase }}</span>
+    <button
+      class="btn btn-xs btn-outline-primary btn-grid-sort mr-2"
+      title="Remove sorting"
+      (click)="removeSort()"
+    >
+      <span class="mr-1"
+        >{{ gridState.sorts[0].colId | textCase }},
+        {{ gridState.sorts[0].sort | textCase }}</span
+      >
       <i class="fa fa-remove"></i>
     </button>
   </div>

@@ -8,6 +8,8 @@
     "format": "npm run format-glob -- \"src/{app,environments}/**/*{.ts,.js,.json,.css,.scss}\"",
     "format-glob": "prettier --write",
     "ng": "ng",
+    "bit:pull": "bit import && bit checkout latest --all",
+    "bit:push": "bit tag --all && bit export nts.angular",
     "build": "ng build",
     "build:stats": "ng build --prod --stats-json && npm run bundle-report",
     "bundle-report": "webpack-bundle-analyzer dist/browser/stats.json -p 8887",

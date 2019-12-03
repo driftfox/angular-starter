@@ -9,6 +9,10 @@ import {
   ViewChild,
   OnChanges,
   SimpleChanges,
+  ViewChildren,
+  ElementRef,
+  ChangeDetectorRef,
+  OnDestroy,
 } from '@angular/core';
 import { Table } from 'primeng/table';
 import { TableColumnDirective } from '../../directives/column.directive';
@@ -17,7 +21,7 @@ type NtsColumnType = 'email' | 'date' | 'dateTime' | 'currency';
 
 export interface NtsColumn {
   field: string;
-  header: string;
+  header: string | null;
   type?: NtsColumnType;
   /** Arguments to pass to the formatting pipes */
   typeArgs?: string;
@@ -30,7 +34,7 @@ export interface NtsColumn {
   // tslint:disable-next-line:use-component-view-encapsulation
   encapsulation: ViewEncapsulation.None,
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Rows */
   @Input() rows: any[] | undefined;
   /** Columns */
@@ -41,8 +45,14 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() sortable = true;
   /** Show the custom filter box */
   @Input() showFilter = false;
+  /** Show table headers */
+  @Input() showHeader = true;
   /** Custom global filter term */
   @Input() filterTerm: string | null = null;
+  /** Enable paginate and only display this many entries */
+  @Input() paginateRows: number | undefined;
+
+  public columnWidthsPercent: number[] | null = null;
 
   /** Holds custom DOM templates passed from parent */
   public templates: Record<string, TableColumnDirective> = {};
@@ -60,7 +70,9 @@ export class TableComponent implements OnInit, OnChanges {
   /** Keep an instance of the last sorted option. Used to unset sort */
   private sortLast: { field?: string; order?: number } = {};
 
-  constructor() {}
+  @ViewChildren('th') tableHeaders!: QueryList<ElementRef>;
+
+  constructor(private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     if (this.rows) {
@@ -77,6 +89,11 @@ export class TableComponent implements OnInit, OnChanges {
     if (model.rows && this.rows) {
       this.rowsSrc = [...this.rows];
     }
+
+    setTimeout(() => {
+      this.columnWidthsPercent = this.columnWidthFix(this.tableHeaders.toArray());
+      this.ref.markForCheck();
+    });
   }
 
   /**
@@ -93,4 +110,23 @@ export class TableComponent implements OnInit, OnChanges {
       this.sortLast = { ...sort };
     }
   }
+
+  /**
+   * Create an array of column width percentages
+   *
+   * @param th
+   */
+  private columnWidthFix(th: ElementRef<any>[]) {
+    if (!th || !th.length) {
+      return null;
+    }
+    const widthsPx = th.map(x => x.nativeElement.clientWidth);
+    const tableWidth = widthsPx.reduce((a, b) => a + b);
+    if (!tableWidth) {
+      return null;
+    }
+    return widthsPx.map(x => Math.floor((x / tableWidth) * 100000) / 1000);
+  }
+
+  ngOnDestroy() {}
 }

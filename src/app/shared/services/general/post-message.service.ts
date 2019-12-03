@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-
 interface Message {
   event?: string;
   payload?: any;

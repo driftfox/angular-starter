@@ -16,6 +16,7 @@ import {
   SortPipe,
   StringPipe,
   TextCasePipe,
+  LimitPipe,
 } from './pipes';
 // Directives
 import {
@@ -38,6 +39,7 @@ export const APP_PIPES_DIRECTIVES = [
   SortPipe,
   StringPipe,
   TextCasePipe,
+  LimitPipe,
 
   // Directives
   FullScreenDirective,

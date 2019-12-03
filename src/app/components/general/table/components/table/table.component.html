@@ -1,5 +1,14 @@
 <div class="nts-table">
-  <p-table #tt [value]="rows" [columns]="columns" sortMode="single" (onSort)="onSort($event)">
+  <p-table
+    #tt
+    [value]="rows"
+    [columns]="columns"
+    sortMode="single"
+    (onSort)="onSort($event)"
+    [paginator]="rows?.length && paginateRows && rows?.length > paginateRows ? !!paginateRows : false"
+    [rows]="paginateRows"
+    [autoLayout]="false"
+  >
     <!-- Global filter-->
     <ng-template pTemplate="caption" *ngIf="showFilter || headerText">
       <div class="d-flex">
@@ -22,9 +31,15 @@
       </div>
     </ng-template>
     <!-- Table Headers -->
-    <ng-template pTemplate="header" let-columns>
+    <ng-template pTemplate="header" let-columns *ngIf="showHeader">
       <tr style="height:30px">
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="!sortable">
+        <th
+          *ngFor="let col of columns; let i = index"
+          [pSortableColumn]="col.field"
+          [pSortableColumnDisabled]="!sortable"
+          #th
+          [ngStyle]="{ width: columnWidthsPercent && columnWidthsPercent[i] ? columnWidthsPercent[i] + '%' : null }"
+        >
           <ng-container *ngIf="templates[col.field] && templates[col.field].templateHeader; else headerDefault">
             <ng-container
               *ngTemplateOutlet="
@@ -45,7 +60,10 @@
       </tr>
     </ng-template>
     <!-- Table Body -->
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+      <!--
+         [ngClass]="{'nts-table-anim-slide-in-from-right' : !loaded}" [ngStyle]="{'animation-delay' : (rowIndex / 25) +'s'}"
+      -->
       <tr>
         <!-- Loop through columns -->
         <td *ngFor="let col of columns">
@@ -98,7 +116,7 @@
     <!-- Empty messages-->
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
-        <td [attr.colspan]="columns?.length">
+        <td [attr.colspan]="columns?.length" class="nts-table-no-content">
           No rows found
         </td>
       </tr>

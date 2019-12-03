@@ -4,6 +4,7 @@ import { CalendarComponent } from './calendar.component';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
+
   let fixture: ComponentFixture<CalendarComponent>;
 
   beforeEach(async(() => {
@@ -14,7 +15,9 @@ describe('CalendarComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CalendarComponent);
+
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 

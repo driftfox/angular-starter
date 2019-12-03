@@ -5,13 +5,17 @@ import { TableComponent } from './components/table/table.component';
 import { TableColumnDirective } from './directives/column.directive';
 import { TableColumnCellDirective } from './directives/cell-body.directive';
 import { TableColumnHeaderDirective } from './directives/cell-header.directive';
-import { NtsFormsModule } from '../../forms/forms.module';
 
-const DEPS = [TableComponent, TableColumnDirective, TableColumnCellDirective, TableColumnHeaderDirective];
+const DEPS = [
+  TableComponent,
+  TableColumnDirective,
+  TableColumnCellDirective,
+  TableColumnHeaderDirective,
+];
 
 @NgModule({
   declarations: [DEPS],
-  imports: [CommonModule, TableModule, NtsFormsModule],
+  imports: [CommonModule, TableModule],
   exports: [DEPS],
 })
 export class NtsTableModule {}

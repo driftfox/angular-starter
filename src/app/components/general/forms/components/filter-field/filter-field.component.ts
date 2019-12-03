@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { debounce } from 'helpful-decorators';
 
 @Component({
@@ -12,6 +19,8 @@ export class NtsFilterFieldComponent implements OnInit {
   @Input() filterTerm: string | null = null;
   /** Character size of input box */
   @Input() size = 30;
+  /** Should the filter box shrink down to fit nicely when used inline */
+  @Input() small = false;
   @Output() filterTermChange: EventEmitter<string | null> = new EventEmitter();
 
   @Input() placeholder = 'Enter filter term...';

@@ -14,5 +14,5 @@ export * from './forms/forms.module';
 export * from './calendar/calendar.module';
 // Generic components & services
 export * from './generic';
-// Generic components & services
-export * from './wizard/wizard.module';
+// Table
+export * from 'src/app/components/general/table/table.module';

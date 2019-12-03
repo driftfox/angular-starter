@@ -1,10 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-/**
- * Formats a number to the phone number format: (555) 555-5555
- * The second argument is to determine whether or not this is a clickable link
- * Usage: {{ value | phoneNumber: true }}
- */
+// Usage: {{ value | phoneNumber: true }}
 @Pipe({
   name: 'phoneNumber',
 })
@@ -14,9 +10,15 @@ export class PhoneNumberPipe implements PipeTransform {
     if (!val || val === '') {
       return val;
     }
-
-    let viewVal = val.trim().replace(/^\+/, '');
-    viewVal = viewVal.replace(/[^0-9]/g, '').slice(0, 10);
+    // Whitelist numbers only
+    let viewVal = val.replace(/[^0-9]/g, '');
+    // Keep track of leading ones
+    let hasLeadingOne = false;
+    // Check for leading one
+    if (viewVal.charAt(0) === '1' && viewVal.length === 11) {
+      hasLeadingOne = true;
+      viewVal = viewVal.slice(1);
+    }
 
     // If this is a clickable link, return the phone number with no spaces or special characters
     if (makeClickable) {
@@ -37,17 +39,18 @@ export class PhoneNumberPipe implements PipeTransform {
         number = viewVal.slice(3);
     }
 
+    let result: string;
     if (number) {
       if (number.length > 3) {
         number = number.slice(0, 3) + '-' + number.slice(3, 7);
       } else {
         number = number;
       }
-      return ('(' + area + ') ' + number).trim().slice(0, 14);
-    } else if (area && area.length === 3) {
-      return '(' + area + ') ';
+      result = ('(' + area + ') ' + number).trim().slice(0, 14);
     } else {
-      return '(' + area;
+      result = '(' + area;
     }
+    // Return result, add back in leading one
+    return hasLeadingOne ? '1 ' + result : result;
   }
 }

@@ -7,4 +7,4 @@ import { ChartComponent } from './chart.component';
   declarations: [ChartComponent],
   exports: [ChartComponent],
 })
-export class ChartModule {}
+export class NtsChartModule {}
