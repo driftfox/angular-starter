@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1576612954638,
+  "timestamp": 1576616880961,
   "index": "/angular-starter/index.html",
   "assetGroups": [
     {
@@ -24,7 +24,7 @@
         "/angular-starter/common.2d04067fef443c5404c9.js",
         "/angular-starter/favicon.ico",
         "/angular-starter/index.html",
-        "/angular-starter/main.f20f9eb7432242d6477d.js",
+        "/angular-starter/main.aaf5f96cc50f324bb7ad.js",
         "/angular-starter/manifest.webmanifest",
         "/angular-starter/polyfills-es5.0cd22d78d22b1dac23f4.js",
         "/angular-starter/polyfills.d499360f5aef5be012c6.js",
@@ -160,10 +160,10 @@
     "/angular-starter/fontawesome-webfont.b06871f281fee6b241d6.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
     "/angular-starter/fontawesome-webfont.fee66e712a8a08eef580.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "/angular-starter/hue.0614c27197fc3ce572e1.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "/angular-starter/index.html": "67b08acb5748ea6b3a04c91ad59c453cd7633059",
+    "/angular-starter/index.html": "85eb2a8c8f631220d9a6de5d6e70a23989ef1e25",
     "/angular-starter/line.567f57385ea3dde2c9ae.gif": "a2af20bd160ca9cfc2c85527663ff7429267519a",
     "/angular-starter/loading.8732a6660b528fadfaeb.gif": "72998a116936156dc7cace0606dab499fe4f3ce8",
-    "/angular-starter/main.f20f9eb7432242d6477d.js": "5ba54ac3331c76e565522953dac5e1fa30e5d117",
+    "/angular-starter/main.aaf5f96cc50f324bb7ad.js": "22cda2cb2969505b263ae641c39fa113e68ef3a0",
     "/angular-starter/manifest.webmanifest": "a141e53f412f67b82b2252384182350a0ccf5e3a",
     "/angular-starter/password-meter.d59e6dc2616c53ce8e77.png": "e0e101bd2a1cbda41398b48a4ab1792d89cb7334",
     "/angular-starter/polyfills-es5.0cd22d78d22b1dac23f4.js": "810ce023dec8aaba93c2fcbeace4ceac6887fa7f",
