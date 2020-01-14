@@ -36,6 +36,6 @@
     "fullTemplateTypeCheck": true,
     "preserveWhitespaces": false
   },
-  "include": ["src/**/*", "../../node_modules/@ntersol-ui/**/*", "node_modules/@ntersol-ui/**/*"],
-  "exclude": ["e2e", "**/*.spec.ts", "node_modules", "../../node_modules/@ntersol-ui/**/*.spec.ts", "node_modules/@ntersol-ui/**/*.spec.ts"]
+  "include": ["src/**/*"],
+  "exclude": ["e2e", "**/*.spec.ts", "node_modules"]
 }

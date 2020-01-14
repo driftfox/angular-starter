@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
-import { UsersService } from './services/users.service';
 import { StaticService } from './services/static.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { EntityState } from '@datorama/akita';
+import { generateEntityStore } from 'src/app/components/general/state-management';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DomainService {
+
+  public users = generateEntityStore<Models.User>(this.http, { idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
+
   // List all store services here
   constructor(
     public http: HttpClient,
     public staticData: StaticService, // Simple webapi calls that are GET only
-    public users: UsersService,
   ) {}
 
   /**

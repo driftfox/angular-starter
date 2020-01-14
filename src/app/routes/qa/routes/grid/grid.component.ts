@@ -12,7 +12,7 @@ import { environment } from '$env';
 })
 export class GridComponent implements OnInit {
   public license = environment.licenses.agGrid;
-  public users$ = this.domain.users.users$;
+  public users$ = this.domain.users.getAll$;
   public rows: any[] = cars;
   public columns: ColDef[] = [
     { field: 'name', headerName: 'Name' },
@@ -41,6 +41,35 @@ export class GridComponent implements OnInit {
     if (gridState) {
       this.gridState = JSON.parse(gridState);
     }
+
+    setTimeout(() => {
+      /**
+    this.domain.users
+      .post({
+        // id: 8,
+        name: 'Jerrol Krause',
+        username: 'Test',
+        email: 'Test',
+        phone: 'Testx140',
+        website: 'Test.com',
+      })
+      .subscribe();
+
+      this.domain.users
+      .put({
+        id: 8,
+        name: 'Some Dewd',
+        username: 'Dewd',
+        email: 'Dewd',
+        phone: 'Testx140',
+        website: 'Test.com',
+      })
+      .subscribe();
+      */
+      this.domain.users.delete(5).subscribe();
+    }, 1000);
+
+      this.domain.users.data$.subscribe(x => console.log(x));
   }
 
   public gridStateChange(gridState: NtsGridState) {

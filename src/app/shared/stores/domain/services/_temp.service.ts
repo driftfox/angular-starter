@@ -6,6 +6,7 @@ import { applyTransaction, EntityState, EntityStore, QueryEntity, StoreConfig } 
 import { environment } from '$env';
 
 /**
+ * This domain store is for exceptions that cannot be 
  * New Domain Store Instructions:
  * 1. Copy/paste this file 
  * 2. Do a case sensitive rename of Temp => NewStoreName
@@ -27,7 +28,9 @@ type StoreModel = Models.User;
 export class TempService {
   public users$ = this.query.select();
 
-  constructor(public store: TempStore, public query: TempQuery, private http: HttpClient) {}
+  constructor(public store: TempStore, public query: TempQuery, private http: HttpClient) {
+
+  }
 
   /**
    * Get entities and load into store
