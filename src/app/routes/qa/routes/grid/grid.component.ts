@@ -12,7 +12,7 @@ import { environment } from '$env';
 })
 export class GridComponent implements OnInit {
   public license = environment.licenses.agGrid;
-  public users$ = this.domain.users.getAll$;
+  public users$ = this.domain.users.data$;
   public rows: any[] = cars;
   public columns: ColDef[] = [
     { field: 'name', headerName: 'Name' },

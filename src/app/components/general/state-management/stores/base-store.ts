@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError, take } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
-import { applyTransaction, QueryEntity, StoreConfigOptions, Store, Query } from '@datorama/akita';
+import { applyTransaction, StoreConfigOptions, Store, Query } from '@datorama/akita';
 
-export interface EntityStoreConfig extends Partial<StoreConfigOptions> {
+export interface StoreConfig extends Partial<StoreConfigOptions> {
   /** The uniqueID or guid or the entity format */
   idKey: string;
   /** Full path to webapi. Assumes restful conventions for verbs */
@@ -49,7 +49,7 @@ export class BaseStoreClass<t> {
   public query: Query<StoreState<t>>;
   public data$: Observable<StoreState<t>>;
 
-  constructor(private http: HttpClient, private config: EntityStoreConfig) {
+  constructor(private http: HttpClient, private config: StoreConfig) {
     // Generate initial state
     const initialState: StoreState<t> = Object.assign(
       { modifying: false, loading: false, error: null, modifyError: false, data: null },
@@ -83,7 +83,7 @@ export class BaseStoreClass<t> {
       return this.http.get<t[]>(apiUrlResolved).pipe(
         tap(entities => {
           const result: t[] = this.config.map && this.config.map.get ? this.config.map.get(entities) : entities;
-          this.store.set(result);
+          this.store.update(result);
         }), // On success, add response to store
         catchError(err => {
           applyTransaction(() => {
@@ -95,7 +95,7 @@ export class BaseStoreClass<t> {
       );
     }
     // Always return original api response but only once
-    return this.query.selectAll().pipe(take(1));
+    return this.query.select().pipe(take(1));
   }
 
   /**
@@ -176,7 +176,7 @@ export class BaseStoreClass<t> {
         // Extract unique Ids
         // const ids: string[] = result.map(x => (<any>x)[this.config.idKey]); // TODO: Fix any
         applyTransaction(() => {
-          this.store.upsertMany(resultArray);
+          this.store.update(resultArray);
           this.store.update({ modifying: false, modifyError: false });
         });
       }),
@@ -204,7 +204,7 @@ export class BaseStoreClass<t> {
       tap(() => {
         applyTransaction(() => {
           console.log(key);
-          this.store.remove(key);
+          this.store.update({});
           this.store.update({ modifying: false, modifyError: false });
         });
       }),

@@ -607,13 +607,23 @@
                 "test": false
             },
             {
-                "name": "entityAddData.util.ts",
-                "relativePath": "src/app/components/general/state-management/utils/entityAddData.util.ts",
-                "test": false
+                "relativePath": "src/app/components/general/state-management/stores/base-store.ts",
+                "test": false,
+                "name": "base-store.ts"
             },
             {
-                "name": "http.util.ts",
-                "relativePath": "src/app/components/general/state-management/utils/http.util.ts",
+                "relativePath": "src/app/components/general/state-management/stores/entity-store.ts",
+                "test": false,
+                "name": "entity-store.ts"
+            },
+            {
+                "relativePath": "src/app/components/general/state-management/stores/store.ts",
+                "test": false,
+                "name": "store.ts"
+            },
+            {
+                "name": "entityAddData.util.ts",
+                "relativePath": "src/app/components/general/state-management/utils/entityAddData.util.ts",
                 "test": false
             }
         ],
