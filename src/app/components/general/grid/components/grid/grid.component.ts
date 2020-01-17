@@ -140,7 +140,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         node.setSelected(true, false);
       }
       // Scroll to the first node supplied by the input
-      if (i === 0 && this.gridApi) {
+      if (i === 0) {
         this.gridApi.ensureNodeVisible(node);
       }
     });
