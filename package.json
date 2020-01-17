@@ -120,8 +120,7 @@
     "rxjs": "6.5.2",
     "ts-loader": "6.0.4",
     "typescript-fsa": "3.0.0-beta-2",
-    "zone.js": "0.10.1",
-    "@bit/nts.angular.components.general.table": "file:./src/app/components/general/table"
+    "zone.js": "0.10.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.802.1",
