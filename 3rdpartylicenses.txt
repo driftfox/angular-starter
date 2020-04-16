@@ -81,6 +81,9 @@ SEE LICENSE IN LICENSE
 @bit/nts.angular.components.general.tags
 SEE LICENSE IN LICENSE
 
+@bit/nts.angular.components.general.tree
+SEE LICENSE IN LICENSE
+
 @datorama/akita
 Apache License 2.0
                                  Apache License
