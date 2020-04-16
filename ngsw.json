@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1587051420194,
+  "timestamp": 1587051542811,
   "index": "/angular-starter/index.html",
   "assetGroups": [
     {
@@ -21,7 +21,7 @@
         "/angular-starter/runtime.f2d0f220ea9933e44e59.js",
         "/angular-starter/safari-pinned-tab.svg",
         "/angular-starter/scripts.b679b573b99f8cfa1a13.js",
-        "/angular-starter/styles.e85d17ea62b4f4c7730e.css"
+        "/angular-starter/styles.01813c8ce71a5a216f81.css"
       ],
       "patterns": []
     },
@@ -78,6 +78,21 @@
         "/angular-starter/hue.f8505bd4d6f3e3aa435b.png",
         "/angular-starter/line.39c65dcc08f7edb347b6.gif",
         "/angular-starter/loading.9347db5956a89b0bab38.gif",
+        "/angular-starter/open-sans-v15-latin-300.0dd4b3fd5a7d853488d1.svg",
+        "/angular-starter/open-sans-v15-latin-300.252a41f69d4c320154a1.ttf",
+        "/angular-starter/open-sans-v15-latin-300.2aeabc9e8ed0aef227d7.eot",
+        "/angular-starter/open-sans-v15-latin-300.df17d4e30091735253a8.woff",
+        "/angular-starter/open-sans-v15-latin-300.f2ebdee8c2343f558a02.woff2",
+        "/angular-starter/open-sans-v15-latin-700.2509c35b0cfc629f81e5.woff",
+        "/angular-starter/open-sans-v15-latin-700.5ee5a006fc1479986aae.svg",
+        "/angular-starter/open-sans-v15-latin-700.7435e6c2064f36f48626.woff2",
+        "/angular-starter/open-sans-v15-latin-700.75e0e55bdb3e82dcacf8.eot",
+        "/angular-starter/open-sans-v15-latin-700.ec32d6be7329ece0789c.ttf",
+        "/angular-starter/open-sans-v15-latin-regular.3c927f8d5c82e30f39e5.svg",
+        "/angular-starter/open-sans-v15-latin-regular.61747992dd9a412e601e.ttf",
+        "/angular-starter/open-sans-v15-latin-regular.87a454b233bedae23f8d.woff",
+        "/angular-starter/open-sans-v15-latin-regular.a356e361ee6765f3d6d4.eot",
+        "/angular-starter/open-sans-v15-latin-regular.ec806460121999bcfb12.woff2",
         "/angular-starter/password-meter.eea288d50533d7995ec1.png",
         "/angular-starter/primeicons.04701ca33ce96d325419.ttf",
         "/angular-starter/primeicons.1d79a0559e5f13294dee.woff",
@@ -140,11 +155,26 @@
     "/angular-starter/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "/angular-starter/fontawesome-webfont.f691f37e57f04c152e23.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "/angular-starter/hue.f8505bd4d6f3e3aa435b.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "/angular-starter/index.html": "fffbcac9628c456113b45c35adc657fd90b67210",
+    "/angular-starter/index.html": "c210dc8687aa39d59eb13776d463d33e0aed3799",
     "/angular-starter/line.39c65dcc08f7edb347b6.gif": "a2af20bd160ca9cfc2c85527663ff7429267519a",
     "/angular-starter/loading.9347db5956a89b0bab38.gif": "72998a116936156dc7cace0606dab499fe4f3ce8",
     "/angular-starter/main.a5c1bc25e836e9d77bdf.js": "7b077af76214d2db864112656ae600ed33c30f74",
     "/angular-starter/manifest.webmanifest": "7fbbd85f507a68b45c31b744a2a59335359342e3",
+    "/angular-starter/open-sans-v15-latin-300.0dd4b3fd5a7d853488d1.svg": "be01801970a371788a1480a3f538ecccc0f53146",
+    "/angular-starter/open-sans-v15-latin-300.252a41f69d4c320154a1.ttf": "861b3593521709d9fa8a8efb6f40817dd7fa9337",
+    "/angular-starter/open-sans-v15-latin-300.2aeabc9e8ed0aef227d7.eot": "7ee41fc56711a91b386b72d60d42feb9b4148f50",
+    "/angular-starter/open-sans-v15-latin-300.df17d4e30091735253a8.woff": "0c74bab4a4ebdafe080c8a35bd61d38f1b692358",
+    "/angular-starter/open-sans-v15-latin-300.f2ebdee8c2343f558a02.woff2": "34f486906decb7c8cf7a02d4758add9a2408c7a5",
+    "/angular-starter/open-sans-v15-latin-700.2509c35b0cfc629f81e5.woff": "b5f79d1934da79c8a4ba381092dad82ffb0582cb",
+    "/angular-starter/open-sans-v15-latin-700.5ee5a006fc1479986aae.svg": "64321d08afe8694bd7c6cf17ff52242f1e5465db",
+    "/angular-starter/open-sans-v15-latin-700.7435e6c2064f36f48626.woff2": "5a6a45d6f98752b11ccb7c4f0f6fd7faf18ad1a7",
+    "/angular-starter/open-sans-v15-latin-700.75e0e55bdb3e82dcacf8.eot": "29ac62f8162f60358348d8f80b191736885fdc12",
+    "/angular-starter/open-sans-v15-latin-700.ec32d6be7329ece0789c.ttf": "f6e1c78441d4ca2ef589ce79e48d3dbf9dca9a0d",
+    "/angular-starter/open-sans-v15-latin-regular.3c927f8d5c82e30f39e5.svg": "8c77b2d7ca417a49f4109f8e1ede939bd8e31224",
+    "/angular-starter/open-sans-v15-latin-regular.61747992dd9a412e601e.ttf": "92d652578c531e2c3d9db4622584f6a1ab2c225a",
+    "/angular-starter/open-sans-v15-latin-regular.87a454b233bedae23f8d.woff": "0e92462e402c15295366d912a7b8be303d0257d8",
+    "/angular-starter/open-sans-v15-latin-regular.a356e361ee6765f3d6d4.eot": "8bfad53d1b3c94c9e13bdd7c0b6c7d605396d7b4",
+    "/angular-starter/open-sans-v15-latin-regular.ec806460121999bcfb12.woff2": "2c07a9656f1e38da408f20f1cf11581a15cbd7a2",
     "/angular-starter/password-meter.eea288d50533d7995ec1.png": "e0e101bd2a1cbda41398b48a4ab1792d89cb7334",
     "/angular-starter/polyfills-es5.b4b53b60134d5500f8c5.js": "3be11b92c66ca09b5da47891ec9ebb247821613c",
     "/angular-starter/polyfills.8c3559084efc23a4eeaa.js": "a268cff1f87be5657fbf3785051009161ec288ca",
@@ -155,7 +185,7 @@
     "/angular-starter/runtime.f2d0f220ea9933e44e59.js": "5547aaca001e299c685dcda6ac3db81c7751a743",
     "/angular-starter/safari-pinned-tab.svg": "2fa5629fc4c22d2a0e5a0a730fad7fb1a26ae627",
     "/angular-starter/scripts.b679b573b99f8cfa1a13.js": "d4dbabf8a7ee6d576323cc1a2105879f039bada1",
-    "/angular-starter/styles.e85d17ea62b4f4c7730e.css": "a0daa91e60a4ce365fe0f49bea3ad668c5df2e7e"
+    "/angular-starter/styles.01813c8ce71a5a216f81.css": "73abbddcc08c53626db7e780e29d4354a0481fe9"
   },
   "navigationUrls": [
     {
