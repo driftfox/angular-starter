@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1587053301188,
+  "timestamp": 1587053417484,
   "index": "/angular-starter/index.html",
   "assetGroups": [
     {
@@ -8,21 +8,20 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/angular-starter/6.468730e2676881fcebff.js",
-        "/angular-starter/7.bf6a119f078127d61eac.js",
-        "/angular-starter/8.32a8d973c26e6a83eec1.js",
+        "/angular-starter/5.d1c992352316f9945487.js",
+        "/angular-starter/6.c4ddf1b13304ede3f250.js",
+        "/angular-starter/7.76d7e3fc44e9dd99a01e.js",
         "/angular-starter/apple-touch-icon.png",
         "/angular-starter/favicon.ico",
         "/angular-starter/index.html",
-        "/angular-starter/main.75a41c32a4ce5251e9d7.js",
+        "/angular-starter/main.ca0a976d4c0082c2dafc.js",
         "/angular-starter/manifest.webmanifest",
         "/angular-starter/polyfills-es5.b4b53b60134d5500f8c5.js",
         "/angular-starter/polyfills.8c3559084efc23a4eeaa.js",
-        "/angular-starter/runtime.66cb67985ef7fd4fffe1.js",
+        "/angular-starter/runtime.f2d0f220ea9933e44e59.js",
         "/angular-starter/safari-pinned-tab.svg",
         "/angular-starter/scripts.b679b573b99f8cfa1a13.js",
-        "/angular-starter/styles.24bcfd837615166bb2fd.css",
-        "/angular-starter/vendor.e55b94d8add3b1ce692e.js"
+        "/angular-starter/styles.24bcfd837615166bb2fd.css"
       ],
       "patterns": []
     },
@@ -90,9 +89,9 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/angular-starter/6.468730e2676881fcebff.js": "9c8438efea8df7400f426df6610c880d0d73e0ee",
-    "/angular-starter/7.bf6a119f078127d61eac.js": "378b0bac63c9ecbf4fc8cb4199b10a71b0acf3ef",
-    "/angular-starter/8.32a8d973c26e6a83eec1.js": "c9218e0a95fb5d484ebaa24273e1b02640375a1b",
+    "/angular-starter/5.d1c992352316f9945487.js": "60538d6e34caa3db56a128b8b99f0fe9d9ed3a97",
+    "/angular-starter/6.c4ddf1b13304ede3f250.js": "c6a61257a5a8f6b2b85ee6c672674ccffaf88641",
+    "/angular-starter/7.76d7e3fc44e9dd99a01e.js": "7d7d8d8547fb72a88791a05cb6617a77cb6ecd98",
     "/angular-starter/apple-touch-icon.png": "15abe2d99cd932cf81f00244cb9db469458911f8",
     "/angular-starter/assets/fonts/open-sans-v15-latin-300.eot": "7ee41fc56711a91b386b72d60d42feb9b4148f50",
     "/angular-starter/assets/fonts/open-sans-v15-latin-300.svg": "be01801970a371788a1480a3f538ecccc0f53146",
@@ -141,10 +140,10 @@
     "/angular-starter/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "/angular-starter/fontawesome-webfont.f691f37e57f04c152e23.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "/angular-starter/hue.f8505bd4d6f3e3aa435b.png": "f81ae627637a684614aa726e206c73ce099a01fd",
-    "/angular-starter/index.html": "95a7e62b770471feee12a35af732e76f1f5c45d7",
+    "/angular-starter/index.html": "7bad0132205d07007fb87b8cbbd7b03bc56f23df",
     "/angular-starter/line.39c65dcc08f7edb347b6.gif": "a2af20bd160ca9cfc2c85527663ff7429267519a",
     "/angular-starter/loading.9347db5956a89b0bab38.gif": "72998a116936156dc7cace0606dab499fe4f3ce8",
-    "/angular-starter/main.75a41c32a4ce5251e9d7.js": "4b44ef5441aea4b179802f6d112fe780f2bbdbfd",
+    "/angular-starter/main.ca0a976d4c0082c2dafc.js": "b12eafc375a0fbd9e5c77d035509e6e1e20e8952",
     "/angular-starter/manifest.webmanifest": "7fbbd85f507a68b45c31b744a2a59335359342e3",
     "/angular-starter/password-meter.eea288d50533d7995ec1.png": "e0e101bd2a1cbda41398b48a4ab1792d89cb7334",
     "/angular-starter/polyfills-es5.b4b53b60134d5500f8c5.js": "3be11b92c66ca09b5da47891ec9ebb247821613c",
@@ -153,11 +152,10 @@
     "/angular-starter/primeicons.1d79a0559e5f13294dee.woff": "c4b44a9b0bc025f62101936b37de1977cd25e3fd",
     "/angular-starter/primeicons.c2e128a00fca2640240d.eot": "3a564ee7b180527eeba74f3dccfa6f779fcc48ab",
     "/angular-starter/primeicons.fa2c83d2f35244bb10dc.svg": "98255677416ed656903e9190e976c00fb2ac862d",
-    "/angular-starter/runtime.66cb67985ef7fd4fffe1.js": "a7b8268dde0c34ac73f5e1ebea81cf436a4961bf",
+    "/angular-starter/runtime.f2d0f220ea9933e44e59.js": "5547aaca001e299c685dcda6ac3db81c7751a743",
     "/angular-starter/safari-pinned-tab.svg": "2fa5629fc4c22d2a0e5a0a730fad7fb1a26ae627",
     "/angular-starter/scripts.b679b573b99f8cfa1a13.js": "d4dbabf8a7ee6d576323cc1a2105879f039bada1",
-    "/angular-starter/styles.24bcfd837615166bb2fd.css": "4f4744be3559c4cc949558c1fd2f24e3987e113d",
-    "/angular-starter/vendor.e55b94d8add3b1ce692e.js": "ba65e8ab644ddc69f1255d315f01822a359b9602"
+    "/angular-starter/styles.24bcfd837615166bb2fd.css": "4f4744be3559c4cc949558c1fd2f24e3987e113d"
   },
   "navigationUrls": [
     {
